@@ -1,0 +1,27 @@
+Package: hildar
+Type: Package
+Title: HILDA data package and utils functions to use on HILDA survey data
+Version: 0.1.0
+Author: Amarin Siripanich
+Maintainer: Amarin Siripanich <amarin.siri@gmail.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 3.5.1),
+Imports:
+    fst,
+    data.table,
+    magrittr,
+    readstata13,
+    foreach,
+    doMC
+Suggests:
+    roxygen2,
+    testthat,
+    spelling
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Language: en-US
