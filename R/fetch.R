@@ -6,7 +6,7 @@
 #'
 #' @return a data.table object
 #' @importFrom assertthat assert_that
-#' @importFrom data.table rbindlist
+#' @importFrom data.table rbindlist as.data.table setcolorder
 #' @importFrom fst read_fst
 #' @export
 hilda_fetch <-
@@ -18,9 +18,11 @@ hilda_fetch <-
     responding_person_only = FALSE
     ) {
     assertthat::assert_that(all(is.numeric(years)))
-    assertthat::assert_that(!is.null(vars),
-      msg = "vars cannot be NULL. If you wish to get all columns use \"all\"")
-    assertthat::assert_that(all(is.character(vars)))
+    # assertthat::assert_that(!is.null(vars),
+    #   msg = "vars cannot be NULL. If you wish to get all columns use \"all\"")
+    if (!is.null(vars)) {
+      assertthat::assert_that(all(is.character(vars)))
+    }
 
     if (add_population_weight) {
       pop_weight_vars <-
@@ -36,7 +38,7 @@ hilda_fetch <-
     }
 
     if (add_geography == TRUE) {
-      geography_vars <- c("hhmsr")
+      geography_vars <- c("hhsgcc")
     }  else {
       geography_vars <- NULL
     }
@@ -48,7 +50,7 @@ hilda_fetch <-
         unique(
           c(
             HILDA$xwaveid,
-            HILDA$random_wave_household_id,
+            HILDA$household_id,
             basic_vars,
             vars,
             geography_vars,
@@ -57,14 +59,19 @@ hilda_fetch <-
         )
     }
 
+
     waves <- letters[years - 2000]
     dat <- lapply(
       X = waves,
       FUN = function(wave) {
-        fst::read_fst(
+        dt <- fst::read_fst(
           path = paste0(HILDA$data_path, "/Combined_", wave, "160u.fst"),
-          columns = vars
+          columns = vars, as.data.table = T
         )
+        # add wave number
+        dt[, wave := which(letters == wave)]
+        setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
+        dt
       }
     )
     dat <- rbindlist(dat, fill = TRUE)
