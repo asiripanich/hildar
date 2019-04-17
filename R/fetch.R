@@ -86,14 +86,20 @@ hilda_fetch <-
     dat <- lapply(
       X = waves,
       FUN = function(wave) {
-        dt <- fst::read_fst(
-          path = paste0(HILDA$data_path, "/Combined_", wave, "160u.fst"),
-          columns = vars, as.data.table = T
-        )
-        # add wave number
-        dt[, wave := which(letters == wave)]
-        setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
-        dt
+        tryCatch({
+          dt <- fst::read_fst(
+            path = paste0(HILDA$data_path, "/Combined_", wave, "160u.fst"),
+            columns = vars,
+            as.data.table = T
+          )
+          # add wave number
+          dt[, wave := which(letters == wave)]
+          setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
+          dt
+        }, error = function(e) {
+          NULL
+        })
+
       }
     )
     dat <- rbindlist(dat, fill = TRUE)
