@@ -28,7 +28,7 @@ standardise_hilda_colnames <- function(hilda_data) {
 remove_leading_numbers <- function(var) {
   if (is.factor(var)) {
     levels(var) <-
-      gsub(pattern = "^\\[\\d\\]\\s",
+      gsub(pattern = "^\\[[0-9]+\\]\\s",
         replacement = "",
         x = levels(var))
     return(var)
