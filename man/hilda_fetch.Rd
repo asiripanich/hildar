@@ -4,13 +4,30 @@
 \alias{hilda_fetch}
 \title{Fetch hilda data conditional on the args}
 \usage{
-hilda_fetch(years, vars = NULL, add_population_weight = TRUE,
-  add_basic_vars = TRUE, add_geography = FALSE,
-  responding_person_only = FALSE)
+hilda_fetch(years, vars = NULL, new_varnames = NULL,
+  add_population_weight = TRUE, add_basic_vars = TRUE,
+  add_geography = FALSE, responding_person_only = FALSE)
 }
 \arguments{
-\item{vars}{a vector containing all desired variable names to be loaded.
-vars can be set to "all" to fetch all columns. This may take a long time to load}
+\item{vars}{a vector containing all desired variable names to be loaded. vars can
+be set to "all" to fetch all columns. This may take a long time to load}
+
+\item{new_varnames}{a vector contains character names with its length equals length of \code{vars} to
+be replaced by \code{vars} orgininal names.}
+
+\item{add_population_weight}{take a logical value whether to add cross-sectional responding person weight
+column and enumerated weight
+column to the data}
+
+\item{add_basic_vars}{take a logical value whether to add hgage (age), hgsex (sex),
+mrcurr (marital status) and
+hhrih (relationship in household) to the data}
+
+\item{add_geography}{take a logical value whether to add hhsgcc (Greater statistical region)
+to the data}
+
+\item{responding_person_only}{takes a logical value to indicate whether the data should be filtered with
+only responding person records only or not.}
 
 \item{waves}{wave number, multiple waves can be put into a vector}
 }
