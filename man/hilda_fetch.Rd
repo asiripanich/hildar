@@ -6,7 +6,7 @@
 \usage{
 hilda_fetch(years, vars = NULL, new_varnames = NULL,
   add_population_weight = TRUE, add_basic_vars = TRUE,
-  add_geography = FALSE, responding_person_only = FALSE)
+  add_geography = FALSE)
 }
 \arguments{
 \item{vars}{a vector containing all desired variable names to be loaded. vars can
@@ -26,10 +26,10 @@ hhrih (relationship in household) to the data}
 \item{add_geography}{take a logical value whether to add hhsgcc (Greater statistical region)
 to the data}
 
+\item{waves}{wave number, multiple waves can be put into a vector}
+
 \item{responding_person_only}{takes a logical value to indicate whether the data should be filtered with
 only responding person records only or not.}
-
-\item{waves}{wave number, multiple waves can be put into a vector}
 }
 \value{
 a data.table object

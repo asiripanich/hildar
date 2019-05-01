@@ -35,8 +35,7 @@ hilda_fetch <-
     new_varnames = NULL,
     add_population_weight = TRUE,
     add_basic_vars = TRUE,
-    add_geography = FALSE,
-    responding_person_only = FALSE
+    add_geography = FALSE
     ) {
     assertthat::assert_that(all(is.numeric(years)))
     # assertthat::assert_that(!is.null(vars),
