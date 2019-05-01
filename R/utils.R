@@ -36,3 +36,20 @@ remove_leading_numbers <- function(var) {
     stop("var is not factor")
   }
 }
+
+
+#' Make a dictionary for a STATA dta file.
+#'
+#' @param stata_df a data.frame read using haven::read_stata
+#'
+#' @return a data.table contains two columns: var and label.
+#'
+#' @import data.table
+#'
+#' @export
+make_dict <- function(stata_df) {
+  data.table(
+    var = names(map(stata_df, ~ attr(., which = "label"))),
+    label = unlist(map(stata_df, ~ attr(., which = "label")))
+  )
+}
