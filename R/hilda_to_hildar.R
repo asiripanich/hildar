@@ -5,7 +5,7 @@
 #' @param cores number of cores
 #' @param pattern only reads ".dta" stata files for now
 #'
-#' @importFrom doMC registerDoMC
+#' @importFrom future plan multiprocess
 #' @importFrom parallel detectCores
 #' @importFrom foreach foreach
 #' @importFrom readstata13 read.dta13
@@ -15,7 +15,7 @@
 #' @export
 hilda_to_hildar <- function(read_dir, save_dir, cores = NULL, pattern = ".dta") {
   if (is.null(cores)) cores <- parallel::detectCores() / 2
-  registerDoMC(cores)
+  plan(multiprocess, workers = cores)
   hilda_filedirs <- list.files(path = read_dir, pattern = pattern, full.names = T)
   hilda_files <- list.files(path = read_dir, pattern = pattern)
   if (file.exists(save_dir)) {

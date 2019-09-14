@@ -10,14 +10,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.5.1),
+    R (>= 3.5.2),
 Imports:
     fst,
     data.table,
     magrittr,
     readstata13,
     foreach,
-    doMC
+    future
 Suggests:
     roxygen2,
     testthat,
