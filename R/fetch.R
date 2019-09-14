@@ -29,7 +29,7 @@
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
 #' @importFrom fst read_fst
 #' @export
-hilda_fetch <-
+fetch <-
   function(years,
     vars = NULL,
     new_varnames = NULL,
@@ -80,14 +80,15 @@ hilda_fetch <-
         )
     }
 
+    extdata_path <- system.file("extdata", package = "hildar")
 
     waves <- letters[years - 2000]
-    dat <- lapply(
+    dat_ls <- lapply(
       X = waves,
       FUN = function(wave) {
         tryCatch({
           dt <- fst::read_fst(
-            path = paste0(HILDA$data_path, "/Combined_", wave, "160u.fst"),
+            path = paste0(extdata_path, "/Combined_", wave, "160u.fst"),
             columns = vars,
             as.data.table = T
           )
@@ -98,10 +99,10 @@ hilda_fetch <-
         }, error = function(e) {
           NULL
         })
-
       }
     )
-    dat <- rbindlist(dat, fill = TRUE)
+
+    dat <- rbindlist(dat_ls, fill = TRUE)
 
     # rename the selected columns in vars
     if (!is.null(new_varnames)) {
@@ -111,3 +112,5 @@ hilda_fetch <-
 
     dat
   }
+
+

@@ -2,7 +2,7 @@
 
 export("%>%")
 export(HILDA)
-export(hilda_fetch)
+export(fetch)
 export(hilda_to_hildar)
 export(make_dict)
 export(remove_leading_numbers)

@@ -20,7 +20,7 @@ Imports:
     future
 Suggests:
     roxygen2,
-    testthat,
+    testthat (>= 2.1.0),
     spelling
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
