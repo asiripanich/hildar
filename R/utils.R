@@ -33,7 +33,8 @@ remove_leading_numbers <- function(var) {
         x = levels(var))
     return(var)
   } else {
-    stop("var is not factor")
+    warning("var is not factor")
+    var
   }
 }
 
