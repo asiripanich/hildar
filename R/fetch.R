@@ -87,9 +87,10 @@ fetch <-
       X = waves,
       FUN = function(wave) {
         tryCatch({
+          path_to_fst <- paste0(extdata_path, "/Combined_", wave, "160u.fst")
           dt <- fst::read_fst(
-            path = paste0(extdata_path, "/Combined_", wave, "160u.fst"),
-            columns = vars,
+            path = path_to_fst,
+            columns = .fst_colnames_exist(path_to_fst, vars),
             as.data.table = T
           )
           # add wave number
@@ -112,5 +113,21 @@ fetch <-
 
     dat
   }
+
+
+#' Returns column names that exists in a .fst file
+#'
+#' @param path path to a .fst file
+#' @param colnames a character vector to check
+#'
+#' @return column names in colnames that exists in the .fst file
+.fst_colnames_exist <- function(path, colnames) {
+
+  first_row_dt <- fst::read.fst(path, to = 1, as.data.table = T)
+
+  colnames_exist <- colnames %in% names(first_row_dt)
+
+  colnames[colnames_exist]
+}
 
 
