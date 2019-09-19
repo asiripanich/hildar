@@ -1,12 +1,84 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # hildar
 
-A package to help R HILDA users.
+<!-- badges: start -->
 
-This package
+<!-- badges: end -->
+
+The goal of **hildar** is to help R users that use HILDA survey data in
+their works.
+
+Please note that, this package doesn’t include any parts of the HILDA
+survey data. You must be authorised to have access to a release of HILDA
+survey data.
 
 ## Installation
-<<NOTE: the instruction is not completed.>>
 
-1) Clone the repo then build the package. 
-2) Add all Combined_x1xxu.dta files into `data-raw` that can be found in the project level folder.
-3) run `create-hilda-dictionary.R` that are located in `data-raw` folder. 
+The development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("asiripanich/hildar")
+```
+
+## Import HILDA files
+
+Basically, this package imports HILDA survey data in .dta format (STATA
+format) and convert them into .fst files so they can be accessed very
+quickly\!
+
+TODO: write an instruction on how to import HILDA files
+
+## Example
+
+Here is how you fetch HILDA data\!
+
+``` r
+library(hildar)
+
+hilda_data <- fetch(years = 2001:2016, add_geography = T)
+
+summary(hilda_data)
+#>    xwaveid              hhid                wave           hgage       
+#>  Length:317738      Length:317738      Min.   : 1.00   Min.   :  0.00  
+#>  Class :character   Class :character   1st Qu.: 5.00   1st Qu.: 17.00  
+#>  Mode  :character   Mode  :character   Median : 9.00   Median : 35.00  
+#>                                        Mean   : 8.98   Mean   : 36.12  
+#>                                        3rd Qu.:13.00   3rd Qu.: 53.00  
+#>                                        Max.   :16.00   Max.   :101.00  
+#>                                                                        
+#>                             hgsex       
+#>  [2] Female                    :162855  
+#>  [1] Male                      :154883  
+#>  [-10] Non-responding person   :     0  
+#>  [-9] Non-responding household :     0  
+#>  [-8] No SCQ                   :     0  
+#>  [-7] Not able to be determined:     0  
+#>  (Other)                       :     0  
+#>                                 mrcurr      
+#>  [1] Legally married               :113430  
+#>  [-10] Non-responding person       : 82127  
+#>  [6] Never married and not de facto: 56987  
+#>  [2] De facto                      : 32708  
+#>  [4] Divorced                      : 14078  
+#>  [5] Widowed                       : 11885  
+#>  (Other)                           :  6523  
+#>                       hhrih                          hhsgcc     
+#>  [4] Couple wo child     :73750   [11] Greater Sydney   :54716  
+#>  [8] Child < 15          :67554   [21] Greater Melbourne:54419  
+#>  [1] Couple w child < 15 :58296   [19] Rest of NSW      :42028  
+#>  [12] Lone person        :37536   [39] Rest of Qld      :36260  
+#>  [10] Non-dependent child:17388   [31] Greater Brisbane :30206  
+#>  [9] Dependent student   :17005   [29] Rest of Vic.     :23801  
+#>  (Other)                 :46209   (Other)               :76308  
+#>      hhwth             hhwtrp       
+#>  Min.   :    0.0   Min.   :  -10.0  
+#>  1st Qu.:  669.6   1st Qu.:  -10.0  
+#>  Median :  896.3   Median :  778.2  
+#>  Mean   : 1060.3   Mean   :  849.9  
+#>  3rd Qu.: 1212.9   3rd Qu.: 1146.0  
+#>  Max.   :20000.0   Max.   :22000.0  
+#> 
+```
