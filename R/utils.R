@@ -38,6 +38,26 @@ remove_leading_numbers <- function(var) {
   }
 }
 
+#' Is missing data value
+#'
+#' Returns TRUE if the values inside a variable contains the missing data values
+#' coding from HILDA. They usally starts with '[-{number}]'.
+#'
+#' @param x a vector
+#'
+#' @return a logical vector
+#' @export
+#'
+#' @examples
+#'
+#' h <- fetch(2011)
+#' h[is_missing_data_value(mrcurr)]
+is_missing_data_value <- function(x) {
+  grepl("^\\[-", x)
+}
+
+
+
 
 #' Make a dictionary for a STATA dta file.
 #'
