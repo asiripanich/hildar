@@ -4,7 +4,7 @@
 \name{HILDA}
 \alias{HILDA}
 \title{HILDA constants}
-\format{An object of class \code{list} of length 5.}
+\format{An object of class \code{list} of length 4.}
 \usage{
 HILDA
 }

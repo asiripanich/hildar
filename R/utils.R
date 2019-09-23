@@ -41,7 +41,8 @@ remove_leading_numbers <- function(var) {
 #' Is missing data value
 #'
 #' Returns TRUE if the values inside a variable contains the missing data values
-#' coding from HILDA. They usally starts with '[-{number}]'.
+#' coding from HILDA. They usally starts with '[-{number}]' or a negative value
+#' if the variable is of type numeric.
 #'
 #' @param x a vector
 #'
@@ -53,6 +54,14 @@ remove_leading_numbers <- function(var) {
 #' h <- fetch(2011)
 #' h[is_missing_data_value(mrcurr)]
 is_missing_data_value <- function(x) {
+  UseMethod("is_missing_data_value", x)
+}
+
+is_missing_data_value.numeric <- function(x) {
+  x < 0
+}
+
+is_missing_data_value.default <- function(x) {
   grepl("^\\[-", x)
 }
 
