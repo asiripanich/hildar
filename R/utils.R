@@ -21,22 +21,28 @@ standardise_hilda_colnames <- function(hilda_data) {
 #' @description In HILDA all factor levels are numbered. If the leading numbers are not needed
 #' then one can use this function to recode the factor lavels.
 #'
-#' @param var a vector of hilda var
+#' @param s a vector or a column from HILDA data
 #'
 #' @return a vector
 #' @export
-remove_leading_numbers <- function(var) {
-  if (is.factor(var)) {
-    levels(var) <-
+remove_leading_numbers <- function(x) {
+  if (is.factor(x)) {
+    levels(x) <-
       gsub(pattern = "^\\[[0-9]+\\]\\s",
-        replacement = "",
-        x = levels(var))
-    return(var)
-  } else {
-    warning("var is not factor")
-    var
+           replacement = "",
+           x = levels(x))
+    return(x)
   }
+  if (is.character(x)) {
+    x_new <-
+      gsub(pattern = "^\\[[0-9]+\\]\\s",
+           replacement = "",
+           x = x)
+    return(x_new)
+  }
+  x
 }
+
 
 #' Is missing data value
 #'

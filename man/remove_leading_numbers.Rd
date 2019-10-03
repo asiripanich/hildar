@@ -4,10 +4,10 @@
 \alias{remove_leading_numbers}
 \title{Remove non-missing leading numbers}
 \usage{
-remove_leading_numbers(var)
+remove_leading_numbers(x)
 }
 \arguments{
-\item{var}{a vector of hilda var}
+\item{s}{a vector or a column from HILDA data}
 }
 \value{
 a vector
