@@ -63,13 +63,27 @@ is_missing_data_value <- function(x) {
   UseMethod("is_missing_data_value", x)
 }
 
+#' @export
+is_missing_data_value.factor <- function(x) {
+  grepl("^\\[-", x)
+}
+
+#' @export
+is_missing_data_value.character <- function(x) {
+  grepl("^\\[-", x)
+}
+
+#' @export
 is_missing_data_value.numeric <- function(x) {
   x < 0
 }
 
-is_missing_data_value.default <- function(x) {
-  grepl("^\\[-", x)
+#' @export
+is_missing_data_value.integer <- function(x) {
+  x < 0
 }
+
+
 
 
 
