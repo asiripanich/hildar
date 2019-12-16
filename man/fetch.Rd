@@ -4,9 +4,14 @@
 \alias{fetch}
 \title{Fetch hilda data conditional on the args}
 \usage{
-fetch(years, vars = NULL, new_varnames = NULL,
-  add_population_weight = TRUE, add_basic_vars = TRUE,
-  add_geography = FALSE)
+fetch(
+  years,
+  vars = NULL,
+  new_varnames = NULL,
+  add_population_weight = TRUE,
+  add_basic_vars = TRUE,
+  add_geography = FALSE
+)
 }
 \arguments{
 \item{vars}{a vector containing all desired variable names to be loaded. vars can

@@ -46,8 +46,9 @@ remove_leading_numbers <- function(x) {
 
 #' Is missing data value
 #'
+#' @description
 #' Returns TRUE if the values inside a variable contains the missing data values
-#' coding from HILDA. They usally starts with '[-{number}]' or a negative value
+#' coding from HILDA. They usally starts with `[-{number}]` or a negative value
 #' if the variable is of type numeric.
 #'
 #' @param x a vector

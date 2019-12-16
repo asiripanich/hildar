@@ -14,7 +14,7 @@ a logical vector
 }
 \description{
 Returns TRUE if the values inside a variable contains the missing data values
-coding from HILDA. They usally starts with '\link{-{number}}' or a negative value
+coding from HILDA. They usally starts with \verb{[-\{number\}]} or a negative value
 if the variable is of type numeric.
 }
 \examples{
