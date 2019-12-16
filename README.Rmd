@@ -34,7 +34,7 @@ devtools::install_github("asiripanich/hildar")
 
 Basically, this package imports HILDA survey data in .dta format (STATA format) and convert them into .fst files so they can be accessed very quickly! 
 
-TODO: write an instruction on how to import HILDA files
+TODO: write an instruction on how to import HILDA files.
 
 ## Example
 
