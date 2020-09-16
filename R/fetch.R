@@ -1,7 +1,7 @@
 #' Fetch hilda data conditional on the args
 #'
-#' @param waves
-#'  wave number, multiple waves can be put into a vector
+#' @param years
+#'  years (e.g. wave 1 = 2001), multiple waves can be put into a vector.
 #' @param vars
 #'  a vector containing all desired variable names to be loaded. vars can
 #'  be set to "all" to fetch all columns. This may take a long time to load
@@ -93,6 +93,11 @@ fetch <-
             columns = .fst_colnames_exist(path_to_fst, vars),
             as.data.table = T
           )
+          # convert all factors to strings
+          fct_cols <- names(dt)[sapply(dt, is.factor)]
+          for (fct_col in fct_cols) {
+            data.table::set(x = dt, j = fct_col, value = as.character(dt[[fct_col]]))
+          }
           # add wave number
           dt[, wave := which(letters == wave)]
           setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
