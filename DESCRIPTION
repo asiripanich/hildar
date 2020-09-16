@@ -17,7 +17,8 @@ Imports:
     magrittr,
     readstata13,
     foreach,
-    future
+    future,
+    usethis
 Suggests:
     roxygen2,
     testthat (>= 2.1.0),

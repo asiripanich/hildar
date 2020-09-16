@@ -37,6 +37,10 @@ fetch <-
     add_basic_vars = TRUE,
     add_geography = FALSE
     ) {
+    if (is.null(getOption("hildar.vault"))) {
+      stop("There is no `hildar.vault` in your global options. Please use `hilda_to_hildar()`",
+           "to create a vault of HILDA fst files first for this package to work properly.")
+    }
     assertthat::assert_that(all(is.numeric(years)))
     # assertthat::assert_that(!is.null(vars),
     #   msg = "vars cannot be NULL. If you wish to get all columns use \"all\"")
@@ -87,7 +91,7 @@ fetch <-
       X = waves,
       FUN = function(wave) {
         tryCatch({
-          path_to_fst <- paste0(extdata_path, "/Combined_", wave, "160u.fst")
+          path_to_fst <- paste0(getOption("hildar.vault"), "/Combined_", wave, "160u.fst")
           dt <- fst::read_fst(
             path = path_to_fst,
             columns = .fst_colnames_exist(path_to_fst, vars),

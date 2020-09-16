@@ -1,7 +1,8 @@
 #' Save HILDA Stata files data to fst data
 #'
 #' @param read_dir readind directory where the HILDA .dta files are
-#' @param save_dir saving directory
+#' @param save_dir saving directory. This will directory will be added to .Rprofile
+#'  as `hildar.vault`.
 #' @param cores number of cores
 #' @param pattern only reads ".dta" stata files for now
 #'
