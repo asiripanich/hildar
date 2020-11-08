@@ -90,7 +90,7 @@
 <div id="3-set-hildarvault-r-option" class="section level2">
 <h2 class="hasAnchor">
 <a href="#3-set-hildarvault-r-option" class="anchor"></a>3) Set <code>hildar.vault</code> R option</h2>
-<p>Let hildar knows where your <code>dir_output</code> is by setting options(hildar.vault = “dir_output”), alternatively you may provide the .dir argument in <code><a href="reference/fetch.html">fetch()</a></code>.</p>
+<p>Let hildar knows where your <code>dir_output</code> is by setting <code><a href="https://rdrr.io/r/base/options.html">options(hildar.vault = "dir_output")</a></code>, alternatively you may provide the directory as the <code>.dir</code> argument in <code><a href="reference/fetch.html">fetch()</a></code>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -140,7 +140,30 @@
 <span class="co">#&gt; 3:   hhpno 1,2,3,4,5,6,... HF Person number</span>
 <span class="co">#&gt; 4:   hhpid 1,2,3,4,5,6,...     HF Person ID</span>
 <span class="co">#&gt; 5: hhstate 1,2,3,4,5,6,...         HF State</span>
-<span class="co">#&gt; 6: hhpcode 1,2,3,4,5,6,...      HF Postcode</span></code></pre></div>
+<span class="co">#&gt; 6: hhpcode 1,2,3,4,5,6,...      HF Postcode</span>
+
+<span class="co"># the number of variables presented in each wave</span>
+<span class="va">hilda_dict</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">var</span>, <span class="va">label</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span> 
+  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="st">"V1"</span>, <span class="st">"wave"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_variables <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span>
+<span class="co">#&gt;     wave number_of_variables</span>
+<span class="co">#&gt;  1:    1                4291</span>
+<span class="co">#&gt;  2:    2                5222</span>
+<span class="co">#&gt;  3:    3                5216</span>
+<span class="co">#&gt;  4:    4                5083</span>
+<span class="co">#&gt;  5:    5                5895</span>
+<span class="co">#&gt;  6:    6                6142</span>
+<span class="co">#&gt;  7:    7                6046</span>
+<span class="co">#&gt;  8:    8                6188</span>
+<span class="co">#&gt;  9:    9                6203</span>
+<span class="co">#&gt; 10:   10                6482</span>
+<span class="co">#&gt; 11:   11                6685</span>
+<span class="co">#&gt; 12:   12                6524</span>
+<span class="co">#&gt; 13:   13                6449</span>
+<span class="co">#&gt; 14:   14                6713</span>
+<span class="co">#&gt; 15:   15                6793</span>
+<span class="co">#&gt; 16:   16                6426</span></code></pre></div>
 </div>
 </div>
   </div>
