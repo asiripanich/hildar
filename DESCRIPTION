@@ -16,10 +16,10 @@ Imports:
     data.table,
     magrittr,
     readstata13,
-    foreach,
     future,
     usethis,
-    checkmate
+    checkmate,
+    furrr
 Suggests:
     roxygen2,
     testthat (>= 2.1.0),
