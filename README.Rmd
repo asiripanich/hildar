@@ -41,22 +41,40 @@ Let hildar knows where your `dir_output` is by setting `options(hildar.vault = "
 
 Here is how you can fetch HILDA data with `hildar`!
 
-```{r example}
+```{r}
 library(hildar)
 
 # fetch removes the HILDA year prefix from all the selected variable
 # (e.g. axxx = 2001, bxxx = 2002).
 fetch(years = 2001:2003, add_geography = T) %>%
   summary()
+```
 
-# add basic demographic variables
+There is an quick option to add basic demographic variables to the data, this is set to TRUE by default.
+
+```{r}
 fetch(years = 2001, add_basic_vars = T) %>% 
   names()
+```
 
-# hilda_dict is just a data.frame. You can `View(hilda_dict)` to quickly search
-# HILDA variables without going to their documentation webpage.
+How about doing a quick search to find variables that you want? Use `hilda_dict` which is a data.table that you can search or view HILDA variables without going to their documentation webpage. 
+
+```{r}
 head(hilda_dict)
+```
 
+Let say we want to select all variables that are related to 'employment' we can easily incorporate them into the `fetch` function.
+
+```{r}
+emp_vars = hilda_dict[grepl(pattern = "employment", label), var]
+emp_vars
+hilda_data = fetch(years = 2001:2003, vars = emp_vars)
+dim(hilda_data)
+```
+
+Here is a summary of the dimensions of our HILDA data files.
+
+```{r}
 # the number of variables and rows in each wave
 nrows_by_wave = 
   fetch(years = 2001:2016, add_basic_vars = F) %>%
