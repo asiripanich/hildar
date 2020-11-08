@@ -9,7 +9,8 @@ hilda_to_hildar(read_dir, save_dir, cores = NULL, pattern = ".dta")
 \arguments{
 \item{read_dir}{readind directory where the HILDA .dta files are}
 
-\item{save_dir}{saving directory}
+\item{save_dir}{saving directory. This will directory will be added to .Rprofile
+as \code{hildar.vault}.}
 
 \item{cores}{number of cores}
 

@@ -10,10 +10,13 @@ fetch(
   new_varnames = NULL,
   add_population_weight = TRUE,
   add_basic_vars = TRUE,
-  add_geography = FALSE
+  add_geography = FALSE,
+  .dir = getOption("hildar.vault")
 )
 }
 \arguments{
+\item{years}{years (e.g. wave 1 = 2001), multiple waves can be put into a vector.}
+
 \item{vars}{a vector containing all desired variable names to be loaded. vars can
 be set to "all" to fetch all columns. This may take a long time to load}
 
@@ -30,8 +33,6 @@ hhrih (relationship in household) to the data}
 
 \item{add_geography}{take a logical value whether to add hhsgcc (Greater statistical region)
 to the data}
-
-\item{waves}{wave number, multiple waves can be put into a vector}
 
 \item{responding_person_only}{takes a logical value to indicate whether the data should be filtered with
 only responding person records only or not.}
