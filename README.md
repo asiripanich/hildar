@@ -76,8 +76,8 @@ fetch(years = 2001:2003, add_geography = T) %>%
 #>  Max.   :13878.4   Max.   :16000.0
 ```
 
-There is an quick option to add basic demographic variables to the data,
-this is set to TRUE by default.
+There is a quick option to add basic demographic variables to the data,
+which is set to TRUE by default.
 
 ``` r
 fetch(years = 2001, add_basic_vars = T) %>% 
@@ -102,7 +102,7 @@ head(hilda_dict)
 ```
 
 Let say we want to select all variables that are related to ‘employment’
-we can easily incorporate them into the `fetch` function.
+we can easily incorporate them into the `fetch()` function.
 
 ``` r
 emp_vars = hilda_dict[grepl(pattern = "employment", label), var]
@@ -136,9 +136,9 @@ emp_vars
 #> [183] "chb12"   "lfpe01"  "lfpe02"  "lfpe03"  "lfpe04"  "lfpe05"  "lfpe06" 
 #> [190] "lfpe07"  "lfpe08"  "lfpe09"  "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13" 
 #> [197] "lfpe14"  "lfpe15"
-hilda_data = fetch(years = 2001:2006, vars = emp_vars)
+hilda_data = fetch(years = 2001:2003, vars = emp_vars)
 dim(hilda_data)
-#> [1] 108028    185
+#> [1] 55899    80
 ```
 
 Here is a summary of the dimensions of our HILDA data files.

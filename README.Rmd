@@ -50,7 +50,7 @@ fetch(years = 2001:2003, add_geography = T) %>%
   summary()
 ```
 
-There is an quick option to add basic demographic variables to the data, this is set to TRUE by default.
+There is a quick option to add basic demographic variables to the data, which is set to TRUE by default.
 
 ```{r}
 fetch(years = 2001, add_basic_vars = T) %>% 
@@ -63,7 +63,7 @@ How about doing a quick search to find variables that you want? Use `hilda_dict`
 head(hilda_dict)
 ```
 
-Let say we want to select all variables that are related to 'employment' we can easily incorporate them into the `fetch` function.
+Let say we want to select all variables that are related to 'employment' we can easily incorporate them into the `fetch()` function.
 
 ```{r}
 emp_vars = hilda_dict[grepl(pattern = "employment", label), var]
