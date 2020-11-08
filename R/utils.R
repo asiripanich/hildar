@@ -1,6 +1,6 @@
 #' Remove the leading alphabets of all the columns
 #' except those start with 'x'
-#' @param hilda_df HILDA data
+#' @param hilda_data a data.frame containing a HILDA dataset
 #'
 #' @return data.table
 #' @export
@@ -21,7 +21,7 @@ standardise_hilda_colnames <- function(hilda_data) {
 #' @description In HILDA all factor levels are numbered. If the leading numbers are not needed
 #' then one can use this function to recode the factor lavels.
 #'
-#' @param s a vector or a column from HILDA data
+#' @param x a vector or a column from HILDA data
 #'
 #' @return a vector
 #' @export

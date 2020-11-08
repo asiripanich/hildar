@@ -34,8 +34,8 @@ hhrih (relationship in household) to the data}
 \item{add_geography}{take a logical value whether to add hhsgcc (Greater statistical region)
 to the data}
 
-\item{responding_person_only}{takes a logical value to indicate whether the data should be filtered with
-only responding person records only or not.}
+\item{.dir}{a directory, if not given it uses getOption("hildar.vault") by default.
+This is where HILDA fst files generated using \code{setup_hildar()} are stored.}
 }
 \value{
 a data.table object

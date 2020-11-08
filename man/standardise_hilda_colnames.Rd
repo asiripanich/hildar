@@ -8,7 +8,7 @@ except those start with 'x'}
 standardise_hilda_colnames(hilda_data)
 }
 \arguments{
-\item{hilda_df}{HILDA data}
+\item{hilda_data}{a data.frame containing a HILDA dataset}
 }
 \value{
 data.table

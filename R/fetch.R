@@ -19,10 +19,8 @@
 #' @param add_geography
 #'  take a logical value whether to add hhsgcc (Greater statistical region)
 #'  to the data
-#' @param responding_person_only
-#'  takes a logical value to indicate whether the data should be filtered with
-#'  only responding person records only or not.
-#'
+#' @param .dir a directory, if not given it uses getOption("hildar.vault") by default.
+#' This is where HILDA fst files generated using `setup_hildar()` are stored.
 #'
 #' @return a data.table object
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
@@ -38,7 +36,7 @@ fetch <-
     .dir = getOption("hildar.vault")
     ) {
     if (!checkmate::test_directory_exists(.dir, access = "r")) {
-      stop("There is no `hildar.vault` in your global options. Please use `hilda_to_hildar()`",
+      stop("There is no `hildar.vault` in your global options. Please use `setup_hildar()`",
            "to create a vault of HILDA fst files first for this package to work properly.")
     }
     checkmate::assert_integerish(years, any.missing = FALSE)

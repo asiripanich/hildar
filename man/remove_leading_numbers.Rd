@@ -7,7 +7,7 @@
 remove_leading_numbers(x)
 }
 \arguments{
-\item{s}{a vector or a column from HILDA data}
+\item{x}{a vector or a column from HILDA data}
 }
 \value{
 a vector
