@@ -123,7 +123,7 @@
 <span class="co">#&gt;  Mean   : 1021.9   Mean   :  809.4  </span>
 <span class="co">#&gt;  3rd Qu.: 1162.6   3rd Qu.: 1129.6  </span>
 <span class="co">#&gt;  Max.   :13878.4   Max.   :16000.0</span></code></pre></div>
-<p>There is an quick option to add basic demographic variables to the data, this is set to TRUE by default.</p>
+<p>There is a quick option to add basic demographic variables to the data, which is set to TRUE by default.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/fetch.html">fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span>, add_basic_vars <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>
@@ -139,7 +139,7 @@
 <span class="co">#&gt; 4:   hhpid 1,2,3,4,5,6,...     HF Person ID</span>
 <span class="co">#&gt; 5: hhstate 1,2,3,4,5,6,...         HF State</span>
 <span class="co">#&gt; 6: hhpcode 1,2,3,4,5,6,...      HF Postcode</span></code></pre></div>
-<p>Let say we want to select all variables that are related to ‘employment’ we can easily incorporate them into the <code>fetch</code> function.</p>
+<p>Let say we want to select all variables that are related to ‘employment’ we can easily incorporate them into the <code><a href="reference/fetch.html">fetch()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">emp_vars</span> <span class="op">=</span> <span class="va">hilda_dict</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"employment"</span>, <span class="va">label</span><span class="op">)</span>, <span class="va">var</span><span class="op">]</span>
 <span class="va">emp_vars</span>
@@ -172,9 +172,9 @@
 <span class="co">#&gt; [183] "chb12"   "lfpe01"  "lfpe02"  "lfpe03"  "lfpe04"  "lfpe05"  "lfpe06" </span>
 <span class="co">#&gt; [190] "lfpe07"  "lfpe08"  "lfpe09"  "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13" </span>
 <span class="co">#&gt; [197] "lfpe14"  "lfpe15"</span>
-<span class="va">hilda_data</span> <span class="op">=</span> <span class="fu"><a href="reference/fetch.html">fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2006</span>, vars <span class="op">=</span> <span class="va">emp_vars</span><span class="op">)</span>
+<span class="va">hilda_data</span> <span class="op">=</span> <span class="fu"><a href="reference/fetch.html">fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="va">emp_vars</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
-<span class="co">#&gt; [1] 108028    185</span></code></pre></div>
+<span class="co">#&gt; [1] 55899    80</span></code></pre></div>
 <p>Here is a summary of the dimensions of our HILDA data files.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># the number of variables and rows in each wave</span>
