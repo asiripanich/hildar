@@ -118,12 +118,17 @@
   new_varnames <span class='op'>=</span> <span class='cn'>NULL</span>,
   add_population_weight <span class='op'>=</span> <span class='cn'>TRUE</span>,
   add_basic_vars <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  add_geography <span class='op'>=</span> <span class='cn'>FALSE</span>
+  add_geography <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  .dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"hildar.vault"</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>years</th>
+      <td><p>years (e.g. wave 1 = 2001), multiple waves can be put into a vector.</p></td>
+    </tr>
     <tr>
       <th>vars</th>
       <td><p>a vector containing all desired variable names to be loaded. vars can
@@ -150,10 +155,6 @@ hhrih (relationship in household) to the data</p></td>
       <th>add_geography</th>
       <td><p>take a logical value whether to add hhsgcc (Greater statistical region)
 to the data</p></td>
-    </tr>
-    <tr>
-      <th>waves</th>
-      <td><p>wave number, multiple waves can be put into a vector</p></td>
     </tr>
     <tr>
       <th>responding_person_only</th>
