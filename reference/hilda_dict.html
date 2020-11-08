@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • hildar</title>
+<title>HILDA dictionary in a data.table format. — hilda_dict • hildar</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="HILDA dictionary in a data.table format. — hilda_dict" />
+<meta property="og:description" content="A data.table that contains a dictionary of the loaded HILDA datasets." />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -100,91 +101,57 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>HILDA dictionary in a data.table format.</h1>
+    
+    <div class="hidden name"><code>hilda_dict.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>A data.table that contains a dictionary of the loaded HILDA datasets.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>hilda_dict</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="HILDA.html">HILDA</a></code> </p>
-        </td>
-        <td><p>HILDA constants</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dot-fst_colnames_exist.html">.fst_colnames_exist()</a></code> </p>
-        </td>
-        <td><p>Returns column names that exists in a .fst file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fetch.html">fetch()</a></code> </p>
-        </td>
-        <td><p>Fetch hilda data conditional on the args</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="hilda_dict.html">hilda_dict</a></code> </p>
-        </td>
-        <td><p>HILDA dictionary in a data.table format.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_missing_data_value.html">is_missing_data_value()</a></code> </p>
-        </td>
-        <td><p>Is missing data value</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="make_dict.html">make_dict()</a></code> </p>
-        </td>
-        <td><p>Make a dictionary for a STATA dta file.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="remove_leading_numbers.html">remove_leading_numbers()</a></code> </p>
-        </td>
-        <td><p>Remove non-missing leading numbers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="setup_hildar.html">setup_hildar()</a></code> </p>
-        </td>
-        <td><p>Save HILDA Stata files data to fst data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="standardise_hilda_colnames.html">standardise_hilda_colnames()</a></code> </p>
-        </td>
-        <td><p>Remove the leading alphabets of all the columns
-except those start with 'x'</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>A data table with many rows and 3 variables:</p><dl>
+<dt>var</dt><dd><p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>) variable names</p></dd>
+<dt>wave</dt><dd><p>(<code><a href='https://rdrr.io/r/base/list.html'>list(integer())</a></code>) waves that the variable was recorded</p></dd>
+<dt>label</dt><dd><p>(<code><a href='https://rdrr.io/r/base/character.html'>character()</a></code>) short description of the variable</p></dd>
+
+</dl>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>hilda_dict</span>
+</div><div class='output co'>#&gt;            var            wave
+#&gt;     1: xwaveid 1,2,3,4,5,6,...
+#&gt;     2:    hhid 1,2,3,4,5,6,...
+#&gt;     3:   hhpno 1,2,3,4,5,6,...
+#&gt;     4:   hhpid 1,2,3,4,5,6,...
+#&gt;     5: hhstate 1,2,3,4,5,6,...
+#&gt;    ---                        
+#&gt; 10279: fimfeue              16
+#&gt; 10280: fimfbss              16
+#&gt; 10281: fimfbfi              16
+#&gt; 10282: fimfd2d              16
+#&gt; 10283:  edasch              16
+#&gt;                                                                                   label
+#&gt;     1:                                                                 XW Cross wave ID
+#&gt;     2:                                                                  HF Household ID
+#&gt;     3:                                                                 HF Person number
+#&gt;     4:                                                                     HF Person ID
+#&gt;     5:                                                                         HF State
+#&gt;    ---                                                                                 
+#&gt; 10279: SCQ:C7f Managing finances - I always make sure I have money saved up for emergen
+#&gt; 10280: SCQ:C7g Managing finances - I do a good job of balancing my spending and savings
+#&gt; 10281: SCQ:C7h Managing finances - I feel very comfortable dealing with banks and other
+#&gt; 10282: SCQ:C7i Managing finances - I am good at dealing with day-to-day financial matte
+#&gt; 10283:                        CPQ:A2a At school at previous interview fed forward check</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
