@@ -42,8 +42,8 @@ binary data format that can be read very quickly, a lot faster than
 ## 3\) Set `hildar.vault` R option
 
 Let hildar knows where your `dir_output` is by setting
-options(hildar.vault = “dir\_output”), alternatively you may provide the
-.dir argument in `fetch()`.
+`options(hildar.vault = "dir_output")`, alternatively you may provide
+the directory as the `.dir` argument in `fetch()`.
 
 ## Example
 
@@ -94,4 +94,27 @@ head(hilda_dict)
 #> 4:   hhpid 1,2,3,4,5,6,...     HF Person ID
 #> 5: hhstate 1,2,3,4,5,6,...         HF State
 #> 6: hhpcode 1,2,3,4,5,6,...      HF Postcode
+
+# the number of variables presented in each wave
+hilda_dict[, unlist(wave), by = .(var, label)] %>% 
+  data.table::setnames("V1", "wave") %>%
+  data.table::setDT() %>%
+  .[, .(number_of_variables = .N), by = wave]
+#>     wave number_of_variables
+#>  1:    1                4291
+#>  2:    2                5222
+#>  3:    3                5216
+#>  4:    4                5083
+#>  5:    5                5895
+#>  6:    6                6142
+#>  7:    7                6046
+#>  8:    8                6188
+#>  9:    9                6203
+#> 10:   10                6482
+#> 11:   11                6685
+#> 12:   12                6524
+#> 13:   13                6449
+#> 14:   14                6713
+#> 15:   15                6793
+#> 16:   16                6426
 ```

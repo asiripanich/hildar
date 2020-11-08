@@ -37,7 +37,7 @@ Use `setup_hildar(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/
 
 ## 3) Set `hildar.vault` R option
 
-Let hildar knows where your `dir_output` is by setting options(hildar.vault = "dir_output"), alternatively you may provide the .dir argument in `fetch()`.
+Let hildar knows where your `dir_output` is by setting `options(hildar.vault = "dir_output")`, alternatively you may provide the directory as the `.dir` argument in `fetch()`.
 
 ## Example
 
@@ -58,4 +58,10 @@ fetch(years = 2001, add_basic_vars = T) %>%
 # hilda_dict is just a data.frame. You can `View(hilda_dict)` to quickly search
 # HILDA variables without going to their documentation webpage.
 head(hilda_dict)
+
+# the number of variables presented in each wave
+hilda_dict[, unlist(wave), by = .(var, label)] %>% 
+  data.table::setnames("V1", "wave") %>%
+  data.table::setDT() %>%
+  .[, .(number_of_variables = .N), by = wave]
 ```
