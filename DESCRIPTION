@@ -1,6 +1,6 @@
 Package: hildar
 Type: Package
-Title: HILDA data package and utils functions to use on HILDA survey data
+Title: HILDA Data Package and Utils Functions to Use on HILDA Survey Data
 Version: 0.1.0
 Author: Amarin Siripanich
 Maintainer: Amarin Siripanich <amarin.siri@gmail.com>
@@ -10,7 +10,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.5.2),
+    R (>= 4.0.0),
 Imports:
     fst,
     data.table,
