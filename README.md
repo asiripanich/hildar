@@ -9,8 +9,14 @@
 status](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
 <!-- badges: end -->
 
-The goal of **hildar** is to help R users that use HILDA survey data in
-their works.
+HILDA survey data is quite large, with many columns and rows. Some waves
+have more than 5000 variables. The goal of this package is to provide a
+quick and easy way to quickly load HILDA data into your workspace by
+converting the datasets from `.dta`, (one of the three formats HILDA
+provides) to `.fst` which can be loaded much much quicker than `.dta` in
+R. The main function here is `hildar::fetch()`, it can be used to load
+multiple years of hilda in one call and also allows a subset of
+variables to be selected. See `?fetch` for more options.
 
 Please note that, this package doesn’t include any parts of the HILDA
 survey data. You must be authorised to have access to a release of HILDA
