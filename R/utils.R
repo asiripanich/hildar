@@ -58,8 +58,11 @@ remove_leading_numbers <- function(x) {
 #'
 #' @examples
 #'
+#' \dontrun{
 #' h <- fetch(2011)
 #' h[is_missing_data_value(mrcurr)]
+#' }
+#'
 is_missing_data_value <- function(x) {
   UseMethod("is_missing_data_value", x)
 }
