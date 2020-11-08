@@ -25,7 +25,6 @@
 #'
 #'
 #' @return a data.table object
-#' @importFrom assertthat assert_that
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
 #' @importFrom fst read_fst
 #' @export
@@ -41,11 +40,10 @@ fetch <-
       stop("There is no `hildar.vault` in your global options. Please use `hilda_to_hildar()`",
            "to create a vault of HILDA fst files first for this package to work properly.")
     }
-    assertthat::assert_that(all(is.numeric(years)))
-    # assertthat::assert_that(!is.null(vars),
+    checkmate::assert_integerish(years, any.missing = FALSE)
     #   msg = "vars cannot be NULL. If you wish to get all columns use \"all\"")
     if (!is.null(vars)) {
-      assertthat::assert_that(all(is.character(vars)))
+      checkmate::assert_character(vars, any.missing = FALSE)
       inp_vars <- vars # cache to match with new_varnames
     }
 
@@ -116,7 +114,7 @@ fetch <-
 
     # rename the selected columns in vars
     if (!is.null(new_varnames)) {
-      assert_that(length(new_varnames) == length(inp_vars))
+      stopifnot(length(new_varnames) == length(inp_vars))
       setnames(dat, old = inp_vars, new = new_varnames)
     }
 
