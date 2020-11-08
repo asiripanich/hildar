@@ -1,5 +1,5 @@
 #' HILDA constants
-#' @export HILDA
+#' @noRd
 HILDA <- list()
 HILDA$xwaveid <- "xwaveid"
 HILDA$household_population_weight <- "hhwth"
