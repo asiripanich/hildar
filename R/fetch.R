@@ -34,13 +34,15 @@ fetch <-
     new_varnames = NULL,
     add_population_weight = TRUE,
     add_basic_vars = TRUE,
-    add_geography = FALSE
+    add_geography = FALSE,
+    .dir = getOption("hildar.vault")
     ) {
-    if (is.null(getOption("hildar.vault"))) {
+    if (!checkmate::test_directory_exists(.dir, access = "r")) {
       stop("There is no `hildar.vault` in your global options. Please use `hilda_to_hildar()`",
            "to create a vault of HILDA fst files first for this package to work properly.")
     }
     checkmate::assert_integerish(years, any.missing = FALSE)
+    checkmate::assert_subset(years, choices = 2001:2016)
     #   msg = "vars cannot be NULL. If you wish to get all columns use \"all\"")
     if (!is.null(vars)) {
       checkmate::assert_character(vars, any.missing = FALSE)
@@ -82,14 +84,12 @@ fetch <-
         )
     }
 
-    extdata_path <- system.file("extdata", package = "hildar")
-
     waves <- letters[years - 2000]
     dat_ls <- lapply(
       X = waves,
       FUN = function(wave) {
         tryCatch({
-          path_to_fst <- paste0(getOption("hildar.vault"), "/Combined_", wave, "160u.fst")
+          path_to_fst <- paste0(.dir, "/Combined_", wave, "160u.fst")
           dt <- fst::read_fst(
             path = path_to_fst,
             columns = .fst_colnames_exist(path_to_fst, vars),
