@@ -12,18 +12,19 @@ LazyData: true
 Depends:
     R (>= 4.0.0),
 Imports:
-    fst,
-    data.table,
-    magrittr,
-    readstata13,
-    future,
-    usethis,
-    checkmate,
-    furrr
+    fst (>= 0.9.0),
+    data.table (>= 1.13.0),
+    magrittr (>= 1.5.0),
+    checkmate (>= 2.0.0),
+    readstata13 (>= 0.9.0),
+    tools (>= 4.0.0),
+    purrr (>= 0.3.0),
+    future (>= 1.19.0),
+    furrr (>= 0.2.0)
 Suggests:
     roxygen2,
-    testthat (>= 2.1.0),
-    spelling
+    testthat (>= 3.0.0),
+    spelling (>= 2.2.0)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Language: en-US
