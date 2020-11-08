@@ -95,26 +95,31 @@ head(hilda_dict)
 #> 5: hhstate 1,2,3,4,5,6,...         HF State
 #> 6: hhpcode 1,2,3,4,5,6,...      HF Postcode
 
-# the number of variables presented in each wave
+# the number of variables and rows in each wave
+nrows_by_wave = 
+  fetch(years = 2001:2016, add_basic_vars = F) %>%
+  .[, .(number_of_rows = .N), by = wave]
+
 hilda_dict[, unlist(wave), by = .(var, label)] %>% 
   data.table::setnames("V1", "wave") %>%
   data.table::setDT() %>%
-  .[, .(number_of_variables = .N), by = wave]
-#>     wave number_of_variables
-#>  1:    1                4291
-#>  2:    2                5222
-#>  3:    3                5216
-#>  4:    4                5083
-#>  5:    5                5895
-#>  6:    6                6142
-#>  7:    7                6046
-#>  8:    8                6188
-#>  9:    9                6203
-#> 10:   10                6482
-#> 11:   11                6685
-#> 12:   12                6524
-#> 13:   13                6449
-#> 14:   14                6713
-#> 15:   15                6793
-#> 16:   16                6426
+  .[, .(number_of_variables = .N), by = wave] %>%
+  merge(nrows_by_wave, by = "wave")
+#>     wave number_of_variables number_of_rows
+#>  1:    1                4291          19914
+#>  2:    2                5222          18295
+#>  3:    3                5216          17690
+#>  4:    4                5083          17209
+#>  5:    5                5895          17467
+#>  6:    6                6142          17453
+#>  7:    7                6046          17280
+#>  8:    8                6188          17144
+#>  9:    9                6203          17632
+#> 10:   10                6482          17855
+#> 11:   11                6685          23415
+#> 12:   12                6524          23182
+#> 13:   13                6449          23299
+#> 14:   14                6713          23110
+#> 15:   15                6793          23297
+#> 16:   16                6426          23496
 ```

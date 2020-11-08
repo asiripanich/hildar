@@ -59,9 +59,14 @@ fetch(years = 2001, add_basic_vars = T) %>%
 # HILDA variables without going to their documentation webpage.
 head(hilda_dict)
 
-# the number of variables presented in each wave
+# the number of variables and rows in each wave
+nrows_by_wave = 
+  fetch(years = 2001:2016, add_basic_vars = F) %>%
+  .[, .(number_of_rows = .N), by = wave]
+
 hilda_dict[, unlist(wave), by = .(var, label)] %>% 
   data.table::setnames("V1", "wave") %>%
   data.table::setDT() %>%
-  .[, .(number_of_variables = .N), by = wave]
+  .[, .(number_of_variables = .N), by = wave] %>%
+  merge(nrows_by_wave, by = "wave")
 ```
