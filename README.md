@@ -47,12 +47,15 @@ options(hildar.vault = “dir\_output”), alternatively you may provide the
 
 ## Example
 
-Here is how you fetch HILDA data\!
+Here is how you can fetch HILDA data with `hildar`\!
 
 ``` r
 library(hildar)
-hilda_data <- fetch(years = 2001:2003, add_geography = T)
-summary(hilda_data)
+
+# fetch removes the HILDA year prefix from all the selected variable
+# (e.g. axxx = 2001, bxxx = 2002).
+fetch(years = 2001:2003, add_geography = T) %>%
+  summary()
 #>    xwaveid              hhid                wave          hgage       
 #>  Length:55899       Length:55899       Min.   :1.00   Min.   :  0.00  
 #>  Class :character   Class :character   1st Qu.:1.00   1st Qu.: 15.00  
@@ -74,4 +77,21 @@ summary(hilda_data)
 #>  Mean   : 1021.9   Mean   :  809.4  
 #>  3rd Qu.: 1162.6   3rd Qu.: 1129.6  
 #>  Max.   :13878.4   Max.   :16000.0
+
+# add basic demographic variables
+fetch(years = 2001, add_basic_vars = T) %>% 
+  names()
+#> [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr"  "hhrih"  
+#> [8] "hhwth"   "hhwtrp"
+
+# hilda_dict is just a data.frame. You can `View(hilda_dict)` to quickly search
+# HILDA variables without going to their documentation webpage.
+head(hilda_dict)
+#>        var            wave            label
+#> 1: xwaveid 1,2,3,4,5,6,... XW Cross wave ID
+#> 2:    hhid 1,2,3,4,5,6,...  HF Household ID
+#> 3:   hhpno 1,2,3,4,5,6,... HF Person number
+#> 4:   hhpid 1,2,3,4,5,6,...     HF Person ID
+#> 5: hhstate 1,2,3,4,5,6,...         HF State
+#> 6: hhpcode 1,2,3,4,5,6,...      HF Postcode
 ```

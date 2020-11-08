@@ -41,10 +41,21 @@ Let hildar knows where your `dir_output` is by setting options(hildar.vault = "d
 
 ## Example
 
-Here is how you fetch HILDA data!
+Here is how you can fetch HILDA data with `hildar`!
 
 ```{r example}
 library(hildar)
-hilda_data <- fetch(years = 2001:2003, add_geography = T)
-summary(hilda_data)
+
+# fetch removes the HILDA year prefix from all the selected variable
+# (e.g. axxx = 2001, bxxx = 2002).
+fetch(years = 2001:2003, add_geography = T) %>%
+  summary()
+
+# add basic demographic variables
+fetch(years = 2001, add_basic_vars = T) %>% 
+  names()
+
+# hilda_dict is just a data.frame. You can `View(hilda_dict)` to quickly search
+# HILDA variables without going to their documentation webpage.
+head(hilda_dict)
 ```
