@@ -142,28 +142,33 @@
 <span class="co">#&gt; 5: hhstate 1,2,3,4,5,6,...         HF State</span>
 <span class="co">#&gt; 6: hhpcode 1,2,3,4,5,6,...      HF Postcode</span>
 
-<span class="co"># the number of variables presented in each wave</span>
+<span class="co"># the number of variables and rows in each wave</span>
+<span class="va">nrows_by_wave</span> <span class="op">=</span> 
+  <span class="fu"><a href="reference/fetch.html">fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2016</span>, add_basic_vars <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_rows <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span>
+
 <span class="va">hilda_dict</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">var</span>, <span class="va">label</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span> 
   <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="st">"V1"</span>, <span class="st">"wave"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_variables <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span>
-<span class="co">#&gt;     wave number_of_variables</span>
-<span class="co">#&gt;  1:    1                4291</span>
-<span class="co">#&gt;  2:    2                5222</span>
-<span class="co">#&gt;  3:    3                5216</span>
-<span class="co">#&gt;  4:    4                5083</span>
-<span class="co">#&gt;  5:    5                5895</span>
-<span class="co">#&gt;  6:    6                6142</span>
-<span class="co">#&gt;  7:    7                6046</span>
-<span class="co">#&gt;  8:    8                6188</span>
-<span class="co">#&gt;  9:    9                6203</span>
-<span class="co">#&gt; 10:   10                6482</span>
-<span class="co">#&gt; 11:   11                6685</span>
-<span class="co">#&gt; 12:   12                6524</span>
-<span class="co">#&gt; 13:   13                6449</span>
-<span class="co">#&gt; 14:   14                6713</span>
-<span class="co">#&gt; 15:   15                6793</span>
-<span class="co">#&gt; 16:   16                6426</span></code></pre></div>
+  <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_variables <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">nrows_by_wave</span>, by <span class="op">=</span> <span class="st">"wave"</span><span class="op">)</span>
+<span class="co">#&gt;     wave number_of_variables number_of_rows</span>
+<span class="co">#&gt;  1:    1                4291          19914</span>
+<span class="co">#&gt;  2:    2                5222          18295</span>
+<span class="co">#&gt;  3:    3                5216          17690</span>
+<span class="co">#&gt;  4:    4                5083          17209</span>
+<span class="co">#&gt;  5:    5                5895          17467</span>
+<span class="co">#&gt;  6:    6                6142          17453</span>
+<span class="co">#&gt;  7:    7                6046          17280</span>
+<span class="co">#&gt;  8:    8                6188          17144</span>
+<span class="co">#&gt;  9:    9                6203          17632</span>
+<span class="co">#&gt; 10:   10                6482          17855</span>
+<span class="co">#&gt; 11:   11                6685          23415</span>
+<span class="co">#&gt; 12:   12                6524          23182</span>
+<span class="co">#&gt; 13:   13                6449          23299</span>
+<span class="co">#&gt; 14:   14                6713          23110</span>
+<span class="co">#&gt; 15:   15                6793          23297</span>
+<span class="co">#&gt; 16:   16                6426          23496</span></code></pre></div>
 </div>
 </div>
   </div>
