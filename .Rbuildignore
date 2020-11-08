@@ -3,3 +3,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
+extdata
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
