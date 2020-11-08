@@ -22,20 +22,22 @@ The goal of **hildar** is to help R users that use HILDA survey data in their wo
 
 Please note that, this package doesn't include any parts of the HILDA survey data. You must be authorised to have access to a release of HILDA survey data. 
 
-## Installation
+## 1) Installation
 
 The development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("asiripanich/hildar")
+# install.packages("remotes")
+remotes::install_github("asiripanich/hildar")
 ```
 
-## Import HILDA files
+## 2) Store HILDA files as fst
 
-Basically, this package imports HILDA survey data in .dta format (STATA format) and convert them into .fst files so they can be accessed very quickly! 
+Use `setup_hildar(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/path/to/save/hilda-fst-files")` to read in HILDA STATA (.dta) files and save them as `.fst` files for `hildar`. `.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
 
-TODO: write an instruction on how to import HILDA files.
+## 3) Set `hildar.vault` R option
+
+Let hildar knows where your `dir_output` is by setting options(hildar.vault = "dir_output"), alternatively you may provide the .dir argument in `fetch()`.
 
 ## Example
 
@@ -43,8 +45,6 @@ Here is how you fetch HILDA data!
 
 ```{r example}
 library(hildar)
-
-hilda_data <- fetch(years = 2001:2016, add_geography = T)
-
+hilda_data <- fetch(years = 2001:2003, add_geography = T)
 summary(hilda_data)
 ```
