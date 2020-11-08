@@ -125,6 +125,8 @@ fetch <-
 #' @param path path to a .fst file
 #' @param colnames a character vector to check
 #'
+#' @noRd
+#'
 #' @return column names in colnames that exists in the .fst file
 .fst_colnames_exist <- function(path, colnames) {
 
@@ -134,5 +136,3 @@ fetch <-
 
   colnames[colnames_exist]
 }
-
-
