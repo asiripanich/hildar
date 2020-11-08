@@ -20,7 +20,8 @@ Imports:
     tools (>= 4.0.0),
     purrr (>= 0.3.0),
     future (>= 1.19.0),
-    furrr (>= 0.2.0)
+    furrr (>= 0.2.0),
+    fs (>= 1.5.0)
 Suggests:
     roxygen2,
     testthat (>= 3.0.0),

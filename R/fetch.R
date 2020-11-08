@@ -87,7 +87,7 @@ fetch <-
       X = waves,
       FUN = function(wave) {
         tryCatch({
-          path_to_fst <- paste0(.dir, "/Combined_", wave, "160u.fst")
+          path_to_fst <- fs::path(.dir, paste0("Combined_", wave, "160u.fst"))
           dt <- fst::read_fst(
             path = path_to_fst,
             columns = .fst_colnames_exist(path_to_fst, vars),
