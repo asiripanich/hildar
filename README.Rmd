@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 # hildar
 
 <!-- badges: start -->
+[![R build status](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
 <!-- badges: end -->
 
 The goal of **hildar** is to help R users that use HILDA survey data in their works. 
