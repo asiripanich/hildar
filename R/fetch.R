@@ -1,4 +1,4 @@
-#' Fetch hilda data conditional on the args
+#' Fetch HILDA data
 #'
 #' @param years
 #'  years (e.g. wave 1 = 2001), multiple waves can be put into a vector.
@@ -26,7 +26,7 @@
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
 #' @importFrom fst read_fst
 #' @export
-fetch <-
+hil_fetch <-
   function(years,
     vars = NULL,
     new_varnames = NULL,
@@ -118,6 +118,33 @@ fetch <-
 
     dat
   }
+
+#' Fetch HILDA data
+#'
+#' Soft-deprecated, new code should use [hil_fetch()].
+#' 
+#' @return See [hil_fetch()].
+#' @importFrom lifecycle deprecate_soft
+#' @export
+#' @keywords internal
+fetch <- function(years,
+                  vars = NULL,
+                  new_varnames = NULL,
+                  add_population_weight = TRUE,
+                  add_basic_vars = TRUE,
+                  add_geography = FALSE,
+                  .dir = getOption("hildar.vault")) {
+  lifecycle::deprecate_soft("0.4.0", "mlfit::fetch()", "mlfit::hil_fetch()")
+  hil_fetch(
+    years,
+    vars,
+    new_varnames,
+    add_population_weight,
+    add_basic_vars,
+    add_geography,
+    .dir
+  )
+}
 
 
 #' Returns column names that exists in a .fst file
