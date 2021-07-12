@@ -18,7 +18,6 @@ coding from HILDA. They usally starts with \verb{[-\{number\}]} or a negative va
 if the variable is of type numeric.
 }
 \examples{
-
 \dontrun{
 h <- fetch(2011)
 h[is_missing_data_value(mrcurr)]
