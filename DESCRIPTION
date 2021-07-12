@@ -4,27 +4,27 @@ Title: HILDA Data Package and Utils Functions to Use on HILDA Survey Data
 Version: 0.1.0
 Author: Amarin Siripanich
 Maintainer: Amarin Siripanich <amarin.siri@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Fast query HILDA by storing them in fst format.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 4.0.0),
+    R,
 Imports:
-    fst (>= 0.9.0),
-    data.table (>= 1.13.0),
-    magrittr (>= 1.5.0),
-    checkmate (>= 2.0.0),
-    readstata13 (>= 0.9.0),
-    tools (>= 4.0.0),
-    purrr (>= 0.3.0),
-    future (>= 1.19.0),
-    furrr (>= 0.2.0),
-    fs (>= 1.5.0)
+    fst,
+    data.table,
+    magrittr,
+    checkmate,
+    readstata13,
+    tools,
+    purrr,
+    future,
+    furrr,
+    fs,
+    lifecycle
 Suggests:
     roxygen2,
-    testthat (>= 3.0.0),
+    testthat,
     spelling (>= 2.2.0)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
