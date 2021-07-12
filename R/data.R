@@ -6,7 +6,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(hilda_dict)
+#' @usage data(hil_dict)
 #' @format A data table with many rows and 3 variables:
 #' \describe{
 #'   \item{var}{(`character()`) variable names}
@@ -15,5 +15,5 @@
 #' }
 #'
 #' @examples
-#' hilda_dict
-"hilda_dict"
+#' hil_dict
+"hil_dict"
