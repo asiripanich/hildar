@@ -1,7 +1,7 @@
 #' Save HILDA Stata files data to fst data
 #'
 #' @param read_dir readind directory where the HILDA .dta files are
-#' @param save_dir a directory to save HILDA files in 'fst' format. 
+#' @param save_dir a directory to save HILDA files in 'fst' format.
 #'  This directory will be added to .Rprofile as `hildar.vault`.
 #' @param n_cores number of cores
 #' @param pattern only reads ".dta" stata files for now
@@ -40,17 +40,17 @@ hil_setup <- function(read_dir, save_dir, n_cores = NULL, pattern = ".dta") {
 }
 
 #' Save HILDA Stata files data to fst data
-#' 
+#'
 #' Soft-deprecated, new code should use [hil_setup()].
-#' 
+#'
 #' @return See [hil_setup()].
 #' @importFrom lifecycle deprecate_soft
 #' @export
 #' @keywords internal
 setup_hildar <- function(read_dir, save_dir, n_cores = NULL, pattern = ".dta") {
   lifecycle::deprecate_soft(
-    "0.4.0", 
-    "mlfit::setup_hildar()", 
+    "0.4.0",
+    "mlfit::setup_hildar()",
     "mlfit::hil_setup()"
   )
   hil_setup(read_dir, save_dir, n_cores, pattern)

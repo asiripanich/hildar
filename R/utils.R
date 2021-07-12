@@ -10,7 +10,8 @@ standardise_hilda_colnames <- function(hilda_data) {
   colnames(hilda_data) <-
     paste(ifelse(first_chars == first_chars[2], "", first_chars),
       notfirst_chars,
-      sep = "")
+      sep = ""
+    )
   colnames(hilda_data)
   return(hilda_data)
 }
@@ -28,16 +29,20 @@ standardise_hilda_colnames <- function(hilda_data) {
 remove_leading_numbers <- function(x) {
   if (is.factor(x)) {
     levels(x) <-
-      gsub(pattern = "^\\[[0-9]+\\]\\s",
-           replacement = "",
-           x = levels(x))
+      gsub(
+        pattern = "^\\[[0-9]+\\]\\s",
+        replacement = "",
+        x = levels(x)
+      )
     return(x)
   }
   if (is.character(x)) {
     x_new <-
-      gsub(pattern = "^\\[[0-9]+\\]\\s",
-           replacement = "",
-           x = x)
+      gsub(
+        pattern = "^\\[[0-9]+\\]\\s",
+        replacement = "",
+        x = x
+      )
     return(x_new)
   }
   x
@@ -57,7 +62,6 @@ remove_leading_numbers <- function(x) {
 #' @export
 #'
 #' @examples
-#'
 #' \dontrun{
 #' h <- fetch(2011)
 #' h[is_missing_data_value(mrcurr)]

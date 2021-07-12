@@ -28,16 +28,17 @@
 #' @export
 hil_fetch <-
   function(years,
-    vars = NULL,
-    new_varnames = NULL,
-    add_population_weight = TRUE,
-    add_basic_vars = TRUE,
-    add_geography = FALSE,
-    .dir = getOption("hildar.vault")
-    ) {
+           vars = NULL,
+           new_varnames = NULL,
+           add_population_weight = TRUE,
+           add_basic_vars = TRUE,
+           add_geography = FALSE,
+           .dir = getOption("hildar.vault")) {
     if (!checkmate::test_directory_exists(.dir, access = "r")) {
-      stop("There is no `hildar.vault` in your global options. Please use `setup_hildar()`",
-           "to create a vault of HILDA fst files first for this package to work properly.")
+      stop(
+        "There is no `hildar.vault` in your global options. Please use `setup_hildar()`",
+        "to create a vault of HILDA fst files first for this package to work properly."
+      )
     }
     checkmate::assert_integerish(years, any.missing = FALSE)
     checkmate::assert_subset(years, choices = 2001:2016)
@@ -49,7 +50,7 @@ hil_fetch <-
 
     if (add_population_weight) {
       pop_weight_vars <-
-        c(HILDA$household_population_weight,HILDA$responding_person_population_weight)
+        c(HILDA$household_population_weight, HILDA$responding_person_population_weight)
     } else {
       pop_weight_vars <- NULL
     }
@@ -62,7 +63,7 @@ hil_fetch <-
 
     if (add_geography == TRUE) {
       geography_vars <- c("hhsgcc")
-    }  else {
+    } else {
       geography_vars <- NULL
     }
 
@@ -86,25 +87,28 @@ hil_fetch <-
     dat_ls <- lapply(
       X = waves,
       FUN = function(wave) {
-        tryCatch({
-          path_to_fst <- fs::path(.dir, paste0("Combined_", wave, "160u.fst"))
-          dt <- fst::read_fst(
-            path = path_to_fst,
-            columns = .fst_colnames_exist(path_to_fst, vars),
-            as.data.table = T
-          )
-          # convert all factors to strings
-          fct_cols <- names(dt)[sapply(dt, is.factor)]
-          for (fct_col in fct_cols) {
-            data.table::set(x = dt, j = fct_col, value = as.character(dt[[fct_col]]))
+        tryCatch(
+          {
+            path_to_fst <- fs::path(.dir, paste0("Combined_", wave, "160u.fst"))
+            dt <- fst::read_fst(
+              path = path_to_fst,
+              columns = .fst_colnames_exist(path_to_fst, vars),
+              as.data.table = T
+            )
+            # convert all factors to strings
+            fct_cols <- names(dt)[sapply(dt, is.factor)]
+            for (fct_col in fct_cols) {
+              data.table::set(x = dt, j = fct_col, value = as.character(dt[[fct_col]]))
+            }
+            # add wave number
+            dt[, wave := which(letters == wave)]
+            setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
+            dt
+          },
+          error = function(e) {
+            NULL
           }
-          # add wave number
-          dt[, wave := which(letters == wave)]
-          setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
-          dt
-        }, error = function(e) {
-          NULL
-        })
+        )
       }
     )
 
@@ -122,7 +126,7 @@ hil_fetch <-
 #' Fetch HILDA data
 #'
 #' Soft-deprecated, new code should use [hil_fetch()].
-#' 
+#'
 #' @return See [hil_fetch()].
 #' @importFrom lifecycle deprecate_soft
 #' @export
@@ -156,7 +160,6 @@ fetch <- function(years,
 #'
 #' @return column names in colnames that exists in the .fst file
 .fst_colnames_exist <- function(path, colnames) {
-
   first_row_dt <- fst::read.fst(path, to = 1, as.data.table = T)
 
   colnames_exist <- colnames %in% names(first_row_dt)

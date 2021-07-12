@@ -16,4 +16,4 @@
 #'
 #' @examples
 #' hilda_dict
-'hilda_dict'
+"hilda_dict"

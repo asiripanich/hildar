@@ -1,5 +1,4 @@
 test_that("get one year data", {
-
   skip_on_ci()
 
   data <- hildar::fetch(years = 2011)
@@ -10,7 +9,6 @@ test_that("get one year data", {
 
 
 test_that("get missing data in one wave", {
-
   skip_on_ci()
 
   selected_years <- 2011:2012
