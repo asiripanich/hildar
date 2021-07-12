@@ -50,7 +50,10 @@ hil_fetch <-
 
     if (add_population_weight) {
       pop_weight_vars <-
-        c(HILDA$household_population_weight, HILDA$responding_person_population_weight)
+        c(
+          HILDA$household_population_weight,
+          HILDA$responding_person_population_weight
+        )
     } else {
       pop_weight_vars <- NULL
     }
