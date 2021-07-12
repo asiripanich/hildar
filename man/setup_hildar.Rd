@@ -6,16 +6,10 @@
 \usage{
 setup_hildar(read_dir, save_dir, n_cores = NULL, pattern = ".dta")
 }
-\arguments{
-\item{read_dir}{readind directory where the HILDA .dta files are}
-
-\item{save_dir}{saving directory. This will directory will be added to .Rprofile
-as \code{hildar.vault}.}
-
-\item{n_cores}{number of cores}
-
-\item{pattern}{only reads ".dta" stata files for now}
+\value{
+See \code{\link[=hil_setup]{hil_setup()}}.
 }
 \description{
-Save HILDA Stata files data to fst data
+Soft-deprecated, new code should use \code{\link[=hil_setup]{hil_setup()}}.
 }
+\keyword{internal}

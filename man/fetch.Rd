@@ -2,7 +2,7 @@
 % Please edit documentation in R/fetch.R
 \name{fetch}
 \alias{fetch}
-\title{Fetch hilda data conditional on the args}
+\title{Fetch HILDA data}
 \usage{
 fetch(
   years,
@@ -14,32 +14,10 @@ fetch(
   .dir = getOption("hildar.vault")
 )
 }
-\arguments{
-\item{years}{years (e.g. wave 1 = 2001), multiple waves can be put into a vector.}
-
-\item{vars}{a vector containing all desired variable names to be loaded. vars can
-be set to "all" to fetch all columns. This may take a long time to load}
-
-\item{new_varnames}{a vector contains character names with its length equals length of \code{vars} to
-be replaced by \code{vars} orgininal names.}
-
-\item{add_population_weight}{take a logical value whether to add cross-sectional responding person weight
-column and enumerated weight
-column to the data}
-
-\item{add_basic_vars}{take a logical value whether to add hgage (age), hgsex (sex),
-mrcurr (marital status) and
-hhrih (relationship in household) to the data}
-
-\item{add_geography}{take a logical value whether to add hhsgcc (Greater statistical region)
-to the data}
-
-\item{.dir}{a directory, if not given it uses getOption("hildar.vault") by default.
-This is where HILDA fst files generated using \code{setup_hildar()} are stored.}
-}
 \value{
-a data.table object
+See \code{\link[=hil_fetch]{hil_fetch()}}.
 }
 \description{
-Fetch hilda data conditional on the args
+Soft-deprecated, new code should use \code{\link[=hil_fetch]{hil_fetch()}}.
 }
+\keyword{internal}
