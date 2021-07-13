@@ -1,31 +1,42 @@
 #' Save HILDA Stata files data to fst data
 #'
+#' This functions looks in a directory for HILDA files in .dta.
+#' format and save them as fst files. The fst files will be used
+#' by `hil_fetch()` for loading querying HILDA data.
+#'
 #' @param read_dir readind directory where the HILDA .dta files are
 #' @param save_dir a directory to save HILDA files in 'fst' format.
 #'  This directory will be added to .Rprofile as `hildar.vault`.
-#' @param n_cores number of cores
-#' @param pattern only reads ".dta" stata files for now
+#' 
+#' @note 
+#' This function can take a long time to finish since each HILDA file
+#' is quite large. One option is to use the future package to choose 
+#' your parallel backend before running `hil_fetch()`. The following
+#' code chuck uses `multisession` which creates background R sessions
+#' equal to the number of `workers`.
+#' 
+#' ```
+#' library(future)
+#' plan(multisession, workers = 2)
+#' ```
 #'
-#' @importFrom future plan multiprocess
 #' @importFrom parallel detectCores
 #' @importFrom readstata13 read.dta13
 #' @importFrom fst write.fst
 #'
 #' @return NULL
 #' @export
-hil_setup <- function(read_dir, save_dir, n_cores = NULL, pattern = ".dta") {
+hil_setup <- function(read_dir, save_dir) {
   checkmate::assert_directory_exists(read_dir, access = "r")
   checkmate::assert_directory_exists(save_dir, access = "rw")
-  checkmate::assert_count(n_cores, positive = T, null.ok = T)
-  if (is.null(n_cores)) {
-    n_cores <- parallel::detectCores() / 2
-    message("using ", n_cores, " cores to setup hilda files.")
-  }
-  future::plan(future::multiprocess, workers = n_cores)
-  hilda_filedirs <- list.files(path = read_dir, pattern = pattern, full.names = T)
-  hilda_files <- list.files(path = read_dir, pattern = pattern)
+  hilda_filedirs <- list.files(
+    path = read_dir,
+    pattern = ".dta",
+    full.names = T
+  )
+  hilda_files <- list.files(path = read_dir, pattern = ".dta")
   if (file.exists(save_dir)) {
-    furrr::future_map(seq_along(hilda_files), ~ {
+    furrr::future_walk(seq_along(hilda_files), ~ {
       df <- read.dta13(hilda_filedirs[.x], convert.factors = T, convert.dates = T) %>%
         standardise_hilda_colnames()
       message("finished reading from ", hilda_filedirs[.x])
@@ -33,7 +44,13 @@ hil_setup <- function(read_dir, save_dir, n_cores = NULL, pattern = ".dta") {
       message("writing to fst..")
       write.fst(df, path = paste(save_dir, "/", filename, ".fst", sep = ""))
     })
-    message("done")
+    message(
+      "HILDA fst files saved to '", save_dir, "'. ",
+      "Add this 'HILDA_FST=", fs::path_expand(save_dir), "' ",
+      "without the apostrophes to your .Renviron file or ",
+      "your .Rprofile file. You can use `usethis::edit_r_profile()` ",
+      "or `usethis::edit_r_environ()` to open them."
+    )
   } else {
     message("save_dir doesn't exist, no files were created")
   }
