@@ -16,7 +16,6 @@ Imports:
     magrittr,
     checkmate,
     readstata13,
-    tools,
     purrr,
     furrr,
     fs,
