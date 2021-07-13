@@ -153,7 +153,7 @@ fetch <- function(years,
                   add_basic_vars = TRUE,
                   add_geography = FALSE,
                   .dir = getOption("hildar.vault")) {
-  lifecycle::deprecate_("0.1.0", "hildar::fetch()", "hildar::hil_fetch()")
+  lifecycle::deprecate_soft("0.1.0", "hildar::fetch()", "hildar::hil_fetch()")
   hil_fetch(
     years,
     vars,
