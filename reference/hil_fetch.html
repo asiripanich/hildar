@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MIT License • hildar</title>
+<title>Fetch HILDA data — hil_fetch • hildar</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="MIT License" />
+<meta property="og:title" content="Fetch HILDA data — hil_fetch" />
+<meta property="og:description" content="Fetch HILDA data" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +71,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">hildar</a>
+        <a class="navbar-link" href="../index.html">hildar</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
@@ -78,16 +79,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -108,29 +109,81 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>MIT License</h1>
+    <h1>Fetch HILDA data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/asiripanich/hildar/blob/master/R/fetch.R'><code>R/fetch.R</code></a></small>
+    <div class="hidden name"><code>hil_fetch.Rd</code></div>
     </div>
 
-<div id="mit-license" class="section level1">
+    <div class="ref-description">
+    <p>Fetch HILDA data</p>
+    </div>
 
-<p>Copyright (c) 2019 Amarin Siripanich</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-</div>
+    <pre class="usage"><span class='fu'>hil_fetch</span><span class='op'>(</span>
+  <span class='va'>years</span>,
+  vars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  new_varnames <span class='op'>=</span> <span class='cn'>NULL</span>,
+  add_population_weight <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  add_basic_vars <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  add_geography <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  hilda_fst_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"HILDA_FST"</span><span class='op'>)</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"HILDA_FST"</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"HILDA_FST"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>years</th>
+      <td><p>years (e.g. wave 1 = 2001), multiple waves can be put into a vector.</p></td>
+    </tr>
+    <tr>
+      <th>vars</th>
+      <td><p>a vector containing all desired variable names to be loaded. vars can
+be set to "all" to fetch all columns. This may take a long time to load</p></td>
+    </tr>
+    <tr>
+      <th>new_varnames</th>
+      <td><p>a vector contains character names with its length equals length of <code>vars</code> to
+be replaced by <code>vars</code> orgininal names.</p></td>
+    </tr>
+    <tr>
+      <th>add_population_weight</th>
+      <td><p>take a logical value whether to add cross-sectional responding person weight
+column and enumerated weight
+column to the data</p></td>
+    </tr>
+    <tr>
+      <th>add_basic_vars</th>
+      <td><p>take a logical value whether to add hgage (age), hgsex (sex),
+mrcurr (marital status) and
+hhrih (relationship in household) to the data</p></td>
+    </tr>
+    <tr>
+      <th>add_geography</th>
+      <td><p>take a logical value whether to add hhsgcc (Greater statistical region)
+to the data</p></td>
+    </tr>
+    <tr>
+      <th>hilda_fst_dir</th>
+      <td><p>a directory where HILDA files in fst format are stored
+by <code><a href='hil_setup.html'>hil_setup()</a></code>. If not given the function will check uses for 'HILDA_FST'
+in your <code>.Rprofile</code> file first, then in <code>.Renviron</code> file.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a data.table object</p>
 
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>

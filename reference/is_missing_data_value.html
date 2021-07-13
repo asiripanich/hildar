@@ -74,7 +74,7 @@ if the variable is of type numeric." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hildar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -88,6 +88,9 @@ if the variable is of type numeric." />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -137,9 +140,8 @@ if the variable is of type numeric.</p>
     <p>a logical vector</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>h</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fetch.html'>fetch</a></span><span class='op'>(</span><span class='fl'>2011</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>h</span> <span class='op'>&lt;-</span> <span class='fu'><a href='hil_fetch.html'>hil_fetch</a></span><span class='op'>(</span><span class='fl'>2011</span><span class='op'>)</span>
 <span class='va'>h</span><span class='op'>[</span><span class='fu'>is_missing_data_value</span><span class='op'>(</span><span class='va'>mrcurr</span><span class='op'>)</span><span class='op'>]</span>
 <span class='op'>}</span>
 

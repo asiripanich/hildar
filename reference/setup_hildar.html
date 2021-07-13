@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Save HILDA Stata files data to fst data — setup_hildar" />
-<meta property="og:description" content="Save HILDA Stata files data to fst data" />
+<meta property="og:description" content="Soft-deprecated, new code should use hil_setup()." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hildar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -114,33 +117,15 @@
     </div>
 
     <div class="ref-description">
-    <p>Save HILDA Stata files data to fst data</p>
+    <p>Soft-deprecated, new code should use <code><a href='hil_setup.html'>hil_setup()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>setup_hildar</span><span class='op'>(</span><span class='va'>read_dir</span>, <span class='va'>save_dir</span>, n_cores <span class='op'>=</span> <span class='cn'>NULL</span>, pattern <span class='op'>=</span> <span class='st'>".dta"</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>read_dir</th>
-      <td><p>readind directory where the HILDA .dta files are</p></td>
-    </tr>
-    <tr>
-      <th>save_dir</th>
-      <td><p>saving directory. This will directory will be added to .Rprofile
-as <code>hildar.vault</code>.</p></td>
-    </tr>
-    <tr>
-      <th>n_cores</th>
-      <td><p>number of cores</p></td>
-    </tr>
-    <tr>
-      <th>pattern</th>
-      <td><p>only reads ".dta" stata files for now</p></td>
-    </tr>
-    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>See <code><a href='hil_setup.html'>hil_setup()</a></code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
