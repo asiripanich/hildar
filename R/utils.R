@@ -19,8 +19,8 @@ standardise_hilda_colnames <- function(hilda_data) {
 
 #' @title Remove non-missing leading numbers
 #'
-#' @description In HILDA all factor levels are numbered. 
-#'  If the leading numbers are not needed then one can 
+#' @description In HILDA all factor levels are numbered.
+#'  If the leading numbers are not needed then one can
 #'  use this function to recode the factor lavels.
 #'
 #' @param x a vector or a column from HILDA data

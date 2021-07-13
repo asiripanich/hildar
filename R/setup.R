@@ -7,14 +7,14 @@
 #' @param read_dir readind directory where the HILDA .dta files are
 #' @param save_dir a directory to save HILDA files in 'fst' format.
 #'  This directory will be added to .Rprofile as `hildar.vault`.
-#' 
-#' @note 
+#'
+#' @note
 #' This function can take a long time to finish since each HILDA file
-#' is quite large. One option is to use the future package to choose 
+#' is quite large. One option is to use the future package to choose
 #' your parallel backend before running `hil_fetch()`. The following
 #' code chuck uses `multisession` which creates background R sessions
 #' equal to the number of `workers`.
-#' 
+#'
 #' ```
 #' library(future)
 #' plan(multisession, workers = 2)
