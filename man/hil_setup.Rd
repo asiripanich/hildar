@@ -4,18 +4,25 @@
 \alias{hil_setup}
 \title{Save HILDA Stata files data to fst data}
 \usage{
-hil_setup(read_dir, save_dir, n_cores = NULL, pattern = ".dta")
+hil_setup(read_dir, save_dir)
 }
 \arguments{
 \item{read_dir}{readind directory where the HILDA .dta files are}
 
 \item{save_dir}{a directory to save HILDA files in 'fst' format.
 This directory will be added to .Rprofile as \code{hildar.vault}.}
-
-\item{n_cores}{number of cores}
-
-\item{pattern}{only reads ".dta" stata files for now}
 }
 \description{
-Save HILDA Stata files data to fst data
+This functions looks in a directory for HILDA files in .dta.
+format and save them as fst files. The fst files will be used
+by \code{hil_fetch()} for loading querying HILDA data.
+}
+\note{
+This function can take a long time to finish since each HILDA file
+is quite large. One option is to use the future package to choose
+your parallel backend before running \code{hil_fetch()}. The following
+code chuck uses \code{multisession} which creates background R sessions
+equal to the number of \code{workers}.\preformatted{library(future)
+plan(multisession, workers = 2)
+}
 }

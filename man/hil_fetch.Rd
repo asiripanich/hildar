@@ -11,7 +11,8 @@ hil_fetch(
   add_population_weight = TRUE,
   add_basic_vars = TRUE,
   add_geography = FALSE,
-  .dir = getOption("hildar.vault")
+  hilda_fst_dir = ifelse(!is.null(getOption("HILDA_FST")), getOption("HILDA_FST"),
+    Sys.getenv("HILDA_FST"))
 )
 }
 \arguments{
@@ -34,8 +35,9 @@ hhrih (relationship in household) to the data}
 \item{add_geography}{take a logical value whether to add hhsgcc (Greater statistical region)
 to the data}
 
-\item{.dir}{a directory, if not given it uses getOption("hildar.vault") by default.
-This is where HILDA fst files generated using \code{setup_hildar()} are stored.}
+\item{hilda_fst_dir}{a directory where HILDA files in fst format are stored
+by \code{hil_setup()}. If not given the function will check uses for 'HILDA_FST'
+in your \code{.Rprofile} file first, then in \code{.Renviron} file.}
 }
 \value{
 a data.table object
