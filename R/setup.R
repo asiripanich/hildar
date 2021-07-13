@@ -66,9 +66,16 @@ hil_setup <- function(read_dir, save_dir) {
 #' @keywords internal
 setup_hildar <- function(read_dir, save_dir, n_cores = NULL, pattern = ".dta") {
   lifecycle::deprecate_soft(
-    "0.4.0",
-    "mlfit::setup_hildar()",
-    "mlfit::hil_setup()"
+    "0.1.0",
+    "hildar::setup_hildar()",
+    "hildar::hil_setup()"
   )
-  hil_setup(read_dir, save_dir, n_cores, pattern)
+
+  warning(
+    "`n_cores` and `pattern` are no longer used by ",
+    "`hildar::hil_setup()`. See the Note section in ",
+    "`?hildar::hil_setup()`."
+  )
+
+  hil_setup(read_dir, save_dir)
 }
