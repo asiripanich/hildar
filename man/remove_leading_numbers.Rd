@@ -13,6 +13,7 @@ remove_leading_numbers(x)
 a vector
 }
 \description{
-In HILDA all factor levels are numbered. If the leading numbers are not needed
-then one can use this function to recode the factor lavels.
+In HILDA all factor levels are numbered.
+If the leading numbers are not needed then one can
+use this function to recode the factor lavels.
 }
