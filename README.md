@@ -8,15 +8,22 @@
 [![R-CMD-check](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
 <!-- badges: end -->
 
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&usqp=CAU)
+
+(source:
+<https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data>)
+
 [HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is
-quite large, with many columns and rows. Some waves have more than 5000
-variables. The goal of this package is to provide a quick and easy way
-to quickly load HILDA data into your workspace by converting the
-datasets from `.dta`, (one of the three formats HILDA provides) to
-`.fst` which can be loaded much much quicker than `.dta` in R. The main
-function here is `hildar::hil_fetch()`, it can be used to load multiple
-years of hilda in one call and also allows a subset of variables to be
-selected. See `?fetch` for more options.
+a large panel survey with close to 20 waves (2001 - 2020). Some waves
+have more than 5000 variables. The goal of this package is to provide a
+quick and easy way to quickly query HILDA data into your R workspace.
+This is possible by converting the dataset of each wave from `.dta`, one
+of the three formats HILDA provides, to `fst` format.
+`[fst](https://github.com/fstpackage/fst)` is a binary format and can be
+read much much quicker than `.dta` in R. The main function that `hildar`
+provides is `hil_fetch()`. It can load multiple waves of HILDA in one
+call and also allows the user to select a subset of variables instead of
+loading everything. See `?hil_fetch` for more options.
 
 ## 1) Installation
 
@@ -94,7 +101,7 @@ There is a quick option to add basic demographic variables to the data,
 which is set to TRUE by default.
 
 ``` r
-hil_fetch(years = 2001, add_basic_vars = T) %>% 
+hil_fetch(years = 2001, add_basic_vars = T) %>%
   names()
 #> [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr" 
 #> [7] "hhrih"   "hhwth"   "hhwtrp"
@@ -119,7 +126,7 @@ Let say we want to select all variables that are related to ‘employment’
 we can easily incorporate them into the `fetch()` function.
 
 ``` r
-emp_vars = hil_dict[grepl(pattern = "employment", label), var]
+emp_vars <- hil_dict[grepl(pattern = "employment", label), var]
 emp_vars
 #>   [1] "hhura"   "fmfempo" "fmmempo" "esempst" "ujljcnt" "jbmind" 
 #>   [7] "jbempst" "jbmlh"   "molha"   "molmth"  "molyr"   "mol3rd" 
@@ -154,7 +161,7 @@ emp_vars
 #> [181] "heothrf" "heothdk" "chb12"   "lfpe01"  "lfpe02"  "lfpe03" 
 #> [187] "lfpe04"  "lfpe05"  "lfpe06"  "lfpe07"  "lfpe08"  "lfpe09" 
 #> [193] "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13"  "lfpe14"  "lfpe15"
-hilda_data = hil_fetch(years = 2001:2003, vars = emp_vars)
+hilda_data <- hil_fetch(years = 2001:2003, vars = emp_vars)
 dim(hilda_data)
 #> [1] 55899    80
 ```
@@ -163,11 +170,11 @@ Here is a summary of the dimensions of our HILDA data files.
 
 ``` r
 # the number of variables and rows in each wave
-nrows_by_wave = 
+nrows_by_wave <-
   hil_fetch(years = 2001:2016, add_basic_vars = F) %>%
   .[, .(number_of_rows = .N), by = wave]
 
-hil_dict[, unlist(wave), by = .(var, label)] %>% 
+hil_dict[, unlist(wave), by = .(var, label)] %>%
   data.table::setnames("V1", "wave") %>%
   data.table::setDT() %>%
   .[, .(number_of_variables = .N), by = wave] %>%

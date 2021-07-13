@@ -18,7 +18,11 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
 <!-- badges: end -->
 
-[HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is quite large, with many columns and rows. Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly load HILDA data into your workspace by converting the datasets from `.dta`, (one of the three formats HILDA provides) to `.fst` which can be loaded much much quicker than `.dta` in R. The main function here is `hildar::hil_fetch()`, it can be used to load multiple years of hilda in one call and also allows a subset of variables to be selected. See `?fetch` for more options.
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&usqp=CAU) 
+
+(source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data)
+
+[HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is a large panel survey with close to 20 waves (2001 - 2020). Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly query HILDA data into your R workspace. This is possible by converting the dataset of each wave from `.dta`, one of the three formats HILDA provides, to `fst` format. `[fst](https://github.com/fstpackage/fst)` is a binary format and can be read much much quicker than `.dta` in R. The main function that `hildar` provides is `hil_fetch()`. It can load multiple waves of HILDA in one call and also allows the user to select a subset of variables instead of loading everything. See `?hil_fetch` for more options.
 
 ## 1) Installation
 
