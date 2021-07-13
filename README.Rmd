@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # hildar
 
 <!-- badges: start -->
-[![R build status](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
+[![R-CMD-check](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
 <!-- badges: end -->
 
 [HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is quite large, with many columns and rows. Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly load HILDA data into your workspace by converting the datasets from `.dta`, (one of the three formats HILDA provides) to `.fst` which can be loaded much much quicker than `.dta` in R. The main function here is `hildar::hil_fetch()`, it can be used to load multiple years of hilda in one call and also allows a subset of variables to be selected. See `?fetch` for more options.
@@ -31,11 +31,17 @@ remotes::install_github("asiripanich/hildar")
 
 ## 2) Store HILDA files as fst
 
-Use `hil_setup(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/path/to/save/hilda-fst-files")` to read in HILDA STATA (.dta) files and save them as `.fst` files for `hildar`. `.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
+Use `hil_setup()` to read HILDA STATA (.dta) files and save them as `.fst` files. `.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
 
-## 3) Set `hildar.vault` R option
+``` r
+hil_setup(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/path/to/save/hilda-fst-files")
+```
 
-Let hildar knows where your `dir_output` is by setting `options(hildar.vault = "dir_output")`, alternatively you may provide the directory as the `.dir` argument in `fetch()`.
+This will allow you to fast query the data across all waves using `hil_fetch()`. 
+
+## 3) Set `HILDA_FST` as a global option or an R environment variable.
+
+`hil_fetch()` requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this `HILDA_FST` as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make `hil_fetch()` more convinient to use. Alternatively, you can manually set it in each call using `hilda_fst_dir` argument in `hil_fetch()`. 
 
 ## Example
 
@@ -46,14 +52,14 @@ library(hildar)
 
 # fetch removes the HILDA year prefix from all the selected variable
 # (e.g. axxx = 2001, bxxx = 2002).
-fetch(years = 2001:2003, add_geography = T) %>%
+hil_fetch(years = 2001:2003, add_geography = T) %>%
   summary()
 ```
 
 There is a quick option to add basic demographic variables to the data, which is set to TRUE by default.
 
 ```{r}
-fetch(years = 2001, add_basic_vars = T) %>% 
+hil_fetch(years = 2001, add_basic_vars = T) %>%
   names()
 ```
 
@@ -66,9 +72,9 @@ head(hil_dict)
 Let say we want to select all variables that are related to 'employment' we can easily incorporate them into the `fetch()` function.
 
 ```{r}
-emp_vars = hil_dict[grepl(pattern = "employment", label), var]
+emp_vars <- hil_dict[grepl(pattern = "employment", label), var]
 emp_vars
-hilda_data = fetch(years = 2001:2003, vars = emp_vars)
+hilda_data <- hil_fetch(years = 2001:2003, vars = emp_vars)
 dim(hilda_data)
 ```
 
@@ -76,11 +82,11 @@ Here is a summary of the dimensions of our HILDA data files.
 
 ```{r}
 # the number of variables and rows in each wave
-nrows_by_wave = 
-  fetch(years = 2001:2016, add_basic_vars = F) %>%
+nrows_by_wave <-
+  hil_fetch(years = 2001:2016, add_basic_vars = F) %>%
   .[, .(number_of_rows = .N), by = wave]
 
-hil_dict[, unlist(wave), by = .(var, label)] %>% 
+hil_dict[, unlist(wave), by = .(var, label)] %>%
   data.table::setnames("V1", "wave") %>%
   data.table::setDT() %>%
   .[, .(number_of_variables = .N), by = wave] %>%
