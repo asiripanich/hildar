@@ -19,8 +19,9 @@
 #' @param add_geography
 #'  take a logical value whether to add hhsgcc (Greater statistical region)
 #'  to the data
-#' @param .dir a directory, if not given it uses getOption("hildar.vault") by default.
-#' This is where HILDA fst files generated using `setup_hildar()` are stored.
+#' @param hilda_fst_dir a directory where HILDA files in fst format are stored
+#'  by `hil_setup()`. If not given the function will check uses for 'HILDA_FST'
+#'  in your `.Rprofile` file first, then in `.Renviron` file.
 #'
 #' @return a data.table object
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
@@ -33,11 +34,17 @@ hil_fetch <-
            add_population_weight = TRUE,
            add_basic_vars = TRUE,
            add_geography = FALSE,
-           .dir = getOption("hildar.vault")) {
-    if (!checkmate::test_directory_exists(.dir, access = "r")) {
+           hilda_fst_dir = ifelse(!is.null(getOption("HILDA_FST")),
+             getOption("HILDA_FST"),
+             Sys.getenv("HILDA_FST")
+           )) {
+    if (!checkmate::test_directory_exists(hilda_fst_dir, access = "r")) {
       stop(
-        "There is no `hildar.vault` in your global options. Please use `setup_hildar()`",
-        "to create a vault of HILDA fst files first for this package to work properly."
+        "There is no `HILDA_FST` in your global options or in your ",
+        "R environment variables. Please use `hil_setup()` to setup ",
+        "before using this function. Alternatively, you can provide ",
+        "a directory that has HILDA files in the `fst` format in ",
+        "the `hilda_fst_dir` argument."
       )
     }
     checkmate::assert_integerish(years, any.missing = FALSE)
@@ -92,7 +99,8 @@ hil_fetch <-
       FUN = function(wave) {
         tryCatch(
           {
-            path_to_fst <- fs::path(.dir, paste0("Combined_", wave, "160u.fst"))
+            path_to_fst <-
+              fs::path(hilda_fst_dir, paste0("Combined_", wave, "160u.fst"))
             dt <- fst::read_fst(
               path = path_to_fst,
               columns = .fst_colnames_exist(path_to_fst, vars),
@@ -101,7 +109,11 @@ hil_fetch <-
             # convert all factors to strings
             fct_cols <- names(dt)[sapply(dt, is.factor)]
             for (fct_col in fct_cols) {
-              data.table::set(x = dt, j = fct_col, value = as.character(dt[[fct_col]]))
+              data.table::set(
+                x = dt,
+                j = fct_col,
+                value = as.character(dt[[fct_col]])
+              )
             }
             # add wave number
             dt[, wave := which(letters == wave)]
