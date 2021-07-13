@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# hildar 0.2.1.9000
+
+- Same as previous version.
+
+
 # hildar 0.2.1
 
 - Properly import packages of used functions.
