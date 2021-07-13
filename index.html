@@ -74,7 +74,9 @@
 <a href="#hildar" class="anchor"></a>hildar</h1></div>
 <!-- badges: start -->
 
-<p><a href="https://melbourneinstitute.unimelb.edu.au/hilda">HILDA survey data</a> is quite large, with many columns and rows. Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly load HILDA data into your workspace by converting the datasets from <code>.dta</code>, (one of the three formats HILDA provides) to <code>.fst</code> which can be loaded much much quicker than <code>.dta</code> in R. The main function here is <code><a href="reference/hil_fetch.html">hildar::hil_fetch()</a></code>, it can be used to load multiple years of hilda in one call and also allows a subset of variables to be selected. See <code><a href="reference/fetch.html">?fetch</a></code> for more options.</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&amp;usqp=CAU"></p>
+<p>(source: <a href="https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" class="uri">https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data</a>)</p>
+<p><a href="https://melbourneinstitute.unimelb.edu.au/hilda">HILDA survey data</a> is a large panel survey with close to 20 waves (2001 - 2020). Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly query HILDA data into your R workspace. This is possible by converting the dataset of each wave from <code>.dta</code>, one of the three formats HILDA provides, to <code>fst</code> format. <code>[fst](https://github.com/fstpackage/fst)</code> is a binary format and can be read much much quicker than <code>.dta</code> in R. The main function that <code>hildar</code> provides is <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>. It can load multiple waves of HILDA in one call and also allows the user to select a subset of variables instead of loading everything. See <code><a href="reference/hil_fetch.html">?hil_fetch</a></code> for more options.</p>
 <div id="1-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#1-installation" class="anchor"></a>1) Installation</h2>
@@ -137,7 +139,7 @@
 <span class="co">#&gt;  Max.   :16000.0</span></code></pre></div>
 <p>There is a quick option to add basic demographic variables to the data, which is set to TRUE by default.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span>, add_basic_vars <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span>, add_basic_vars <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr" </span>
 <span class="co">#&gt; [7] "hhrih"   "hhwth"   "hhwtrp"</span></code></pre></div>
@@ -153,7 +155,7 @@
 <span class="co">#&gt; 6: hhpcode 1,2,3,4,5,6,...      HF Postcode</span></code></pre></div>
 <p>Let say we want to select all variables that are related to ‘employment’ we can easily incorporate them into the <code><a href="reference/fetch.html">fetch()</a></code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emp_vars</span> <span class="op">=</span> <span class="va">hil_dict</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"employment"</span>, <span class="va">label</span><span class="op">)</span>, <span class="va">var</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">emp_vars</span> <span class="op">&lt;-</span> <span class="va">hil_dict</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"employment"</span>, <span class="va">label</span><span class="op">)</span>, <span class="va">var</span><span class="op">]</span>
 <span class="va">emp_vars</span>
 <span class="co">#&gt;   [1] "hhura"   "fmfempo" "fmmempo" "esempst" "ujljcnt" "jbmind" </span>
 <span class="co">#&gt;   [7] "jbempst" "jbmlh"   "molha"   "molmth"  "molyr"   "mol3rd" </span>
@@ -188,17 +190,17 @@
 <span class="co">#&gt; [181] "heothrf" "heothdk" "chb12"   "lfpe01"  "lfpe02"  "lfpe03" </span>
 <span class="co">#&gt; [187] "lfpe04"  "lfpe05"  "lfpe06"  "lfpe07"  "lfpe08"  "lfpe09" </span>
 <span class="co">#&gt; [193] "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13"  "lfpe14"  "lfpe15"</span>
-<span class="va">hilda_data</span> <span class="op">=</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="va">emp_vars</span><span class="op">)</span>
+<span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="va">emp_vars</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
 <span class="co">#&gt; [1] 55899    80</span></code></pre></div>
 <p>Here is a summary of the dimensions of our HILDA data files.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># the number of variables and rows in each wave</span>
-<span class="va">nrows_by_wave</span> <span class="op">=</span> 
+<span class="va">nrows_by_wave</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2016</span>, add_basic_vars <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_rows <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span>
 
-<span class="va">hil_dict</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">var</span>, <span class="va">label</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span> 
+<span class="va">hil_dict</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">var</span>, <span class="va">label</span><span class="op">)</span><span class="op">]</span> <span class="op">%&gt;%</span>
   <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="st">"V1"</span>, <span class="st">"wave"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_variables <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span> <span class="op">%&gt;%</span>
