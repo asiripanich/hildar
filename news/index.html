@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hildar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -114,20 +114,19 @@
       <small>Source: <a href='https://github.com/asiripanich/hildar/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="hildar-0109000" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0.9000">
-<a href="#hildar-0109000" class="anchor"></a>hildar 0.1.0.9000</h1>
+    <div id="hildar-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#hildar-020" class="anchor"></a>hildar 0.2.0</h1>
 <ul>
-<li>Remove minimum versions</li>
-<li>Use <code>hil_</code> as pkg suffix. <code><a href="../reference/fetch.html">fetch()</a></code> and <code><a href="../reference/setup_hildar.html">setup_hildar()</a></code> have been renamed to <code><a href="../reference/hil_fetch.html">hil_fetch()</a></code> and <code><a href="../reference/hil_setup.html">hil_setup()</a></code>.</li>
-<li>hilda_fetch now as ‘fetch’. Use the extdata folder to store fst files of 16 HILDA waves.</li>
-</ul>
-</div>
-    <div id="hildar-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#hildar-010" class="anchor"></a>hildar 0.1.0</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li><p><code><a href="../reference/hil_fetch.html">hil_fetch()</a></code> looks for <code>HILDA_FST</code> in .Rprofile and .Renviron if not provided by the user. Also, the <code>.dir</code> argument is now <code>hilda_fst_dir</code>.</p></li>
+<li><p>Simplify <code><a href="../reference/hil_setup.html">hil_setup()</a></code> by removing the <code>n_cores</code> and <code>pattern</code> arguments. See its Notes.</p></li>
+<li><p>Renamed <code>hilda_dict</code> to <code>hil_dict</code>.</p></li>
+<li><p>Remove minimum versions of the dependencies.</p></li>
+<li>
+<p>Use <code>hil_</code> as pkg suffix. <code><a href="../reference/fetch.html">fetch()</a></code> and <code><a href="../reference/setup_hildar.html">setup_hildar()</a></code> have been renamed to <code><a href="../reference/hil_fetch.html">hil_fetch()</a></code> and <code><a href="../reference/hil_setup.html">hil_setup()</a></code>.</p>
+<h1 id="hildar-010" class="page-header" data-toc-text="0.2.0">hildar 0.1.0</h1>
+</li>
+<li><p>Added a <code>NEWS.md</code> file to track changes to the package.</p></li>
 </ul>
 </div>
   </div>
