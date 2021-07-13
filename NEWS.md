@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# hildar 0.2.1
+
+- Properly import packages of used functions.
+- Fix wrong warning messages in deprecate functions.
+
 # hildar 0.2.0
 
 - `hil_fetch()` looks for `HILDA_FST` in .Rprofile and .Renviron if not provided by the user. Also, the `.dir` argument is now `hilda_fst_dir`.
