@@ -74,9 +74,39 @@
 <a href="#hildar" class="anchor"></a>hildar</h1></div>
 <!-- badges: start -->
 
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&amp;usqp=CAU"></p>
-<p>(source: <a href="https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" class="uri">https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data</a>)</p>
-<p><a href="https://melbourneinstitute.unimelb.edu.au/hilda">HILDA survey data</a> is a large panel survey with close to 20 waves (2001 - 2020). Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly query HILDA data into your R workspace. This is possible by converting the dataset of each wave from <code>.dta</code>, one of the three formats HILDA provides, to <code>fst</code> format. <code>[fst](https://github.com/fstpackage/fst)</code> is a binary format and can be read much much quicker than <code>.dta</code> in R. The main function that <code>hildar</code> provides is <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>. It can load multiple waves of HILDA in one call and also allows the user to select a subset of variables instead of loading everything. See <code><a href="reference/hil_fetch.html">?hil_fetch</a></code> for more options.</p>
+<!-- badges: end -->
+<p align="center">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&amp;usqp=CAU" title="source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" width="400"></p>
+<p><strong>source: <a href="https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" class="uri">https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data</a></strong></p>
+<p><a href="https://melbourneinstitute.unimelb.edu.au/hilda">HILDA survey data</a> is a large panel survey with close to 20 waves (2001 - 2020), and some waves have more than 5000 variables, which makes reading them into R a little challenging.</p>
+<p>The goal of this package is to provide a quick and easy way to query HILDA data into R. This is possible by converting each wave of HILDA from its STATA file (<code>.dta</code>), one of the three formats HILDA provides, to <code>fst</code> format. <code>[fst](https://github.com/fstpackage/fst)</code> is a binary format and can be read much much quicker than <code>.dta</code> in R.</p>
+<table class="table">
+<colgroup>
+<col width="7%">
+<col width="92%">
+</colgroup>
+<thead><tr class="header">
+<th>Function name</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="reference/hil_setup.html">hil_setup()</a></code></td>
+<td>Setup HILDA fst files for <code>hil_fetch() to use</code>.</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/hil_fetch.html">hil_fetch()</a></code></td>
+<td>Fetches HILDA records based on query options.</td>
+</tr>
+<tr class="odd">
+<td><code>hil_dict</code></td>
+<td>Shows HILDA data glossary and waves each variable is available in. This provides a convenient way to select multiple variables based on their description by passing it to <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note that, <code>hil_dict</code> is a data.frame object bundled with the package, and was generated using HILDA 2001 - 2016. Hence, it only covers variables from those 16 waves. In a future release, <code>hilar</code> will create <code>hil_dict</code> that matches your HILDA data during <code><a href="reference/hil_setup.html">hil_setup()</a></code>.</p>
+</blockquote>
 <div id="1-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#1-installation" class="anchor"></a>1) Installation</h2>
@@ -85,17 +115,17 @@
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"asiripanich/hildar"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="2-store-hilda-files-as-fst" class="section level2">
+<div id="2-store-hilda-as-fst-files" class="section level2">
 <h2 class="hasAnchor">
-<a href="#2-store-hilda-files-as-fst" class="anchor"></a>2) Store HILDA files as fst</h2>
+<a href="#2-store-hilda-as-fst-files" class="anchor"></a>2) Store HILDA as <code>.fst</code> files</h2>
 <p>Use <code><a href="reference/hil_setup.html">hil_setup()</a></code> to read HILDA STATA (.dta) files and save them as <code>.fst</code> files. <code>.fst</code> is a binary data format that can be read very quickly, a lot faster than <code>.dta</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/hil_setup.html">hil_setup</a></span><span class="op">(</span>dir_input <span class="op">=</span> <span class="st">"/path/to/your/hilda-stata-files"</span>, dir_output <span class="op">=</span> <span class="st">"/path/to/save/hilda-fst-files"</span><span class="op">)</span></code></pre></div>
 <p>This will allow you to fast query the data across all waves using <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 </div>
-<div id="3-set-hilda_fst-as-a-global-option-or-an-r-environment-variable" class="section level2">
+<div id="3-tell-hildar-where-the-fst-files-are-stored" class="section level2">
 <h2 class="hasAnchor">
-<a href="#3-set-hilda_fst-as-a-global-option-or-an-r-environment-variable" class="anchor"></a>3) Set <code>HILDA_FST</code> as a global option or an R environment variable.</h2>
+<a href="#3-tell-hildar-where-the-fst-files-are-stored" class="anchor"></a>3) Tell <code>hildar</code> where the <code>.fst</code> files are stored.</h2>
 <p><code><a href="reference/hil_fetch.html">hil_fetch()</a></code> requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this <code>HILDA_FST</code> as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make <code><a href="reference/hil_fetch.html">hil_fetch()</a></code> more convinient to use. Alternatively, you can manually set it in each call using <code>hilda_fst_dir</code> argument in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 </div>
 <div id="example" class="section level2">
@@ -109,40 +139,33 @@
 <span class="co"># (e.g. axxx = 2001, bxxx = 2002).</span>
 <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, add_geography <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;    xwaveid              hhid                wave     </span>
-<span class="co">#&gt;  Length:55899       Length:55899       Min.   :1.00  </span>
-<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1.00  </span>
-<span class="co">#&gt;  Mode  :character   Mode  :character   Median :2.00  </span>
-<span class="co">#&gt;                                        Mean   :1.96  </span>
-<span class="co">#&gt;                                        3rd Qu.:3.00  </span>
-<span class="co">#&gt;                                        Max.   :3.00  </span>
-<span class="co">#&gt;      hgage           hgsex              mrcurr         </span>
-<span class="co">#&gt;  Min.   :  0.00   Length:55899       Length:55899      </span>
-<span class="co">#&gt;  1st Qu.: 15.00   Class :character   Class :character  </span>
-<span class="co">#&gt;  Median : 34.00   Mode  :character   Mode  :character  </span>
-<span class="co">#&gt;  Mean   : 34.81                                        </span>
-<span class="co">#&gt;  3rd Qu.: 51.00                                        </span>
-<span class="co">#&gt;  Max.   :100.00                                        </span>
-<span class="co">#&gt;     hhrih              hhsgcc              hhwth        </span>
-<span class="co">#&gt;  Length:55899       Length:55899       Min.   :    0.0  </span>
-<span class="co">#&gt;  Class :character   Class :character   1st Qu.:  734.1  </span>
-<span class="co">#&gt;  Mode  :character   Mode  :character   Median :  917.2  </span>
-<span class="co">#&gt;                                        Mean   : 1021.9  </span>
-<span class="co">#&gt;                                        3rd Qu.: 1162.6  </span>
-<span class="co">#&gt;                                        Max.   :13878.4  </span>
-<span class="co">#&gt;      hhwtrp       </span>
-<span class="co">#&gt;  Min.   :  -10.0  </span>
-<span class="co">#&gt;  1st Qu.:  -10.0  </span>
-<span class="co">#&gt;  Median :  824.0  </span>
-<span class="co">#&gt;  Mean   :  809.4  </span>
-<span class="co">#&gt;  3rd Qu.: 1129.6  </span>
-<span class="co">#&gt;  Max.   :16000.0</span></code></pre></div>
+<span class="co">#&gt;    xwaveid              hhid                wave          hgage       </span>
+<span class="co">#&gt;  Length:55899       Length:55899       Min.   :1.00   Min.   :  0.00  </span>
+<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1.00   1st Qu.: 15.00  </span>
+<span class="co">#&gt;  Mode  :character   Mode  :character   Median :2.00   Median : 34.00  </span>
+<span class="co">#&gt;                                        Mean   :1.96   Mean   : 34.81  </span>
+<span class="co">#&gt;                                        3rd Qu.:3.00   3rd Qu.: 51.00  </span>
+<span class="co">#&gt;                                        Max.   :3.00   Max.   :100.00  </span>
+<span class="co">#&gt;     hgsex              mrcurr             hhrih              hhsgcc         </span>
+<span class="co">#&gt;  Length:55899       Length:55899       Length:55899       Length:55899      </span>
+<span class="co">#&gt;  Class :character   Class :character   Class :character   Class :character  </span>
+<span class="co">#&gt;  Mode  :character   Mode  :character   Mode  :character   Mode  :character  </span>
+<span class="co">#&gt;                                                                             </span>
+<span class="co">#&gt;                                                                             </span>
+<span class="co">#&gt;                                                                             </span>
+<span class="co">#&gt;      hhwth             hhwtrp       </span>
+<span class="co">#&gt;  Min.   :    0.0   Min.   :  -10.0  </span>
+<span class="co">#&gt;  1st Qu.:  734.1   1st Qu.:  -10.0  </span>
+<span class="co">#&gt;  Median :  917.2   Median :  824.0  </span>
+<span class="co">#&gt;  Mean   : 1021.9   Mean   :  809.4  </span>
+<span class="co">#&gt;  3rd Qu.: 1162.6   3rd Qu.: 1129.6  </span>
+<span class="co">#&gt;  Max.   :13878.4   Max.   :16000.0</span></code></pre></div>
 <p>There is a quick option to add basic demographic variables to the data, which is set to TRUE by default.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span>, add_basic_vars <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr" </span>
-<span class="co">#&gt; [7] "hhrih"   "hhwth"   "hhwtrp"</span></code></pre></div>
+<span class="co">#&gt; [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr"  "hhrih"  </span>
+<span class="co">#&gt; [8] "hhwth"   "hhwtrp"</span></code></pre></div>
 <p>How about doing a quick search to find variables that you want? Use <code>hil_dict</code> which is a data.table that you can search or view HILDA variables without going to their documentation webpage.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">hil_dict</span><span class="op">)</span>
@@ -153,43 +176,39 @@
 <span class="co">#&gt; 4:   hhpid 1,2,3,4,5,6,...     HF Person ID</span>
 <span class="co">#&gt; 5: hhstate 1,2,3,4,5,6,...         HF State</span>
 <span class="co">#&gt; 6: hhpcode 1,2,3,4,5,6,...      HF Postcode</span></code></pre></div>
-<p>Let say we want to select all variables that are related to ‘employment’ we can easily incorporate them into the <code><a href="reference/fetch.html">fetch()</a></code> function.</p>
+<p>Let say we want to select all variables that are related to ‘employment’. Here is how we can easily use the selected employment variables in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">emp_vars</span> <span class="op">&lt;-</span> <span class="va">hil_dict</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"employment"</span>, <span class="va">label</span><span class="op">)</span>, <span class="va">var</span><span class="op">]</span>
 <span class="va">emp_vars</span>
-<span class="co">#&gt;   [1] "hhura"   "fmfempo" "fmmempo" "esempst" "ujljcnt" "jbmind" </span>
-<span class="co">#&gt;   [7] "jbempst" "jbmlh"   "molha"   "molmth"  "molyr"   "mol3rd" </span>
-<span class="co">#&gt;  [13] "losateo" "loimpew" "jbmi06"  "es"      "esempdt" "molt"   </span>
-<span class="co">#&gt;  [19] "fmfemp"  "fmmemp"  "lshrcom" "cnpu_fd" "cnpu_np" "cnpu_o1"</span>
-<span class="co">#&gt;  [25] "cnpu_o2" "cnpu_na" "cnph_o1" "cnph_o2" "cnpc_ps" "cnpc_fd"</span>
-<span class="co">#&gt;  [31] "cnpc_o1" "cnpc_o2" "cnsu_ps" "cnsu_fd" "cnsu_kp" "cnsu_np"</span>
-<span class="co">#&gt;  [37] "cnsu_o1" "cnsu_o2" "cnsu_na" "cnsh_bs" "cnsh_ru" "cnsh_re"</span>
-<span class="co">#&gt;  [43] "cnsh_ps" "cnsh_fd" "cnsh_kp" "cnsh_o1" "cnsh_o2" "cnsc_bs"</span>
-<span class="co">#&gt;  [49] "cnsc_ru" "cnsc_ps" "cnsc_fd" "cnsc_kp" "cnsc_o1" "cnsc_o2"</span>
-<span class="co">#&gt;  [55] "chkb12"  "pjothru" "pjothra" "pjotcnt" "fmfempn" "fmmempn"</span>
-<span class="co">#&gt;  [61] "lshremp" "lsmnemp" "lsmncom" "fisemr"  "lsemp"   "lscom"  </span>
-<span class="co">#&gt;  [67] "jbtremp" "ujtros"  "ncesop"  "rcesop"  "rtgwage" "hepuwrk"</span>
-<span class="co">#&gt;  [73] "herjob"  "herhour" "hechjob" "hetowrk" "heonas"  "hespeq" </span>
-<span class="co">#&gt;  [79] "heothed" "nsu1_fd" "nsu1_o1" "nsu1_o2" "nsu1_na" "nsu1_np"</span>
-<span class="co">#&gt;  [85] "nsu2_fd" "nsu2_o1" "nsu2_o2" "nsu2_na" "nsu2_np" "nsu3_fd"</span>
-<span class="co">#&gt;  [91] "nsu3_o1" "nsu3_o2" "nsu3_na" "nsu3_np" "nsu4_fd" "nsu4_o1"</span>
-<span class="co">#&gt;  [97] "nsu4_o2" "nsu4_na" "nsu4_np" "nsu5_fd" "nsu5_o1" "nsu5_o2"</span>
-<span class="co">#&gt; [103] "nsu5_na" "nsu5_np" "nsu6_fd" "nsu6_o1" "nsu6_o2" "nsu6_na"</span>
-<span class="co">#&gt; [109] "nsu6_np" "nsh1_ps" "nsh2_ps" "nsh3_ps" "nsh4_ps" "nsh5_ps"</span>
-<span class="co">#&gt; [115] "nsh6_ps" "nsh1_fd" "nsh2_fd" "nsh3_fd" "nsh4_fd" "nsh5_fd"</span>
-<span class="co">#&gt; [121] "nsh6_fd" "nsh1_o1" "nsh2_o1" "nsh3_o1" "nsh4_o1" "nsh5_o1"</span>
-<span class="co">#&gt; [127] "nsh6_o1" "nsh1_o2" "nsh2_o2" "nsh3_o2" "nsh4_o2" "nsh5_o2"</span>
-<span class="co">#&gt; [133] "nsh6_o2" "npu1_o1" "npu1_o2" "npu1_na" "npu1_np" "npu2_o1"</span>
-<span class="co">#&gt; [139] "npu2_o2" "npu2_na" "npu2_np" "npu3_o1" "npu3_o2" "npu3_na"</span>
-<span class="co">#&gt; [145] "npu3_np" "npu4_o1" "npu4_o2" "npu4_na" "npu4_np" "npu5_o1"</span>
-<span class="co">#&gt; [151] "npu5_o2" "npu5_na" "npu5_np" "npu6_o1" "npu6_o2" "npu6_na"</span>
-<span class="co">#&gt; [157] "npu6_np" "nph1_fd" "nph2_fd" "nph3_fd" "nph4_fd" "nph5_fd"</span>
-<span class="co">#&gt; [163] "nph6_fd" "nph1_o1" "nph2_o1" "nph3_o1" "nph4_o1" "nph5_o1"</span>
-<span class="co">#&gt; [169] "nph6_o1" "nph1_o2" "nph2_o2" "nph3_o2" "nph4_o2" "nph5_o2"</span>
-<span class="co">#&gt; [175] "nph6_o2" "nrpmact" "jttpewt" "jttpeot" "jdemp"   "skces2" </span>
-<span class="co">#&gt; [181] "heothrf" "heothdk" "chb12"   "lfpe01"  "lfpe02"  "lfpe03" </span>
-<span class="co">#&gt; [187] "lfpe04"  "lfpe05"  "lfpe06"  "lfpe07"  "lfpe08"  "lfpe09" </span>
-<span class="co">#&gt; [193] "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13"  "lfpe14"  "lfpe15"</span>
+<span class="co">#&gt;   [1] "hhura"   "fmfempo" "fmmempo" "esempst" "ujljcnt" "jbmind"  "jbempst"</span>
+<span class="co">#&gt;   [8] "jbmlh"   "molha"   "molmth"  "molyr"   "mol3rd"  "losateo" "loimpew"</span>
+<span class="co">#&gt;  [15] "jbmi06"  "es"      "esempdt" "molt"    "fmfemp"  "fmmemp"  "lshrcom"</span>
+<span class="co">#&gt;  [22] "cnpu_fd" "cnpu_np" "cnpu_o1" "cnpu_o2" "cnpu_na" "cnph_o1" "cnph_o2"</span>
+<span class="co">#&gt;  [29] "cnpc_ps" "cnpc_fd" "cnpc_o1" "cnpc_o2" "cnsu_ps" "cnsu_fd" "cnsu_kp"</span>
+<span class="co">#&gt;  [36] "cnsu_np" "cnsu_o1" "cnsu_o2" "cnsu_na" "cnsh_bs" "cnsh_ru" "cnsh_re"</span>
+<span class="co">#&gt;  [43] "cnsh_ps" "cnsh_fd" "cnsh_kp" "cnsh_o1" "cnsh_o2" "cnsc_bs" "cnsc_ru"</span>
+<span class="co">#&gt;  [50] "cnsc_ps" "cnsc_fd" "cnsc_kp" "cnsc_o1" "cnsc_o2" "chkb12"  "pjothru"</span>
+<span class="co">#&gt;  [57] "pjothra" "pjotcnt" "fmfempn" "fmmempn" "lshremp" "lsmnemp" "lsmncom"</span>
+<span class="co">#&gt;  [64] "fisemr"  "lsemp"   "lscom"   "jbtremp" "ujtros"  "ncesop"  "rcesop" </span>
+<span class="co">#&gt;  [71] "rtgwage" "hepuwrk" "herjob"  "herhour" "hechjob" "hetowrk" "heonas" </span>
+<span class="co">#&gt;  [78] "hespeq"  "heothed" "nsu1_fd" "nsu1_o1" "nsu1_o2" "nsu1_na" "nsu1_np"</span>
+<span class="co">#&gt;  [85] "nsu2_fd" "nsu2_o1" "nsu2_o2" "nsu2_na" "nsu2_np" "nsu3_fd" "nsu3_o1"</span>
+<span class="co">#&gt;  [92] "nsu3_o2" "nsu3_na" "nsu3_np" "nsu4_fd" "nsu4_o1" "nsu4_o2" "nsu4_na"</span>
+<span class="co">#&gt;  [99] "nsu4_np" "nsu5_fd" "nsu5_o1" "nsu5_o2" "nsu5_na" "nsu5_np" "nsu6_fd"</span>
+<span class="co">#&gt; [106] "nsu6_o1" "nsu6_o2" "nsu6_na" "nsu6_np" "nsh1_ps" "nsh2_ps" "nsh3_ps"</span>
+<span class="co">#&gt; [113] "nsh4_ps" "nsh5_ps" "nsh6_ps" "nsh1_fd" "nsh2_fd" "nsh3_fd" "nsh4_fd"</span>
+<span class="co">#&gt; [120] "nsh5_fd" "nsh6_fd" "nsh1_o1" "nsh2_o1" "nsh3_o1" "nsh4_o1" "nsh5_o1"</span>
+<span class="co">#&gt; [127] "nsh6_o1" "nsh1_o2" "nsh2_o2" "nsh3_o2" "nsh4_o2" "nsh5_o2" "nsh6_o2"</span>
+<span class="co">#&gt; [134] "npu1_o1" "npu1_o2" "npu1_na" "npu1_np" "npu2_o1" "npu2_o2" "npu2_na"</span>
+<span class="co">#&gt; [141] "npu2_np" "npu3_o1" "npu3_o2" "npu3_na" "npu3_np" "npu4_o1" "npu4_o2"</span>
+<span class="co">#&gt; [148] "npu4_na" "npu4_np" "npu5_o1" "npu5_o2" "npu5_na" "npu5_np" "npu6_o1"</span>
+<span class="co">#&gt; [155] "npu6_o2" "npu6_na" "npu6_np" "nph1_fd" "nph2_fd" "nph3_fd" "nph4_fd"</span>
+<span class="co">#&gt; [162] "nph5_fd" "nph6_fd" "nph1_o1" "nph2_o1" "nph3_o1" "nph4_o1" "nph5_o1"</span>
+<span class="co">#&gt; [169] "nph6_o1" "nph1_o2" "nph2_o2" "nph3_o2" "nph4_o2" "nph5_o2" "nph6_o2"</span>
+<span class="co">#&gt; [176] "nrpmact" "jttpewt" "jttpeot" "jdemp"   "skces2"  "heothrf" "heothdk"</span>
+<span class="co">#&gt; [183] "chb12"   "lfpe01"  "lfpe02"  "lfpe03"  "lfpe04"  "lfpe05"  "lfpe06" </span>
+<span class="co">#&gt; [190] "lfpe07"  "lfpe08"  "lfpe09"  "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13" </span>
+<span class="co">#&gt; [197] "lfpe14"  "lfpe15"</span>
 <span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="va">emp_vars</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
 <span class="co">#&gt; [1] 55899    80</span></code></pre></div>
