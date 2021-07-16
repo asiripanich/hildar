@@ -12,17 +12,32 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
 # hildar
 
 <!-- badges: start -->
+
 [![R-CMD-check](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
+
 <!-- badges: end -->
 
-![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&usqp=CAU) 
+<p align="center">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&amp;usqp=CAU" title="source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" width="400"/>
+</p>
 
-(source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data)
+**source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data**
 
-[HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is a large panel survey with close to 20 waves (2001 - 2020). Some waves have more than 5000 variables. The goal of this package is to provide a quick and easy way to quickly query HILDA data into your R workspace. This is possible by converting the dataset of each wave from `.dta`, one of the three formats HILDA provides, to `fst` format. `[fst](https://github.com/fstpackage/fst)` is a binary format and can be read much much quicker than `.dta` in R. The main function that `hildar` provides is `hil_fetch()`. It can load multiple waves of HILDA in one call and also allows the user to select a subset of variables instead of loading everything. See `?hil_fetch` for more options.
+[HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is a large panel survey with close to 20 waves (2001 - 2020), and some waves have more than 5000 variables, which makes reading them into R a little challenging.
+
+The goal of this package is to provide a quick and easy way to query HILDA data into R. This is possible by converting each wave of HILDA from its STATA file (`.dta`), one of the three formats HILDA provides, to `fst` format. `[fst](https://github.com/fstpackage/fst)` is a binary format and can be read much much quicker than `.dta` in R.
+
+| Function name | Description                                                                                                                                                                               |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `hil_setup()` | Setup HILDA fst files for `hil_fetch() to use`.                                                                                                                                           |
+| `hil_fetch()` | Fetches HILDA records based on query options.                                                                                                                                             |
+| `hil_dict`    | Shows HILDA data glossary and waves each variable is available in. This provides a convenient way to select multiple variables based on their description by passing it to `hil_fetch()`. |
+
+> Note that, `hil_dict` is a data.frame object bundled with the package, and was generated using HILDA 2001 - 2016. Hence, it only covers variables from those 16 waves. In a future release, `hilar` will create `hil_dict` that matches your HILDA data during `hil_setup()`.
 
 ## 1) Installation
 
@@ -33,7 +48,7 @@ The development version from [GitHub](https://github.com/) with:
 remotes::install_github("asiripanich/hildar")
 ```
 
-## 2) Store HILDA files as fst
+## 2) Store HILDA as `.fst` files
 
 Use `hil_setup()` to read HILDA STATA (.dta) files and save them as `.fst` files. `.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
 
@@ -41,11 +56,11 @@ Use `hil_setup()` to read HILDA STATA (.dta) files and save them as `.fst` files
 hil_setup(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/path/to/save/hilda-fst-files")
 ```
 
-This will allow you to fast query the data across all waves using `hil_fetch()`. 
+This will allow you to fast query the data across all waves using `hil_fetch()`.
 
-## 3) Set `HILDA_FST` as a global option or an R environment variable.
+## 3) Tell `hildar` where the `.fst` files are stored.
 
-`hil_fetch()` requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this `HILDA_FST` as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make `hil_fetch()` more convinient to use. Alternatively, you can manually set it in each call using `hilda_fst_dir` argument in `hil_fetch()`. 
+`hil_fetch()` requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this `HILDA_FST` as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make `hil_fetch()` more convinient to use. Alternatively, you can manually set it in each call using `hilda_fst_dir` argument in `hil_fetch()`.
 
 ## Example
 
@@ -67,13 +82,13 @@ hil_fetch(years = 2001, add_basic_vars = T) %>%
   names()
 ```
 
-How about doing a quick search to find variables that you want? Use `hil_dict` which is a data.table that you can search or view HILDA variables without going to their documentation webpage. 
+How about doing a quick search to find variables that you want? Use `hil_dict` which is a data.table that you can search or view HILDA variables without going to their documentation webpage.
 
 ```{r}
 head(hil_dict)
 ```
 
-Let say we want to select all variables that are related to 'employment' we can easily incorporate them into the `fetch()` function.
+Let say we want to select all variables that are related to 'employment'. Here is how we can easily use the selected employment variables in `hil_fetch()`.
 
 ```{r}
 emp_vars <- hil_dict[grepl(pattern = "employment", label), var]
