@@ -102,7 +102,7 @@ Here is a summary of the dimensions of our HILDA data files.
 ```{r}
 # the number of variables and rows in each wave
 nrows_by_wave <-
-  hil_fetch(years = 2001:2016, add_basic_vars = F) %>%
+  hil_fetch(years = 2001:2020, add_basic_vars = F) %>%
   .[, .(number_of_rows = .N), by = wave]
 
 hilda_dictionary[, unlist(wave), by = .(var, label)] %>%
