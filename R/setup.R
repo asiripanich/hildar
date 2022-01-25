@@ -4,7 +4,8 @@
 #' format and save them as fst files. The fst files will be used
 #' by `hil_fetch()` for loading querying HILDA data.
 #'
-#' @param read_dir readind directory where the HILDA .dta files are
+#' @param read_dir read directory where the HILDA files that
+#'  match this `Combined_.*.dta` regex pattern are in.
 #' @param save_dir a directory to save HILDA files in 'fst' format.
 #'  This directory will be added to .Rprofile as `hildar.vault`.
 #'
@@ -31,29 +32,30 @@ hil_setup <- function(read_dir, save_dir) {
   checkmate::assert_directory_exists(save_dir, access = "rw")
   hilda_filedirs <- list.files(
     path = read_dir,
-    pattern = ".dta",
+    pattern = "Combined_.*.dta",
     full.names = T
   )
   hilda_files <- list.files(path = read_dir, pattern = ".dta")
-  if (file.exists(save_dir)) {
     furrr::future_walk(seq_along(hilda_files), ~ {
+      cli::cli_alert_info("Reading a HILDA wave from: {hilda_filedirs[.x]}")
       df <- read.dta13(hilda_filedirs[.x], convert.factors = T, convert.dates = T) %>%
         standardise_hilda_colnames()
-      message("finished reading from ", hilda_filedirs[.x])
-      filename <- gsub(pattern = pattern, replacement = "", hilda_files[.x])
-      message("writing to fst..")
-      write.fst(df, path = paste(save_dir, "/", filename, ".fst", sep = ""))
+      filename <- gsub(pattern = ".dta", replacement = "", hilda_files[.x])
+      cli::cli_alert_info("Saving the HILDA file as a fst file.")
+      write.fst(df, path = paste0(save_dir, "/", filename, ".fst"))
     })
-    message(
-      "HILDA fst files saved to '", save_dir, "'. ",
-      "Add this 'HILDA_FST=", fs::path_expand(save_dir), "' ",
-      "without the apostrophes to your .Renviron file or ",
-      "your .Rprofile file. You can use `usethis::edit_r_profile()` ",
-      "or `usethis::edit_r_environ()` to open them."
+    cli::cli_alert_success(
+      "HILDA fst files have been saved to '{save_dir}'.
+      Please add -> {.emph 'HILDA_FST={fs::path_expand(save_dir)}'} \\
+      to your .Renviron file or .Rprofile file.
+      You can use `usethis::edit_r_profile()` \\
+      or `usethis::edit_r_environ()` to open them."
     )
-  } else {
-    message("save_dir doesn't exist, no files were created")
-  }
+
+  # make a data dictionary
+  make_dict(hilda_filedirs)
+
+  invisible()
 }
 
 #' Save HILDA Stata files data to fst data
