@@ -122,7 +122,7 @@ make_dict <- function(read_dir, save_dir = NULL) {
   hilda_dict <- lapply(
     hilda_filedirs,
     function(x) {
-      haven::read_stata(x, n_max = 1) %>%
+      haven::read_stata(x, n_max = 0) %>%
         {
           data.table(
             var = names(map(., ~ attr(., which = "label"))),
@@ -138,6 +138,7 @@ make_dict <- function(read_dir, save_dir = NULL) {
       var = substr(var, 2, nchar(var))
     )] %>%
     .[, wave := which(letters == wave), by = seq_len(nrow(.))] %>%
+    .[, wave := as.integer(wave)] %>%
     .[, .(wave = list(wave), label = head(label, 1)), by = var]
 
   if (!is.null(save_dir)) {
