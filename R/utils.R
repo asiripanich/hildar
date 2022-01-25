@@ -94,15 +94,82 @@ is_missing_data_value.integer <- function(x) {
 
 
 
-#' Make a dictionary for a STATA dta file.
+#' Make a HILDA data dictionary.
 #'
-#' @param df a data.frame read using haven::read_stata
-#'
-#' @return a data.table contains two columns: var and label.
-#' @noRd
-.make_dict <- function(df) {
-  data.table(
-    var = names(map(df, ~ attr(., which = "label"))),
-    label = unlist(map(df, ~ attr(., which = "label")))
+#' @return `make_dict()` returns a data.table contains three
+#'  columns: var, label, and wave. But if `save_dir` is not
+#'  `NULL`, the dict will be saved to that location.
+#' @rdname hil_setup
+#' @format `hil_dict()` returns a data table with many rows and 3 variables:
+#' \describe{
+#'   \item{var}{(`character()`) variable names}
+#'   \item{wave}{(`list(integer())`) waves that the variable was recorded}
+#'   \item{label}{(`character()`) short description of the variable}
+#' }
+#' @export
+make_dict <- function(read_dir, save_dir = NULL) {
+  checkmate::assert_directory_exists(read_dir, access = "r")
+  if (!is.null(save_dir)) {
+    checkmate::assert_directory_exists(save_dir, access = "rw")
+  }
+
+  hilda_filedirs <- list.files(
+    path = read_dir,
+    pattern = "Combined_.*.dta",
+    full.names = T
   )
+
+  hilda_dict <- lapply(
+    hilda_filedirs,
+    function(x) {
+      haven::read_stata(x, n_max = 1) %>%
+        {
+          data.table(
+            var = names(map(., ~ attr(., which = "label"))),
+            label = unlist(map(., ~ attr(., which = "label")))
+          )
+        }
+    }
+  ) %>%
+    rbindlist() %>%
+    unique(by = "var") %>%
+    .[!grepl("^x", var), `:=`(
+      wave = substr(var, 1, 1),
+      var = substr(var, 2, nchar(var))
+    )] %>%
+    .[, wave := which(letters == wave), by = seq_len(nrow(.))] %>%
+    .[, .(wave = list(wave), label = head(label, 1)), by = var]
+
+  if (!is.null(save_dir)) {
+    hilda_dict_pathname <- fs::path(save_dir, "hil_dict.rds")
+    cli::cli_alert_info("Saving HILDA data dictionary at: {hilda_dict_pathname}")
+    saveRDS(hilda_dict, hilda_dict_pathname)
+  }
+
+  hilda_dict
+}
+
+#' @rdname hil_setup
+#' @export
+#' @examples 
+#' # HILDA data dictionary
+#' hil_dict()
+hil_dict <- function() {
+  hilda_dict_path <- fs::path(get_hilda_fst_path(), "hil_dict.rds")
+  checkmate::assert_file_exists(hilda_dict_path)
+  readRDS(hilda_dict_path)
+}
+
+#' Get a `HILDA_FST` environment variable
+#' 
+#' This returns an environment variable called `HILDA_FST` which is
+#' the pathname where HILDA fst files are stored.
+#' 
+#' @return a pathname.
+#' @export 
+get_hilda_fst_path <- function() {
+  if (is.null(Sys.getenv("HILDA_FST"))) {
+    stop("`HILDA_FST` doesn't exist.")
+  }
+  return(Sys.getenv("HILDA_FST"))
 }
