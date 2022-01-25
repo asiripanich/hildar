@@ -107,7 +107,7 @@ hil_fetch <-
             if (length(path_to_fst) != 1) {
               cli::cli_alert_danger(
                 "There are more than one HILDA file that matches wave {.field {wave}}:"
-                )
+              )
               cli::cli_ol(path_to_fst)
               stop("Please check your HILDA fst directory for duplicated files or file an issue.")
             }
@@ -136,7 +136,7 @@ hil_fetch <-
         )
       }
     )
-    
+
     dat <- rbindlist(dat_ls, fill = TRUE)
 
     # rename the selected columns in vars

@@ -152,7 +152,7 @@ make_dict <- function(read_dir, save_dir = NULL) {
 
 #' @rdname hil_setup
 #' @export
-#' @examples 
+#' @examples
 #' # HILDA data dictionary
 #' hil_dict()
 hil_dict <- function() {
@@ -162,12 +162,12 @@ hil_dict <- function() {
 }
 
 #' Get a `HILDA_FST` environment variable
-#' 
+#'
 #' This returns an environment variable called `HILDA_FST` which is
 #' the pathname where HILDA fst files are stored.
-#' 
+#'
 #' @return a pathname.
-#' @export 
+#' @export
 get_hilda_fst_path <- function() {
   if (is.null(Sys.getenv("HILDA_FST"))) {
     stop("`HILDA_FST` doesn't exist.")

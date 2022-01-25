@@ -36,21 +36,21 @@ hil_setup <- function(read_dir, save_dir) {
     full.names = T
   )
   hilda_files <- list.files(path = read_dir, pattern = ".dta")
-    furrr::future_walk(seq_along(hilda_files), ~ {
-      cli::cli_alert_info("Reading a HILDA wave from: {hilda_filedirs[.x]}")
-      df <- read.dta13(hilda_filedirs[.x], convert.factors = T, convert.dates = T) %>%
-        standardise_hilda_colnames()
-      filename <- gsub(pattern = ".dta", replacement = "", hilda_files[.x])
-      cli::cli_alert_info("Saving the HILDA file as a fst file.")
-      write.fst(df, path = paste0(save_dir, "/", filename, ".fst"))
-    })
-    cli::cli_alert_success(
-      "HILDA fst files have been saved to '{save_dir}'.
+  furrr::future_walk(seq_along(hilda_files), ~ {
+    cli::cli_alert_info("Reading a HILDA wave from: {hilda_filedirs[.x]}")
+    df <- read.dta13(hilda_filedirs[.x], convert.factors = T, convert.dates = T) %>%
+      standardise_hilda_colnames()
+    filename <- gsub(pattern = ".dta", replacement = "", hilda_files[.x])
+    cli::cli_alert_info("Saving the HILDA file as a fst file.")
+    write.fst(df, path = paste0(save_dir, "/", filename, ".fst"))
+  })
+  cli::cli_alert_success(
+    "HILDA fst files have been saved to '{save_dir}'.
       Please add -> {.emph 'HILDA_FST={fs::path_expand(save_dir)}'} \\
       to your .Renviron file or .Rprofile file.
       You can use `usethis::edit_r_profile()` \\
       or `usethis::edit_r_environ()` to open them."
-    )
+  )
 
   # make a data dictionary
   make_dict(hilda_filedirs)
