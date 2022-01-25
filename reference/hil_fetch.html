@@ -52,7 +52,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hil_fetch</span><span class="op">(</span>
-  <span class="va">years</span>,
+  years <span class="op">=</span> <span class="cn">NULL</span>,
   vars <span class="op">=</span> <span class="cn">NULL</span>,
   new_varnames <span class="op">=</span> <span class="cn">NULL</span>,
   add_population_weight <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -66,7 +66,12 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>years</dt>
-<dd><p>years (e.g. wave 1 = 2001), multiple waves can be put into a vector.</p></dd>
+<dd><p>This argument allow you to specify the years of HILDA
+that you like to load instead of using alphabets.
+The first wave of HILDA was in 2001 and known as wave 'a',
+and the following year was wave 'b'. To load multiple waves
+you can be put use a numeric vector (e.g.,<code>2001:2009</code> would load all waves
+between 2001 and 2009).</p></dd>
 <dt>vars</dt>
 <dd><p>a vector containing all desired variable names to be loaded. vars can
 be set to "all" to fetch all columns. This may take a long time to load</p></dd>
