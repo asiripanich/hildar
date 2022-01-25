@@ -85,13 +85,13 @@ hil_fetch(years = 2001, add_basic_vars = T) %>%
 How about doing a quick search to find variables that you want? Use `hil_dict` which is a data.table that you can search or view HILDA variables without going to their documentation webpage.
 
 ```{r}
-head(hil_dict)
+hilda_dictionary <- hil_dict()
 ```
 
 Let say we want to select all variables that are related to 'employment'. Here is how we can easily use the selected employment variables in `hil_fetch()`.
 
 ```{r}
-emp_vars <- hil_dict[grepl(pattern = "employment", label), var]
+emp_vars <- hilda_dictionary[grepl(pattern = "employment", label), var]
 emp_vars
 hilda_data <- hil_fetch(years = 2001:2003, vars = emp_vars)
 dim(hilda_data)
@@ -105,9 +105,8 @@ nrows_by_wave <-
   hil_fetch(years = 2001:2016, add_basic_vars = F) %>%
   .[, .(number_of_rows = .N), by = wave]
 
-hil_dict[, unlist(wave), by = .(var, label)] %>%
+hilda_dictionary[, unlist(wave), by = .(var, label)] %>%
   data.table::setnames("V1", "wave") %>%
-  data.table::setDT() %>%
-  .[, .(number_of_variables = .N), by = wave] %>%
+  .[!is.na(wave), .(number_of_variables = .N), by = wave] %>%
   merge(nrows_by_wave, by = "wave")
 ```
