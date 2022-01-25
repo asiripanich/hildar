@@ -36,7 +36,7 @@ hil_fetch <-
            add_geography = FALSE,
            hilda_fst_dir = ifelse(!is.null(getOption("HILDA_FST")),
              getOption("HILDA_FST"),
-             Sys.getenv("HILDA_FST")
+             get_hilda_fst_path()
            )) {
     if (!checkmate::test_directory_exists(hilda_fst_dir, access = "r")) {
       stop(
@@ -99,8 +99,18 @@ hil_fetch <-
       FUN = function(wave) {
         tryCatch(
           {
-            path_to_fst <-
-              fs::path(hilda_fst_dir, paste0("Combined_", wave, "160u.fst"))
+            path_to_fst <- list.files(
+              path = hilda_fst_dir,
+              pattern = paste0(wave, "\\d{3}u.fst"),
+              full.names = TRUE
+            )
+            if (length(path_to_fst) != 1) {
+              cli::cli_alert_danger(
+                "There are more than one HILDA file that matches wave {.field {wave}}:"
+                )
+              cli::cli_ol(path_to_fst)
+              stop("Please check your HILDA fst directory for duplicated files or file an issue.")
+            }
             dt <- fst::read_fst(
               path = path_to_fst,
               columns = .fst_colnames_exist(path_to_fst, vars),
@@ -126,7 +136,7 @@ hil_fetch <-
         )
       }
     )
-
+    
     dat <- rbindlist(dat_ls, fill = TRUE)
 
     # rename the selected columns in vars
