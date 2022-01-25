@@ -47,8 +47,18 @@ hil_fetch <-
         "the `hilda_fst_dir` argument."
       )
     }
+    available_waves <- list.files(
+      path = hilda_fst_dir,
+      pattern = "Combined_[a-z]\\d{3}u.fst",
+      full.names = TRUE
+    ) %>%
+      basename() %>%
+      gsub("Combined_", "", .) %>%
+      gsub("\\d.*", "", .) %>%
+      tolower()
+    available_years <- 2000 + seq_along(letters)[letters %in% available_waves]
     checkmate::assert_integerish(years, any.missing = FALSE)
-    checkmate::assert_subset(years, choices = 2001:2016)
+    checkmate::assert_subset(years, choices = available_years)
     #   msg = "vars cannot be NULL. If you wish to get all columns use \"all\"")
     if (!is.null(vars)) {
       checkmate::assert_character(vars, any.missing = FALSE)
