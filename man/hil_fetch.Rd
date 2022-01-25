@@ -5,7 +5,7 @@
 \title{Fetch HILDA data}
 \usage{
 hil_fetch(
-  years,
+  years = NULL,
   vars = NULL,
   new_varnames = NULL,
   add_population_weight = TRUE,
@@ -16,7 +16,12 @@ hil_fetch(
 )
 }
 \arguments{
-\item{years}{years (e.g. wave 1 = 2001), multiple waves can be put into a vector.}
+\item{years}{This argument allow you to specify the years of HILDA
+that you like to load instead of using alphabets.
+The first wave of HILDA was in 2001 and known as wave 'a',
+and the following year was wave 'b'. To load multiple waves
+you can be put use a numeric vector (e.g.,\code{2001:2009} would load all waves
+between 2001 and 2009).}
 
 \item{vars}{a vector containing all desired variable names to be loaded. vars can
 be set to "all" to fetch all columns. This may take a long time to load}

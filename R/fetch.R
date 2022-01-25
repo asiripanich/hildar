@@ -1,7 +1,12 @@
 #' Fetch HILDA data
 #'
 #' @param years
-#'  years (e.g. wave 1 = 2001), multiple waves can be put into a vector.
+#'  This argument allow you to specify the years of HILDA
+#'  that you like to load instead of using alphabets.
+#'  The first wave of HILDA was in 2001 and known as wave 'a',
+#'  and the following year was wave 'b'. To load multiple waves
+#'  you can be put use a numeric vector (e.g.,`2001:2009` would load all waves
+#'  between 2001 and 2009).
 #' @param vars
 #'  a vector containing all desired variable names to be loaded. vars can
 #'  be set to "all" to fetch all columns. This may take a long time to load
@@ -28,7 +33,7 @@
 #' @importFrom fst read_fst
 #' @export
 hil_fetch <-
-  function(years,
+  function(years = NULL,
            vars = NULL,
            new_varnames = NULL,
            add_population_weight = TRUE,
