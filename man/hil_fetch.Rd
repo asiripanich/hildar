@@ -12,7 +12,7 @@ hil_fetch(
   add_basic_vars = TRUE,
   add_geography = FALSE,
   hilda_fst_dir = ifelse(!is.null(getOption("HILDA_FST")), getOption("HILDA_FST"),
-    Sys.getenv("HILDA_FST"))
+    get_hilda_fst_path())
 )
 }
 \arguments{
