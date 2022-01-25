@@ -48,5 +48,7 @@ plan(multisession, workers = 2)
 }
 \examples{
 # HILDA data dictionary
-hil_dict()
+\dontrun{
+ hil_dict()
+}
 }

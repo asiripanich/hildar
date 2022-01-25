@@ -154,7 +154,9 @@ make_dict <- function(read_dir, save_dir = NULL) {
 #' @export
 #' @examples
 #' # HILDA data dictionary
-#' hil_dict()
+#' \dontrun{
+#'  hil_dict()
+#' }
 hil_dict <- function() {
   hilda_dict_path <- fs::path(get_hilda_fst_path(), "hil_dict.rds")
   checkmate::assert_file_exists(hilda_dict_path)
