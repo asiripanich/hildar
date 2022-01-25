@@ -53,7 +53,7 @@ hil_setup <- function(read_dir, save_dir) {
   )
 
   # make a data dictionary
-  make_dict(hilda_filedirs)
+  make_dict(read_dir, save_dir)
 
   invisible()
 }
