@@ -55,17 +55,26 @@ remotes::install_github("asiripanich/hildar")
 
 ### 1) Store HILDA as `.fst` files
 
-Use `hil_setup()` to read HILDA STATA (.dta) files and save them as `.fst` files. `.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
+Use `hil_setup()` to read HILDA STATA (.dta) files and save them as `.fst` files.
+`.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
+An additional benefit of `hil_setup()` is that it creates a HILDA dictionary file that you can later call using `hil_dict()`.
+Having a functional `hil_dict()` allows the user to use `hil_vars()` and `hil_labs()` for searching variable names using a regular expression.   
 
 ``` r
-hil_setup(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/path/to/save/hilda-fst-files")
+hil_setup(
+  read_dir = "/path/to/your/hilda-stata-files", 
+  save_dir = "/path/to/save/hilda-fst-files"
+)
 ```
 
-This will allow you to fast query the data across all waves using `hil_fetch()`.
+This will allow you to fast query HILDA data from all waves using `hil_fetch()`.
 
 ### 2) Tell `hildar` where the HILDA `.fst` files are stored at.
 
-`hil_fetch()` requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this `HILDA_FST` as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make `hil_fetch()` more convinient to use. Alternatively, you can manually set it in each call using `hilda_fst_dir` argument in `hil_fetch()`.
+`hil_fetch()` requires the user to specify where the HILDA fst files generated in the previous step are stored. 
+You can either set this `HILDA_FST` as a global option or an R environment variable. 
+Setting this as a persistent option for all your R sessions will make `hil_fetch()` more convinient to use. 
+Alternatively, you can manually set it in each call using `hilda_fst_dir` argument in `hil_fetch()`.
 
 ## Example
 
