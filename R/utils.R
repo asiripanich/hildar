@@ -155,7 +155,7 @@ make_dict <- function(read_dir, save_dir = NULL) {
 #' @examples
 #' # HILDA data dictionary
 #' \dontrun{
-#'  hil_dict()
+#' hil_dict()
 #' }
 hil_dict <- function() {
   hilda_dict_path <- fs::path(get_hilda_fst_path(), "hil_dict.rds")

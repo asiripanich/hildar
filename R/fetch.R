@@ -199,10 +199,16 @@ fetch <- function(years,
 #' @noRd
 #'
 #' @return column names in colnames that exists in the .fst file
-.fst_colnames_exist <- function(path, colnames) {
-  first_row_dt <- fst::read.fst(path, to = 1, as.data.table = T)
+.fst_colnames_exist <- function(path, vars) {
+  column_names <- .fst_colnames(path)
+  vars_exist <- vars %in% column_names
+  missing_vars <- vars[!vars_exist]
+  if (length(missing_vars) > 0) {
+    cli::cli_alert_warning("These variables: {.var {missing_vars}} don't exist in {.path {path}}.")
+  }
+  vars[vars_exist]
+}
 
-  colnames_exist <- colnames %in% names(first_row_dt)
-
-  colnames[colnames_exist]
+.fst_colnames <- function(path) {
+  colnames(fst::read.fst(path, to = 1, as.data.table = T))
 }

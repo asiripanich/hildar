@@ -9,11 +9,8 @@
 
 <!-- badges: end -->
 <p align="center">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&amp;usqp=CAU" title="source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" width="400"/>
+<img src="https://fbe.unimelb.edu.au/_nocache?a=3881339" title="source: https://fbe.unimelb.edu.au/_nocache?a=3881339" width="400"/>
 </p>
-
-**source:
-<https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data>**
 
 [HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is
 a large panel survey with close to 20 waves (2001 - 2020), and some
@@ -23,21 +20,21 @@ little challenging.
 The goal of this package is to provide a quick and easy way to query
 HILDA data into R. This is possible by converting each wave of HILDA
 from its STATA file (`.dta`), one of the three formats HILDA provides,
-to `fst` format. `[fst](https://github.com/fstpackage/fst)` is a binary
+to `fst` format. [fst](https://github.com/fstpackage/fst) is a binary
 format and can be read much much quicker than `.dta` in R.
 
-| Function name | Description                                                                                                                                                                               |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `hil_setup()` | Setup HILDA fst files for `hil_fetch() to use`.                                                                                                                                           |
-| `hil_fetch()` | Fetches HILDA records based on query options.                                                                                                                                             |
-| `hil_dict`    | Shows HILDA data glossary and waves each variable is available in. This provides a convenient way to select multiple variables based on their description by passing it to `hil_fetch()`. |
+| Function name          | Description                                                                                                                                                                               |
+|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `hil_setup()`          | Setup HILDA fst files for `hil_fetch() to use`.                                                                                                                                           |
+| `hil_fetch()`          | Fetches HILDA records based on query options.                                                                                                                                             |
+| `hil_dict()`           | Shows HILDA data glossary and waves each variable is available in. This provides a convenient way to select multiple variables based on their description by passing it to `hil_fetch()`. |
+| `hil_vars()`           | Returns all variables where their variable names match a regular expression.                                                                                                              |
+| `hil_labs()`           | Returns all variables where their labels match a regular expression.                                                                                                                      |
+| `hil_browse()`         | Opens up the HILDA data dictionary page on your default web browser.                                                                                                                      |
+| `hil_crosswave_info()` | Takes a variable name and search for its cross wave information.                                                                                                                          |
+| `hil_var_details()`    | Similar to `hil_crosswave_info()` but it searches for a variable’s details.                                                                                                               |
 
-> Note that, `hil_dict` is a data.frame object bundled with the package,
-> and was generated using HILDA 2001 - 2016. Hence, it only covers
-> variables from those 16 waves. In a future release, `hilar` will
-> create `hil_dict` that matches your HILDA data during `hil_setup()`.
-
-## 1) Installation
+## Installation
 
 The development version from [GitHub](https://github.com/) with:
 
@@ -46,7 +43,9 @@ The development version from [GitHub](https://github.com/) with:
 remotes::install_github("asiripanich/hildar")
 ```
 
-## 2) Store HILDA as `.fst` files
+## Setup
+
+### 1) Store HILDA as `.fst` files
 
 Use `hil_setup()` to read HILDA STATA (.dta) files and save them as
 `.fst` files. `.fst` is a binary data format that can be read very
@@ -59,7 +58,7 @@ hil_setup(dir_input = "/path/to/your/hilda-stata-files", dir_output = "/path/to/
 This will allow you to fast query the data across all waves using
 `hil_fetch()`.
 
-## 3) Tell `hildar` where the `.fst` files are stored.
+### 2) Tell `hildar` where the HILDA `.fst` files are stored at.
 
 `hil_fetch()` requires the user to tell it where the HILDA fst files
 generated in the previous step are stored. You can either set this
@@ -70,7 +69,8 @@ set it in each call using `hilda_fst_dir` argument in `hil_fetch()`.
 
 ## Example
 
-Here is how you can fetch HILDA data with `hildar`!
+Once the setup is completed, you can now start fetching HILDA data with
+`hildar`!
 
 ``` r
 library(hildar)
@@ -103,6 +103,14 @@ variables without going to their documentation webpage.
 
 ``` r
 hilda_dictionary <- hil_dict()
+head(hilda_dictionary)
+#>        var            wave                    label
+#> 1: xwaveid              NA         XW Cross wave ID
+#> 2:    hhid 1,2,3,4,5,6,...          HF Household ID
+#> 3:   hhpno 1,2,3,4,5,6,...         HF Person number
+#> 4:   hhpid 1,2,3,4,5,6,...             HF Person ID
+#> 5:  hhrpid 1,2,3,4,5,6,... DV: Randomised person id
+#> 6: hhstate 1,2,3,4,5,6,...                 HF State
 ```
 
 Let say we want to select all variables that are related to
@@ -110,19 +118,26 @@ Let say we want to select all variables that are related to
 variables in `hil_fetch()`.
 
 ``` r
-emp_vars <- hilda_dictionary[grepl(pattern = "employment", label), var]
-emp_vars
-#>   [1] "hhura"   "fmfempo" "fmmempo" "esempst" "ujljcnt" "jbmind"  "jbempst" "jbmlh"   "molha"   "molmth"  "molyr"   "mol3rd"  "losateo" "loimpew" "jbmi06"  "es"      "esempdt" "fmfemp"  "fmmemp"  "lshrcom" "cnpu_fd" "cnpu_np" "cnpu_o1" "cnpu_o2" "cnpu_na" "cnph_o1"
-#>  [27] "cnph_o2" "cnpc_ps" "cnpc_fd" "cnpc_o1" "cnpc_o2" "cnsu_ps" "cnsu_fd" "cnsu_kp" "cnsu_np" "cnsu_o1" "cnsu_o2" "cnsu_na" "cnsh_bs" "cnsh_ru" "cnsh_re" "cnsh_ps" "cnsh_fd" "cnsh_kp" "cnsh_o1" "cnsh_o2" "cnsc_bs" "cnsc_ru" "cnsc_ps" "cnsc_fd" "cnsc_kp" "cnsc_o1"
-#>  [53] "cnsc_o2" "chkb12"  "pjothru" "pjothra" "pjotcnt" "fmfempn" "fmmempn" "lshremp" "lsmnemp" "lsmncom" "fisemr"  "lsemp"   "lscom"   "jbtremp" "ujtros"  "ncesop"  "rcesop"  "rtgwage" "cnsh_au" "hepuwrk" "herjob"  "herhour" "hechjob" "hetowrk" "heonas"  "hespeq" 
-#>  [79] "heothed" "nsu1_fd" "nsu1_o1" "nsu1_o2" "nsu1_na" "nsu1_np" "nsu2_fd" "nsu2_o1" "nsu2_o2" "nsu2_na" "nsu2_np" "nsu3_fd" "nsu3_o1" "nsu3_o2" "nsu3_na" "nsu3_np" "nsu4_fd" "nsu4_o1" "nsu4_o2" "nsu4_na" "nsu4_np" "nsu5_fd" "nsu5_o1" "nsu5_o2" "nsu5_na" "nsu5_np"
-#> [105] "nsu6_fd" "nsu6_o1" "nsu6_o2" "nsu6_na" "nsu6_np" "nsh1_ps" "nsh2_ps" "nsh3_ps" "nsh4_ps" "nsh5_ps" "nsh6_ps" "nsh1_fd" "nsh2_fd" "nsh3_fd" "nsh4_fd" "nsh5_fd" "nsh6_fd" "nsh1_o1" "nsh2_o1" "nsh3_o1" "nsh4_o1" "nsh5_o1" "nsh6_o1" "nsh1_o2" "nsh2_o2" "nsh3_o2"
-#> [131] "nsh4_o2" "nsh5_o2" "nsh6_o2" "npu1_o1" "npu1_o2" "npu1_na" "npu1_np" "npu2_o1" "npu2_o2" "npu2_na" "npu2_np" "npu3_o1" "npu3_o2" "npu3_na" "npu3_np" "npu4_o1" "npu4_o2" "npu4_na" "npu4_np" "npu5_o1" "npu5_o2" "npu5_na" "npu5_np" "npu6_o1" "npu6_o2" "npu6_na"
-#> [157] "npu6_np" "nph1_fd" "nph2_fd" "nph3_fd" "nph4_fd" "nph5_fd" "nph6_fd" "nph1_o1" "nph2_o1" "nph3_o1" "nph4_o1" "nph5_o1" "nph6_o1" "nph1_o2" "nph2_o2" "nph3_o2" "nph4_o2" "nph5_o2" "nph6_o2" "nrpmact" "jttpewt" "jttpeot" "jdemp"   "skces2"  "heothrf" "heothdk"
-#> [183] "chb12"   "lfpe01"  "lfpe02"  "lfpe03"  "lfpe04"  "lfpe05"  "lfpe06"  "lfpe07"  "lfpe08"  "lfpe09"  "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13"  "lfpe14"  "lfpe15"  "lfpe16"  "lfpe17"  "lfpe18"  "lfpe19"  "cvpw"    "cvrd"    "cvipe"
-hilda_data <- hil_fetch(years = 2001:2003, vars = emp_vars)
+hilda_data <- hil_fetch(years = 2001:2003, vars = hil_labs("employment"))
+#> ! These variables: `cnpu_fd`, `cnpu_np`, `cnpu_o1`, `cnpu_o2`, `cnpu_na`, `cnph_o1`, `cnph_o2`, `cnpc_ps`, `cnpc_fd`, `cnpc_o1`, `cnpc_o2`, `cnsu_ps`, `cnsu_fd`, `cnsu_kp`, `cnsu_np`, `cnsu_o1`, `cnsu_o2`, `cnsu_na`, `cnsh_bs`, `cnsh_ru`, `cnsh_re`, `cnsh_ps`, `cnsh_fd`, `cnsh_kp`, `cnsh_o1`, `cnsh_o2`, `cnsc_bs`, `cnsc_ru`, `cnsc_ps`, `cnsc_fd`, `cnsc_kp`, `cnsc_o1`, `cnsc_o2`, `chkb12`, `pjothru`, `pjothra`, `pjotcnt`, `fmfempn`, `fmmempn`, `lshremp`, `lsmnemp`, `lsmncom`, `fisemr`, `lsemp`, `lscom`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.
+#> ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.
+#> ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `fisemr`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, `nph5_fd`, `nph6_fd`, `nph1_o1`, `nph2_o1`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.
 dim(hilda_data)
 #> [1] 55899    79
+```
+
+Or if you know the prefix of a subject area that you like to query, you
+can use `hil_vars(pattern)` to query all variable names that match the
+pattern. For example, `hil_vars("^ff")` will get all variables in
+subject area ‘Health’ and nested area ‘Heath - diet’.
+
+``` r
+hilda_data <- hil_fetch(years = 2001:2003, vars = hil_vars("^ff"))
+#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.
+#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.
+#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.
+dim(hilda_data)
+#> [1] 55899     9
 ```
 
 Here is a summary of the dimensions of our HILDA data files.
