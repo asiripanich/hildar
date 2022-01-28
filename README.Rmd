@@ -25,7 +25,8 @@ knitr::opts_chunk$set(
 <img src="https://fbe.unimelb.edu.au/_nocache?a=3881339" title="source: https://fbe.unimelb.edu.au/_nocache?a=3881339" width="400"/>
 </p>
 
-[HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is a large panel survey with close to 20 waves (2001 - 2020), and some waves have more than 5000 variables, which makes reading them into R a little challenging.
+[HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is a large panel survey 20 waves (2001 - 2020) and counting!
+Some waves have more than 5000 variables, which means reading them into R is a little challenging (personally I think it is wayyyyyyyy too slow).
 
 The goal of this package is to provide a quick and easy way to query HILDA data into R. 
 This is possible by converting each wave of HILDA from its STATA file (`.dta`), one of the three formats HILDA provides, to `fst` format. [fst](https://github.com/fstpackage/fst) is a binary format and can be read much much quicker than `.dta` in R.

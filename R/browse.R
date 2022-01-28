@@ -4,6 +4,7 @@
 #' @param wave wave number
 #'
 #' @export
+#' @importFrom utils browseURL
 #'
 #' @return These functions are called for their side-effect which is to
 #'  launch a relavant page on a web browser.

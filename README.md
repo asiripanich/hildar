@@ -13,9 +13,9 @@
 </p>
 
 [HILDA survey data](https://melbourneinstitute.unimelb.edu.au/hilda) is
-a large panel survey with close to 20 waves (2001 - 2020), and some
-waves have more than 5000 variables, which makes reading them into R a
-little challenging.
+a large panel survey 20 waves (2001 - 2020) and counting! Some waves
+have more than 5000 variables, which means reading them into R is a
+little challenging (personally I think it is wayyyyyyyy too slow).
 
 The goal of this package is to provide a quick and easy way to query
 HILDA data into R. This is possible by converting each wave of HILDA

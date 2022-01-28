@@ -21,7 +21,8 @@ Imports:
     fs,
     lifecycle,
     cli,
-    haven
+    haven,
+    utils
 Suggests:
     roxygen2,
     testthat,
