@@ -67,14 +67,13 @@
 
 <!-- badges: end -->
 <p align="center">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLV9hgux5t_pK-anbgugJ8GfoMxjD6D7_nHA&amp;usqp=CAU" title="source: https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" width="400"></p>
-<p><strong>source: <a href="https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data" class="external-link uri">https://www.dss.gov.au/about-the-department/national-centre-for-longitudinal-data</a></strong></p>
+<img src="https://fbe.unimelb.edu.au/_nocache?a=3881339" title="source: https://fbe.unimelb.edu.au/_nocache?a=3881339" width="400"></p>
 <p><a href="https://melbourneinstitute.unimelb.edu.au/hilda" class="external-link">HILDA survey data</a> is a large panel survey with close to 20 waves (2001 - 2020), and some waves have more than 5000 variables, which makes reading them into R a little challenging.</p>
-<p>The goal of this package is to provide a quick and easy way to query HILDA data into R. This is possible by converting each wave of HILDA from its STATA file (<code>.dta</code>), one of the three formats HILDA provides, to <code>fst</code> format. <code>[fst](https://github.com/fstpackage/fst)</code> is a binary format and can be read much much quicker than <code>.dta</code> in R.</p>
+<p>The goal of this package is to provide a quick and easy way to query HILDA data into R. This is possible by converting each wave of HILDA from its STATA file (<code>.dta</code>), one of the three formats HILDA provides, to <code>fst</code> format. <a href="https://github.com/fstpackage/fst" class="external-link">fst</a> is a binary format and can be read much much quicker than <code>.dta</code> in R.</p>
 <table class="table">
 <colgroup>
-<col width="7%">
-<col width="92%">
+<col width="11%">
+<col width="88%">
 </colgroup>
 <thead><tr class="header">
 <th>Function name</th>
@@ -90,16 +89,33 @@
 <td>Fetches HILDA records based on query options.</td>
 </tr>
 <tr class="odd">
-<td><code>hil_dict</code></td>
+<td><code><a href="reference/hil_setup.html">hil_dict()</a></code></td>
 <td>Shows HILDA data glossary and waves each variable is available in. This provides a convenient way to select multiple variables based on their description by passing it to <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/hil_vars.html">hil_vars()</a></code></td>
+<td>Returns all variables where their variable names match a regular expression.</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/hil_vars.html">hil_labs()</a></code></td>
+<td>Returns all variables where their labels match a regular expression.</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/hil_browse.html">hil_browse()</a></code></td>
+<td>Opens up the HILDA data dictionary page on your default web browser.</td>
+</tr>
+<tr class="odd">
+<td><code><a href="reference/hil_browse.html">hil_crosswave_info()</a></code></td>
+<td>Takes a variable name and search for its cross wave information.</td>
+</tr>
+<tr class="even">
+<td><code><a href="reference/hil_browse.html">hil_var_details()</a></code></td>
+<td>Similar to <code><a href="reference/hil_browse.html">hil_crosswave_info()</a></code> but it searches for a variable’s details.</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>Note that, <code>hil_dict</code> is a data.frame object bundled with the package, and was generated using HILDA 2001 - 2016. Hence, it only covers variables from those 16 waves. In a future release, <code>hilar</code> will create <code>hil_dict</code> that matches your HILDA data during <code><a href="reference/hil_setup.html">hil_setup()</a></code>.</p>
-</blockquote>
 <div class="section level2">
-<h2 id="1-installation">1) Installation<a class="anchor" aria-label="anchor" href="#1-installation"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>The development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -107,22 +123,26 @@
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"asiripanich/hildar"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="2-store-hilda-as-fst-files">2) Store HILDA as <code>.fst</code> files<a class="anchor" aria-label="anchor" href="#2-store-hilda-as-fst-files"></a>
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
+<div class="section level3">
+<h3 id="1-store-hilda-as-fst-files">1) Store HILDA as <code>.fst</code> files<a class="anchor" aria-label="anchor" href="#1-store-hilda-as-fst-files"></a>
+</h3>
 <p>Use <code><a href="reference/hil_setup.html">hil_setup()</a></code> to read HILDA STATA (.dta) files and save them as <code>.fst</code> files. <code>.fst</code> is a binary data format that can be read very quickly, a lot faster than <code>.dta</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/hil_setup.html">hil_setup</a></span><span class="op">(</span>dir_input <span class="op">=</span> <span class="st">"/path/to/your/hilda-stata-files"</span>, dir_output <span class="op">=</span> <span class="st">"/path/to/save/hilda-fst-files"</span><span class="op">)</span></code></pre></div>
 <p>This will allow you to fast query the data across all waves using <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 </div>
-<div class="section level2">
-<h2 id="3-tell-hildar-where-the-fst-files-are-stored">3) Tell <code>hildar</code> where the <code>.fst</code> files are stored.<a class="anchor" aria-label="anchor" href="#3-tell-hildar-where-the-fst-files-are-stored"></a>
-</h2>
+<div class="section level3">
+<h3 id="2-tell-hildar-where-the-hilda-fst-files-are-stored-at">2) Tell <code>hildar</code> where the HILDA <code>.fst</code> files are stored at.<a class="anchor" aria-label="anchor" href="#2-tell-hildar-where-the-hilda-fst-files-are-stored-at"></a>
+</h3>
 <p><code><a href="reference/hil_fetch.html">hil_fetch()</a></code> requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this <code>HILDA_FST</code> as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make <code><a href="reference/hil_fetch.html">hil_fetch()</a></code> more convinient to use. Alternatively, you can manually set it in each call using <code>hilda_fst_dir</code> argument in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>Here is how you can fetch HILDA data with <code>hildar</code>!</p>
+<p>Once the setup is completed, you can now start fetching HILDA data with <code>hildar</code>!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/asiripanich/hildar" class="external-link">hildar</a></span><span class="op">)</span>
 
@@ -144,24 +164,33 @@
 <span class="co">#&gt; [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr"  "hhrih"   "hhwth"   "hhwtrp"</span></code></pre></div>
 <p>How about doing a quick search to find variables that you want? Use <code>hil_dict</code> which is a data.table that you can search or view HILDA variables without going to their documentation webpage.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hilda_dictionary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_setup.html">hil_dict</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">hilda_dictionary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_setup.html">hil_dict</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hilda_dictionary</span><span class="op">)</span>
+<span class="co">#&gt;        var            wave                    label</span>
+<span class="co">#&gt; 1: xwaveid              NA         XW Cross wave ID</span>
+<span class="co">#&gt; 2:    hhid 1,2,3,4,5,6,...          HF Household ID</span>
+<span class="co">#&gt; 3:   hhpno 1,2,3,4,5,6,...         HF Person number</span>
+<span class="co">#&gt; 4:   hhpid 1,2,3,4,5,6,...             HF Person ID</span>
+<span class="co">#&gt; 5:  hhrpid 1,2,3,4,5,6,... DV: Randomised person id</span>
+<span class="co">#&gt; 6: hhstate 1,2,3,4,5,6,...                 HF State</span></code></pre></div>
 <p>Let say we want to select all variables that are related to ‘employment’. Here is how we can easily use the selected employment variables in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">emp_vars</span> <span class="op">&lt;-</span> <span class="va">hilda_dictionary</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"employment"</span>, <span class="va">label</span><span class="op">)</span>, <span class="va">var</span><span class="op">]</span>
-<span class="va">emp_vars</span>
-<span class="co">#&gt;   [1] "hhura"   "fmfempo" "fmmempo" "esempst" "ujljcnt" "jbmind"  "jbempst" "jbmlh"   "molha"   "molmth"  "molyr"   "mol3rd"  "losateo" "loimpew" "jbmi06"  "es"      "esempdt" "fmfemp"  "fmmemp"  "lshrcom" "cnpu_fd" "cnpu_np" "cnpu_o1" "cnpu_o2" "cnpu_na" "cnph_o1"</span>
-<span class="co">#&gt;  [27] "cnph_o2" "cnpc_ps" "cnpc_fd" "cnpc_o1" "cnpc_o2" "cnsu_ps" "cnsu_fd" "cnsu_kp" "cnsu_np" "cnsu_o1" "cnsu_o2" "cnsu_na" "cnsh_bs" "cnsh_ru" "cnsh_re" "cnsh_ps" "cnsh_fd" "cnsh_kp" "cnsh_o1" "cnsh_o2" "cnsc_bs" "cnsc_ru" "cnsc_ps" "cnsc_fd" "cnsc_kp" "cnsc_o1"</span>
-<span class="co">#&gt;  [53] "cnsc_o2" "chkb12"  "pjothru" "pjothra" "pjotcnt" "fmfempn" "fmmempn" "lshremp" "lsmnemp" "lsmncom" "fisemr"  "lsemp"   "lscom"   "jbtremp" "ujtros"  "ncesop"  "rcesop"  "rtgwage" "cnsh_au" "hepuwrk" "herjob"  "herhour" "hechjob" "hetowrk" "heonas"  "hespeq" </span>
-<span class="co">#&gt;  [79] "heothed" "nsu1_fd" "nsu1_o1" "nsu1_o2" "nsu1_na" "nsu1_np" "nsu2_fd" "nsu2_o1" "nsu2_o2" "nsu2_na" "nsu2_np" "nsu3_fd" "nsu3_o1" "nsu3_o2" "nsu3_na" "nsu3_np" "nsu4_fd" "nsu4_o1" "nsu4_o2" "nsu4_na" "nsu4_np" "nsu5_fd" "nsu5_o1" "nsu5_o2" "nsu5_na" "nsu5_np"</span>
-<span class="co">#&gt; [105] "nsu6_fd" "nsu6_o1" "nsu6_o2" "nsu6_na" "nsu6_np" "nsh1_ps" "nsh2_ps" "nsh3_ps" "nsh4_ps" "nsh5_ps" "nsh6_ps" "nsh1_fd" "nsh2_fd" "nsh3_fd" "nsh4_fd" "nsh5_fd" "nsh6_fd" "nsh1_o1" "nsh2_o1" "nsh3_o1" "nsh4_o1" "nsh5_o1" "nsh6_o1" "nsh1_o2" "nsh2_o2" "nsh3_o2"</span>
-<span class="co">#&gt; [131] "nsh4_o2" "nsh5_o2" "nsh6_o2" "npu1_o1" "npu1_o2" "npu1_na" "npu1_np" "npu2_o1" "npu2_o2" "npu2_na" "npu2_np" "npu3_o1" "npu3_o2" "npu3_na" "npu3_np" "npu4_o1" "npu4_o2" "npu4_na" "npu4_np" "npu5_o1" "npu5_o2" "npu5_na" "npu5_np" "npu6_o1" "npu6_o2" "npu6_na"</span>
-<span class="co">#&gt; [157] "npu6_np" "nph1_fd" "nph2_fd" "nph3_fd" "nph4_fd" "nph5_fd" "nph6_fd" "nph1_o1" "nph2_o1" "nph3_o1" "nph4_o1" "nph5_o1" "nph6_o1" "nph1_o2" "nph2_o2" "nph3_o2" "nph4_o2" "nph5_o2" "nph6_o2" "nrpmact" "jttpewt" "jttpeot" "jdemp"   "skces2"  "heothrf" "heothdk"</span>
-<span class="co">#&gt; [183] "chb12"   "lfpe01"  "lfpe02"  "lfpe03"  "lfpe04"  "lfpe05"  "lfpe06"  "lfpe07"  "lfpe08"  "lfpe09"  "lfpe10"  "lfpe11"  "lfpe12"  "lfpe13"  "lfpe14"  "lfpe15"  "lfpe16"  "lfpe17"  "lfpe18"  "lfpe19"  "cvpw"    "cvrd"    "cvipe"</span>
-<span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="va">emp_vars</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="fu"><a href="reference/hil_vars.html">hil_labs</a></span><span class="op">(</span><span class="st">"employment"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ! These variables: `cnpu_fd`, `cnpu_np`, `cnpu_o1`, `cnpu_o2`, `cnpu_na`, `cnph_o1`, `cnph_o2`, `cnpc_ps`, `cnpc_fd`, `cnpc_o1`, `cnpc_o2`, `cnsu_ps`, `cnsu_fd`, `cnsu_kp`, `cnsu_np`, `cnsu_o1`, `cnsu_o2`, `cnsu_na`, `cnsh_bs`, `cnsh_ru`, `cnsh_re`, `cnsh_ps`, `cnsh_fd`, `cnsh_kp`, `cnsh_o1`, `cnsh_o2`, `cnsc_bs`, `cnsc_ru`, `cnsc_ps`, `cnsc_fd`, `cnsc_kp`, `cnsc_o1`, `cnsc_o2`, `chkb12`, `pjothru`, `pjothra`, `pjotcnt`, `fmfempn`, `fmmempn`, `lshremp`, `lsmnemp`, `lsmncom`, `fisemr`, `lsemp`, `lscom`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.</span>
+<span class="co">#&gt; ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.</span>
+<span class="co">#&gt; ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `fisemr`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, `nph5_fd`, `nph6_fd`, `nph1_o1`, `nph2_o1`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
 <span class="co">#&gt; [1] 55899    79</span></code></pre></div>
-<p>Here is a summary of the dimensions of our HILDA data files.</p>
+<p>Or if you know the prefix of a subject area that you like to query, you can use <code>hil_vars(pattern)</code> to query all variable names that match the pattern. For example, <code>hil_vars("^ff")</code> will get all variables in subject area ‘Health’ and nested area ‘Heath - diet’.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="fu"><a href="reference/hil_vars.html">hil_vars</a></span><span class="op">(</span><span class="st">"^ff"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.</span>
+<span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.</span>
+<span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
+<span class="co">#&gt; [1] 55899     9</span></code></pre></div>
+<p>Here is a summary of the dimensions of our HILDA data files.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># the number of variables and rows in each wave</span>
 <span class="va">nrows_by_wave</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2020</span>, add_basic_vars <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>

@@ -25,10 +25,16 @@
     <loc>/reference/get_hilda_fst_path.html</loc>
   </url>
   <url>
+    <loc>/reference/hil_browse.html</loc>
+  </url>
+  <url>
     <loc>/reference/hil_fetch.html</loc>
   </url>
   <url>
     <loc>/reference/hil_setup.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hil_vars.html</loc>
   </url>
   <url>
     <loc>/reference/hildar-package.html</loc>
