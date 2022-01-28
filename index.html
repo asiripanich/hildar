@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">hildar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,15 +128,18 @@
 <div class="section level3">
 <h3 id="1-store-hilda-as-fst-files">1) Store HILDA as <code>.fst</code> files<a class="anchor" aria-label="anchor" href="#1-store-hilda-as-fst-files"></a>
 </h3>
-<p>Use <code><a href="reference/hil_setup.html">hil_setup()</a></code> to read HILDA STATA (.dta) files and save them as <code>.fst</code> files. <code>.fst</code> is a binary data format that can be read very quickly, a lot faster than <code>.dta</code>.</p>
+<p>Use <code><a href="reference/hil_setup.html">hil_setup()</a></code> to read HILDA STATA (.dta) files and save them as <code>.fst</code> files. <code>.fst</code> is a binary data format that can be read very quickly, a lot faster than <code>.dta</code>. An additional benefit of <code><a href="reference/hil_setup.html">hil_setup()</a></code> is that it creates a HILDA dictionary file that you can later call using <code><a href="reference/hil_setup.html">hil_dict()</a></code>. Having a functional <code><a href="reference/hil_setup.html">hil_dict()</a></code> allows the user to use <code><a href="reference/hil_vars.html">hil_vars()</a></code> and <code><a href="reference/hil_vars.html">hil_labs()</a></code> for searching variable names using a regular expression.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/hil_setup.html">hil_setup</a></span><span class="op">(</span>dir_input <span class="op">=</span> <span class="st">"/path/to/your/hilda-stata-files"</span>, dir_output <span class="op">=</span> <span class="st">"/path/to/save/hilda-fst-files"</span><span class="op">)</span></code></pre></div>
-<p>This will allow you to fast query the data across all waves using <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
+<code class="sourceCode R"><span class="fu"><a href="reference/hil_setup.html">hil_setup</a></span><span class="op">(</span>
+  read_dir <span class="op">=</span> <span class="st">"/path/to/your/hilda-stata-files"</span>, 
+  save_dir <span class="op">=</span> <span class="st">"/path/to/save/hilda-fst-files"</span>
+<span class="op">)</span></code></pre></div>
+<p>This will allow you to fast query HILDA data from all waves using <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 </div>
 <div class="section level3">
 <h3 id="2-tell-hildar-where-the-hilda-fst-files-are-stored-at">2) Tell <code>hildar</code> where the HILDA <code>.fst</code> files are stored at.<a class="anchor" aria-label="anchor" href="#2-tell-hildar-where-the-hilda-fst-files-are-stored-at"></a>
 </h3>
-<p><code><a href="reference/hil_fetch.html">hil_fetch()</a></code> requires the user to tell it where the HILDA fst files generated in the previous step are stored. You can either set this <code>HILDA_FST</code> as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make <code><a href="reference/hil_fetch.html">hil_fetch()</a></code> more convinient to use. Alternatively, you can manually set it in each call using <code>hilda_fst_dir</code> argument in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
+<p><code><a href="reference/hil_fetch.html">hil_fetch()</a></code> requires the user to specify where the HILDA fst files generated in the previous step are stored. You can either set this <code>HILDA_FST</code> as a global option or an R environment variable. Setting this as a persistent option for all your R sessions will make <code><a href="reference/hil_fetch.html">hil_fetch()</a></code> more convinient to use. Alternatively, you can manually set it in each call using <code>hilda_fst_dir</code> argument in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 </div>
 </div>
 <div class="section level2">
