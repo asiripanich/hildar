@@ -1,7 +1,7 @@
 Package: hildar
 Type: Package
 Title: HILDA Data Package and Utils Functions to Use on HILDA Survey Data
-Version: 0.2.1.9001
+Version: 0.3.0
 Author: Amarin Siripanich
 Maintainer: Amarin Siripanich <amarin.siri@gmail.com>
 Description: Fast query HILDA by storing them in fst format.

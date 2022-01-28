@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# hildar 0.2.1.9001
+# hildar 0.3.0
 
 - Improved README.
 - `make_dict()` now converts the wave column as integer.
@@ -8,17 +8,14 @@
 - `hil_setup()` now adds a dictionary file to `save_dir` and should be able to find HILDA files in `read_dir` correctly.
 - `hil_fetch()` now works with other releases of HILDA not just release 16, which was unintentionally added.
 - Replaced the `hil_dict` object with a `hil_dict()` function that returns it.
-
-
-# hildar 0.2.1.9000
-
-- Same as previous version.
+- Added `hil_vars()`, `hil_labs()`, and functions for quickly browsing the online HILDA dictionary.
 
 
 # hildar 0.2.1
 
 - Properly import packages of used functions.
 - Fix wrong warning messages in deprecate functions.
+
 
 # hildar 0.2.0
 
@@ -27,6 +24,8 @@
 - Renamed `hilda_dict` to `hil_dict`.
 - Remove minimum versions of the dependencies.
 - Use `hil_` as pkg suffix. `fetch()` and `setup_hildar()` have been renamed to `hil_fetch()` and `hil_setup()`.
+
+
 # hildar 0.1.0
 
 * Added a `NEWS.md` file to track changes to the package.
