@@ -52,6 +52,13 @@ hil_setup <- function(read_dir, save_dir) {
   },
     .options = furrr::furrr_options(seed = 20220716)
   )
+  cli::cli_alert_success("HILDA fst files have been saved to '{save_dir}'.")
+  cli::cli_alert_info(
+    "Please add -> {.emph 'HILDA_FST={fs::path_expand(save_dir)}'} \\
+      to your .Renviron file or .Rprofile file. 
+      This will allow you to use `hil_fetch()` without having to \\
+      explicitly tell it where the HILDA fst files are each time \\
+      you call the function. \\
       You can use `usethis::edit_r_profile()` \\
       or `usethis::edit_r_environ()` to open them."
   )
