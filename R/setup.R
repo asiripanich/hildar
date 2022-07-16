@@ -19,6 +19,13 @@
 #' ```
 #' library(future)
 #' plan(multisession, workers = 2)
+#' 
+#' # `hil_setup()` can take several minutes to finish.
+#' # To monitor its progress, you can wrap the function in
+#' # `progressr::with_progress({...}}` like below.
+#' progressr::with_progress({
+#'    hil_setup(read_dir = "...", save_dir = "...")
+#' })
 #' ```
 #'
 #' @importFrom parallel detectCores
