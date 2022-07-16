@@ -42,9 +42,18 @@ This function can take a long time to finish since each HILDA file
 is quite large. One option is to use the future package to choose
 your parallel backend before running \code{hil_fetch()}. The following
 code chuck uses \code{multisession} which creates background R sessions
-equal to the number of \code{workers}.\preformatted{library(future)
+equal to the number of \code{workers}.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{library(future)
 plan(multisession, workers = 2)
-}
+
+# `hil_setup()` can take several minutes to finish.
+# To monitor its progress, you can wrap the function in
+# `progressr::with_progress(\{...\}\}` like below.
+progressr::with_progress(\{
+   hil_setup(read_dir = "...", save_dir = "...")
+\})
+}\if{html}{\out{</div>}}
 }
 \examples{
 # HILDA data dictionary
