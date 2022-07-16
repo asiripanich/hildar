@@ -32,8 +32,8 @@ hil_setup <- function(read_dir, save_dir) {
   checkmate::assert_directory_exists(save_dir, access = "rw")
   hilda_filedirs <- list.files(
     path = read_dir,
-    pattern = "Combined_.*.dta",
-    full.names = T
+    pattern = "Combined_[a-z]\\d{3}(u|c).dta",
+    full.names = TRUE
   )
   hilda_files <- list.files(path = read_dir, pattern = ".dta")
   if (requireNamespace("progressr", quietly = TRUE)) {
