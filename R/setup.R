@@ -33,7 +33,7 @@ hil_setup <- function(read_dir, save_dir) {
   hilda_filedirs <- list.files(
     path = read_dir,
     pattern = "Combined_.*.dta",
-    full.names = T
+    full.names = TRUE
   )
   hilda_files <- list.files(path = read_dir, pattern = ".dta")
   furrr::future_walk(seq_along(hilda_files), ~ {
