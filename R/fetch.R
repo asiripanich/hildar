@@ -54,7 +54,7 @@ hil_fetch <-
     }
     available_waves <- list.files(
       path = hilda_fst_dir,
-      pattern = "Combined_[a-z]\\d{3}u.fst",
+      pattern = "Combined_[a-z]\\d{3}(u|c).fst",
       full.names = TRUE
     ) %>%
       basename() %>%
@@ -116,7 +116,7 @@ hil_fetch <-
           {
             path_to_fst <- list.files(
               path = hilda_fst_dir,
-              pattern = paste0(wave, "\\d{3}u.fst"),
+              pattern = paste0("Combined_", wave, "\\d{3}(u|c).fst"),
               full.names = TRUE
             )
             if (length(path_to_fst) != 1) {
