@@ -112,6 +112,7 @@ variables without going to their documentation webpage.
 hilda_dictionary <- hil_dict()
 head(hilda_dictionary)
 #>        var            wave                    label
+#>     <char>          <list>                   <char>
 #> 1: xwaveid              NA         XW Cross wave ID
 #> 2:    hhid 1,2,3,4,5,6,...          HF Household ID
 #> 3:   hhpno 1,2,3,4,5,6,...         HF Person number
@@ -126,9 +127,9 @@ variables in `hil_fetch()`.
 
 ``` r
 hilda_data <- hil_fetch(years = 2001:2003, vars = hil_labs("employment"))
-#> ! These variables: `cnpu_fd`, `cnpu_np`, `cnpu_o1`, `cnpu_o2`, `cnpu_na`, `cnph_o1`, `cnph_o2`, `cnpc_ps`, `cnpc_fd`, `cnpc_o1`, `cnpc_o2`, `cnsu_ps`, `cnsu_fd`, `cnsu_kp`, `cnsu_np`, `cnsu_o1`, `cnsu_o2`, `cnsu_na`, `cnsh_bs`, `cnsh_ru`, `cnsh_re`, `cnsh_ps`, `cnsh_fd`, `cnsh_kp`, `cnsh_o1`, `cnsh_o2`, `cnsc_bs`, `cnsc_ru`, `cnsc_ps`, `cnsc_fd`, `cnsc_kp`, `cnsc_o1`, `cnsc_o2`, `chkb12`, `pjothru`, `pjothra`, `pjotcnt`, `fmfempn`, `fmmempn`, `lshremp`, `lsmnemp`, `lsmncom`, `fisemr`, `lsemp`, `lscom`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.
-#> ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.
-#> ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `fisemr`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, `nph5_fd`, `nph6_fd`, `nph1_o1`, `nph2_o1`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.
+#> ! These variables: `cnpu_fd`, `cnpu_np`, `cnpu_o1`, `cnpu_o2`, `cnpu_na`, `cnph_o1`, `cnph_o2`, `cnpc_ps`, `cnpc_fd`, `cnpc_o1`, `cnpc_o2`, `cnsu_ps`, `cnsu_fd`, `cnsu_kp`, `cnsu_np`, `cnsu_o1`, `cnsu_o2`, `cnsu_na`, `cnsh_bs`, `cnsh_ru`, `cnsh_re`, `cnsh_ps`, `cnsh_fd`, `cnsh_kp`, `cnsh_o1`, `cnsh_o2`, `cnsc_bs`, `cnsc_ru`, `cnsc_ps`, `cnsc_fd`, `cnsc_kp`, `cnsc_o1`, `cnsc_o2`, `chkb12`, `pjothru`, `pjothra`, `pjotcnt`, `fmfempn`, `fmmempn`, `lshremp`, `lsmnemp`, `lsmncom`, `fisemr`, `lsemp`, `lscom`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, … don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_a200u.fst'.
+#> ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, … don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_b200u.fst'.
+#> ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `fisemr`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, `nph5_fd`, `nph6_fd`, `nph1_o1`, `nph2_o1`, … don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_c200u.fst'.
 dim(hilda_data)
 #> [1] 55899    79
 ```
@@ -140,9 +141,9 @@ subject area ‘Health’ and nested area ‘Heath - diet’.
 
 ``` r
 hilda_data <- hil_fetch(years = 2001:2003, vars = hil_vars("^ff"))
-#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.
-#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.
-#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.
+#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_a200u.fst'.
+#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_b200u.fst'.
+#> ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_c200u.fst'.
 dim(hilda_data)
 #> [1] 55899     9
 ```
@@ -159,25 +160,28 @@ hilda_dictionary[, unlist(wave), by = .(var, label)] %>%
   data.table::setnames("V1", "wave") %>%
   .[!is.na(wave), .(number_of_variables = .N), by = wave] %>%
   merge(nrows_by_wave, by = "wave")
-#>     wave number_of_variables number_of_rows
-#>  1:    1                4289          19914
-#>  2:    2                5220          18295
-#>  3:    3                5214          17690
-#>  4:    4                5081          17209
-#>  5:    5                5893          17467
-#>  6:    6                6140          17453
-#>  7:    7                6044          17280
-#>  8:    8                6186          17144
-#>  9:    9                6202          17632
-#> 10:   10                6488          17855
-#> 11:   11                6691          23415
-#> 12:   12                6530          23182
-#> 13:   13                6455          23299
-#> 14:   14                6719          23114
-#> 15:   15                6800          23305
-#> 16:   16                6433          23507
-#> 17:   17                6697          23442
-#> 18:   18                7093          23267
-#> 19:   19                7278          23256
-#> 20:   20                6864          22932
+#> Key: <wave>
+#>      wave number_of_variables number_of_rows
+#>     <int>               <int>          <int>
+#>  1:     1                4289          19914
+#>  2:     2                5220          18295
+#>  3:     3                5214          17690
+#>  4:     4                5081          17209
+#>  5:     5                5893          17467
+#>  6:     6                6140          17453
+#>  7:     7                6044          17280
+#>  8:     8                6186          17144
+#>  9:     9                6202          17632
+#> 10:    10                6488          17855
+#> 11:    11                6691          23415
+#> 12:    12                6530          23182
+#> 13:    13                6455          23299
+#> 14:    14                6719          23114
+#> 15:    15                6800          23305
+#> 16:    16                6433          23507
+#> 17:    17                6697          23442
+#> 18:    18                7093          23267
+#> 19:    19                7278          23256
+#> 20:    20                6864          22932
+#>      wave number_of_variables number_of_rows
 ```
