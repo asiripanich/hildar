@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
-
+[![R-CMD-check](https://github.com/asiripanich/hildar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/asiripanich/hildar/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
+
 <p align="center">
 <img src="https://fbe.unimelb.edu.au/_nocache?a=3881339" title="source: https://fbe.unimelb.edu.au/_nocache?a=3881339" width="400"/>
 </p>
@@ -86,6 +86,8 @@ library(hildar)
 # (e.g. axxx = 2001, bxxx = 2002).
 hil_fetch(years = 2001:2003, add_geography = T) %>%
   summary()
+#> fstcore package v0.9.12
+#> (OpenMP was not detected, using single threaded mode)
 #>    xwaveid              hhid                wave          hgage           hgsex              mrcurr             hhrih              hhsgcc              hhwth             hhwtrp       
 #>  Length:55899       Length:55899       Min.   :1.00   Min.   :  0.00   Length:55899       Length:55899       Length:55899       Length:55899       Min.   :    0.0   Min.   :  -10.0  
 #>  Class :character   Class :character   1st Qu.:1.00   1st Qu.: 15.00   Class :character   Class :character   Class :character   Class :character   1st Qu.:  732.7   1st Qu.:  -10.0  
