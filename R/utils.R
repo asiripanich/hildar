@@ -177,24 +177,3 @@ get_hilda_fst_path <- function() {
   return(Sys.getenv("HILDA_FST"))
 }
 
-#' Search HILDA data dictionary by variable or label.
-#'
-#' @param pattern a RegEx pattern.
-#' @param ... arguments here are passed to `grepl()`.3
-#'
-#' @return a character vector of variable names that match the pattern.
-#' @export
-hil_vars <- function(pattern, ...) {
-  checkmate::assert_string(pattern)
-  vars_in_dict <- hil_dict()[, var]
-  vars_in_dict[grepl(pattern = pattern, x = vars_in_dict, ...)]
-}
-
-#' @export
-#' @rdname hil_vars
-hil_labs <- function(pattern, ...) {
-  checkmate::assert_string(pattern)
-  labs_in_dict <- hil_dict()[, label]
-  vars_in_dict <- hil_dict()[, var]
-  vars_in_dict[grepl(pattern = pattern, x = labs_in_dict, ...)]
-}

@@ -59,6 +59,7 @@ Use `hil_setup()` to read HILDA STATA (.dta) files and save them as `.fst` files
 `.fst` is a binary data format that can be read very quickly, a lot faster than `.dta`.
 An additional benefit of `hil_setup()` is that it creates a HILDA dictionary file that you can later call using `hil_dict()`.
 Having a functional `hil_dict()` allows the user to use `hil_vars()` and `hil_labs()` for searching variable names using a regular expression.   
+This will allow you to fast query HILDA data from all waves using `hil_fetch()`.
 
 ``` r
 hil_setup(
@@ -67,7 +68,19 @@ hil_setup(
 )
 ```
 
-This will allow you to fast query HILDA data from all waves using `hil_fetch()`.
+To speed up the setup process, you can select a `future` parallel backend and call it before running your `hil_setup()`.
+
+``` r
+library(future)
+plan(multisession, workers = 2)
+
+# `hil_setup()` can take several minutes to finish.
+# To monitor its progress, you can wrap the function in
+# `progressr::with_progress({...}}` like below.
+progressr::with_progress({
+   hil_setup(read_dir = "...", save_dir = "...")
+})
+```
 
 ### 2) Tell `hildar` where the HILDA `.fst` files are stored at.
 

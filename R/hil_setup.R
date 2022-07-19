@@ -19,6 +19,13 @@
 #' ```
 #' library(future)
 #' plan(multisession, workers = 2)
+#' 
+#' # `hil_setup()` can take several minutes to finish.
+#' # To monitor its progress, you can wrap the function in
+#' # `progressr::with_progress({...}}` like below.
+#' progressr::with_progress({
+#'    hil_setup(read_dir = "...", save_dir = "...")
+#' })
 #' ```
 #'
 #' @importFrom parallel detectCores
@@ -32,10 +39,13 @@ hil_setup <- function(read_dir, save_dir) {
   checkmate::assert_directory_exists(save_dir, access = "rw")
   hilda_filedirs <- list.files(
     path = read_dir,
-    pattern = "Combined_.*.dta",
+    pattern = "Combined_[a-z]\\d{3}(u|c).dta",
     full.names = TRUE
   )
   hilda_files <- list.files(path = read_dir, pattern = ".dta")
+  if (requireNamespace("progressr", quietly = TRUE)) {
+    p <- progressr::progressor(steps = length(hilda_files))
+  }
   furrr::future_walk(seq_along(hilda_files), ~ {
     cli::cli_alert_info("Reading a HILDA wave from: {hilda_filedirs[.x]}")
     df <- read.dta13(hilda_filedirs[.x], convert.factors = T, convert.dates = T) %>%
@@ -43,11 +53,19 @@ hil_setup <- function(read_dir, save_dir) {
     filename <- gsub(pattern = ".dta", replacement = "", hilda_files[.x])
     cli::cli_alert_info("Saving the HILDA file as a fst file.")
     write.fst(df, path = paste0(save_dir, "/", filename, ".fst"))
-  })
-  cli::cli_alert_success(
-    "HILDA fst files have been saved to '{save_dir}'.
-      Please add -> {.emph 'HILDA_FST={fs::path_expand(save_dir)}'} \\
-      to your .Renviron file or .Rprofile file.
+    if (requireNamespace("progressr", quietly = TRUE)) {
+      p()
+    }
+  },
+    .options = furrr::furrr_options(seed = 20220716)
+  )
+  cli::cli_alert_success("HILDA fst files have been saved to '{save_dir}'.")
+  cli::cli_alert_info(
+    "Please add -> {.emph 'HILDA_FST={fs::path_expand(save_dir)}'} \\
+      to your .Renviron file or .Rprofile file. 
+      This will allow you to use `hil_fetch()` without having to \\
+      explicitly tell it where the HILDA fst files are each time \\
+      you call the function. \\
       You can use `usethis::edit_r_profile()` \\
       or `usethis::edit_r_environ()` to open them."
   )
