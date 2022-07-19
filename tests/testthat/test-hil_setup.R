@@ -17,4 +17,10 @@ test_that("hil_setup", {
   progressr::with_progress({
     hil_setup(hilda_read_path, hilda_save_path)
   })
+
+  checkmate::expect_character(hil_labs("income"),  min.len = 1)
+  checkmate::expect_character(hil_labs("^HF"),  min.len = 1)
+
+  checkmate::expect_character(hil_labs("income"),  min.len = 1)
+  checkmate::expect_character(hil_labs("^HF"),  min.len = 1)
 })
