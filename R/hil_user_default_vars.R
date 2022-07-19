@@ -39,15 +39,14 @@
 hil_user_default_vars <- function() {
     vars_in_dot_rprofile <- getOption("HILDAR_USER_DEFAULT_VARS")
     vars_in_dot_renviron <- unlist(strsplit(Sys.getenv("HILDAR_USER_DEFAULT_VARS"), split = ","))
-
-    cli::cli_alert_info("`HILDAR_USER_DEFAULT_VARS` in Rprofile: {.var {vars_in_dot_rprofile}}")
-    cli::cli_alert_info("`HILDAR_USER_DEFAULT_VARS` in Renviron: {.var {vars_in_dot_renviron}}")
-
     if (!is.null(vars_in_dot_rprofile)) {
+        cli::cli_alert_info("`HILDAR_USER_DEFAULT_VARS` in Rprofile: {.var {vars_in_dot_rprofile}}")
         return(vars_in_dot_rprofile)
     }
     if (length(vars_in_dot_renviron) != 0) {
+        cli::cli_alert_info("`HILDAR_USER_DEFAULT_VARS` in Renviron: {.var {vars_in_dot_renviron}}")
         return(vars_in_dot_renviron)
     }
+    cli::cli_alert_info("`HILDAR_USER_DEFAULT_VARS` was not set in `.Renviron` and `.Rprofile` files.")
     NULL
 }
