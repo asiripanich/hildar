@@ -17,8 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg)](https://github.com/asiripanich/hildar/actions)
-
+[![R-CMD-check](https://github.com/asiripanich/hildar/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/asiripanich/hildar/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 <p align="center">
@@ -131,6 +130,8 @@ For example, `hil_vars("^ff")` will get all variables in subject area 'Health' a
 hilda_data <- hil_fetch(years = 2001:2003, vars = hil_vars("^ff"))
 dim(hilda_data)
 ```
+
+To set default variables to be loaded every time you call `hil_fetch()`, see `hil_user_default_vars()`.
 
 Here is a summary of the dimensions of our HILDA data files.
 
