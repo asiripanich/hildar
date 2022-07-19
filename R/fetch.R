@@ -70,31 +70,26 @@ hil_fetch <-
       inp_vars <- vars # cache to match with new_varnames
     }
 
-    if (add_population_weight) {
-      pop_weight_vars <-
-        c(
-          HILDA$household_population_weight,
-          HILDA$responding_person_population_weight
-        )
-    } else {
-      pop_weight_vars <- NULL
-    }
-
-    if (add_basic_vars == TRUE) {
-      basic_vars <- c("hgage", "hgsex", "mrcurr", "hhrih")
-    } else {
-      basic_vars <- NULL
-    }
-
-    if (add_geography == TRUE) {
-      geography_vars <- c("hhsgcc")
-    } else {
-      geography_vars <- NULL
-    }
-
-    if (any(vars %in% "all")) {
+    if (length(vars) == 1 && vars == "all") {
       vars <- NULL
     } else {
+      if (add_population_weight) {
+        vars <-
+          c(
+            vars,
+            HILDA$household_population_weight,
+            HILDA$responding_person_population_weight
+          )
+      }
+
+      if (add_basic_vars == TRUE) {
+        vars <- c(vars, "hgage", "hgsex", "mrcurr", "hhrih")
+      }
+
+      if (add_geography == TRUE) {
+        vars <- c(vars, "hhsgcc")
+      }
+
       vars <-
         unique(
           c(
