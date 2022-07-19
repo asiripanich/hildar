@@ -94,11 +94,8 @@ hil_fetch <-
         unique(
           c(
             HILDA$xwaveid,
-            HILDA$household_id,
-            basic_vars,
             vars,
-            geography_vars,
-            pop_weight_vars
+            hil_user_default_vars()
           )
         )
     }
