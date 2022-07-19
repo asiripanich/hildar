@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">hildar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,18 @@
       <small>Source: <a href="https://github.com/asiripanich/hildar/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.0.9000" id="hildar-0309000">hildar 0.3.0.9000<a class="anchor" aria-label="anchor" href="#hildar-0309000"></a></h2>
+<ul><li>
+<code><a href="../reference/hil_setup.html">hil_setup()</a></code> can be wrapped with <code><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">progressr::with_progress</a></code> to show its progress.</li>
+<li>
+<code><a href="../reference/hil_fetch.html">hil_fetch()</a></code> now works with general releases of HILDA. (thanks <a href="https://github.com/raisin-toast" class="external-link">@raisin-toast</a>, <a href="https://github.com/asiripanich/hildar/issues/6" class="external-link">#6</a>).</li>
+<li>
+<code><a href="../reference/hil_fetch.html">hil_fetch()</a></code> now makes sure that the HILDA files correspond to the requested years exist before attempting to fetch.</li>
+<li>
+<code><a href="../reference/hil_fetch.html">hil_fetch()</a></code> fetches variables returned by <code><a href="../reference/hil_user_default_vars.html">hil_user_default_vars()</a></code> by default. See <code><a href="../reference/hil_user_default_vars.html">hil_user_default_vars()</a></code> for details.</li>
+<li>Use pkgdown’s new theme.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="hildar-030">hildar 0.3.0<a class="anchor" aria-label="anchor" href="#hildar-030"></a></h2>
 <ul><li>Improved README.</li>
