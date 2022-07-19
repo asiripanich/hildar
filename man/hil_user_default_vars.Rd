@@ -14,10 +14,28 @@ This function returns the user default HILDA variables ("HILDAR_USER_DEFAULT_VAR
 that can be found in \code{.Rprofile} and \code{.Renviron}. If 'HILDAR_USER_DEFAULT_VARS' in
 both files are set, the function will give higher priority to the variables set in .Rprofile.
 
-To edit both files, you can use \code{\link[usethis:edit]{usethis::edit_r_profile()}} and \code{\link[usethis:edit]{usethis::edit_r_environ()}}.
-
 By default, \code{\link[=hil_fetch]{hil_fetch()}} will select the variables returned by \code{\link[=hil_user_default_vars]{hil_user_default_vars()}}
 in its output.
+}
+\note{
+To edit both files, you can use \code{\link[usethis:edit]{usethis::edit_r_profile()}} and \code{\link[usethis:edit]{usethis::edit_r_environ()}}.
+
+For \code{.Renviron}, please make sure \code{HILDAR_USER_DEFAULT_VARS} has the following format:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{HILDAR_USER_DEFAULT_VARS="hhid, hgage, hgsex"
+}\if{html}{\out{</div>}}
+
+For \code{.Rprofile}, please make sure \code{HILDAR_USER_DEFAULT_VARS} has the following format:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{options(HILDAR_USER_DEFAULT_VARS = c("hhid", "losat"))
+}\if{html}{\out{</div>}}
+
+The main advantage of setting this in your .Renviron file is that all your new
+R sessions that don't have a project-specific .Rprofile file will use the
+\code{HILDAR_USER_DEFAULT_VARS} from your \code{.Renviron} file.
+
+However, if you have a project that requires a specific set of variables, it is
+recommended that you use the .Rprofile option.
 }
 \examples{
 hil_user_default_vars()
