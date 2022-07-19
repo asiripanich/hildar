@@ -1,5 +1,8 @@
 #' Fetch HILDA data
 #'
+#' Fetch HILDA data from the HILDA fst files created by [hil_setup()].
+#' To set default variables for [hil_fetch()] to fetch see [hil_user_default_vars()].
+#'
 #' @param years
 #'  This argument allow you to specify the years of HILDA
 #'  that you like to load instead of using alphabets.
@@ -32,6 +35,17 @@
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
 #' @importFrom fst read_fst
 #' @export
+#'
+#' @examples
+#' summary(hil_fetch(2011))
+#'
+#' summary(hil_fetch(2011:2012, vars = "losat"))
+#'
+#' # Query all variables that start with 'hs' (Housing)
+#' summary(hil_fetch(2011, vars = hil_vars("^hs")))
+#'
+#' # Query all variables with the word 'coronavirus' in their variable description.
+#' summary(hil_fetch(2020, vars = hil_labs("coronavirus")))
 hil_fetch <-
   function(years = NULL,
            vars = NULL,
