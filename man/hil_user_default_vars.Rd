@@ -22,7 +22,7 @@ To edit both files, you can use \code{\link[usethis:edit]{usethis::edit_r_profil
 
 For \code{.Renviron}, please make sure \code{HILDAR_USER_DEFAULT_VARS} has the following format:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{HILDAR_USER_DEFAULT_VARS="hhid, hgage, hgsex"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{HILDAR_USER_DEFAULT_VARS="hhid, losat"
 }\if{html}{\out{</div>}}
 
 For \code{.Rprofile}, please make sure \code{HILDAR_USER_DEFAULT_VARS} has the following format:
@@ -30,12 +30,12 @@ For \code{.Rprofile}, please make sure \code{HILDAR_USER_DEFAULT_VARS} has the f
 \if{html}{\out{<div class="sourceCode">}}\preformatted{options(HILDAR_USER_DEFAULT_VARS = c("hhid", "losat"))
 }\if{html}{\out{</div>}}
 
-The main advantage of setting this in your .Renviron file is that all your new
-R sessions that don't have a project-specific .Rprofile file will use the
-\code{HILDAR_USER_DEFAULT_VARS} from your \code{.Renviron} file.
+The main advantage of setting the variables in your \code{.Renviron} file is
+that all your new R sessions that don't have a project-specific \code{.Rprofile}
+file will use the \code{HILDAR_USER_DEFAULT_VARS} from your \code{.Renviron} file.
 
 However, if you have a project that requires a specific set of variables, it is
-recommended that you use the .Rprofile option.
+recommended that you use the \code{.Rprofile} option.
 }
 \examples{
 hil_user_default_vars()

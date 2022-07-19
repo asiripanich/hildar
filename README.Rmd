@@ -118,6 +118,8 @@ hilda_data <- hil_fetch(years = 2001:2003, vars = hil_vars("^ff"))
 dim(hilda_data)
 ```
 
+To set default variables to be loaded every time you call `hil_fetch()`, see `hil_user_default_vars()`.
+
 Here is a summary of the dimensions of our HILDA data files.
 
 ```{r}
