@@ -1,9 +1,18 @@
 test_that("hil_setup", {
-  testthat::skip("requires a manual execution")
-  hilda_read_path <- "/Users/amarin/data/hildar_read_test"
-  hilda_save_path <- "/Users/amarin/data/hildar_save_test"
+  # testthat::skip("requires a manual execution")
+  hilda_read_path <- here::here("data-raw")
+  hilda_save_path <- tempdir()
   hil_setup(hilda_read_path, hilda_save_path)
-
+  checkmate::expect_data_frame(
+    hil_fetch(c(2001, 2011, 2020), hilda_fst_dir = hilda_save_path, vars = "all"),
+    nrows = 3,
+    min.cols = 3
+  )
+  checkmate::expect_data_frame(
+    hil_dict(hilda_fst_dir = hilda_save_path),
+    min.rows = 1,
+    ncols = 3
+  )
   future::plan(future::multisession, workers = 2)
   progressr::with_progress({
     hil_setup(hilda_read_path, hilda_save_path)

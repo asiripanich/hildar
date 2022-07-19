@@ -28,7 +28,8 @@ Suggests:
     testthat,
     spelling (>= 2.2.0),
     progressr,
-    future
+    future,
+    here
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Language: en-US
