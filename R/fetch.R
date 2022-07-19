@@ -134,7 +134,16 @@ hil_fetch <-
             }
             # add wave number
             dt[, wave := which(letters == wave)]
-            setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
+            main_col_orders <- c(
+              HILDA$xwaveid,
+              HILDA$household_id_restricted_release,
+              HILDA$household_id_general_release,
+              "wave"
+            )
+            setcolorder(
+              dt,
+              main_col_orders[main_col_orders %in% colnames(dt)]
+            )
             dt
           },
           error = function(e) {
