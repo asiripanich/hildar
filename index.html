@@ -8,8 +8,8 @@
 <meta name="description" content="Fast query HILDA by storing them in fst format.">
 <title>HILDA Data Package and Utils Functions to Use on HILDA Survey Data • hildar</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="HILDA Data Package and Utils Functions to Use on HILDA Survey Data">
 <meta property="og:description" content="Fast query HILDA by storing them in fst format.">
@@ -64,10 +64,7 @@
 <div class="page-header"><h1 id="hildar">hildar<a class="anchor" aria-label="anchor" href="#hildar"></a>
 </h1></div>
 <!-- badges: start -->
-
-<!-- badges: end -->
-<p align="center">
-<img src="https://fbe.unimelb.edu.au/_nocache?a=3881339" title="source: https://fbe.unimelb.edu.au/_nocache?a=3881339" width="400"></p>
+<p align="center"><img src="https://fbe.unimelb.edu.au/_nocache?a=3881339" title="source: https://fbe.unimelb.edu.au/_nocache?a=3881339" width="400"></p>
 <p><a href="https://melbourneinstitute.unimelb.edu.au/hilda" class="external-link">HILDA survey data</a> is a large panel survey 20 waves (2001 - 2020) and counting! Some waves have more than 5000 variables, which means reading them into R is a little challenging (personally I think it is wayyyyyyyy too slow).</p>
 <p>The goal of this package is to provide a quick and easy way to query HILDA data into R. This is possible by converting each wave of HILDA from its STATA file (<code>.dta</code>), one of the three formats HILDA provides, to <code>fst</code> format. <a href="https://github.com/fstpackage/fst" class="external-link">fst</a> is a binary format and can be read much much quicker than <code>.dta</code> in R.</p>
 <table class="table">
@@ -119,8 +116,8 @@
 </h2>
 <p>The development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"asiripanich/hildar"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"asiripanich/hildar"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
@@ -130,10 +127,10 @@
 </h3>
 <p>Use <code><a href="reference/hil_setup.html">hil_setup()</a></code> to read HILDA STATA (.dta) files and save them as <code>.fst</code> files. <code>.fst</code> is a binary data format that can be read very quickly, a lot faster than <code>.dta</code>. An additional benefit of <code><a href="reference/hil_setup.html">hil_setup()</a></code> is that it creates a HILDA dictionary file that you can later call using <code><a href="reference/hil_setup.html">hil_dict()</a></code>. Having a functional <code><a href="reference/hil_setup.html">hil_dict()</a></code> allows the user to use <code><a href="reference/hil_vars.html">hil_vars()</a></code> and <code><a href="reference/hil_vars.html">hil_labs()</a></code> for searching variable names using a regular expression.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/hil_setup.html">hil_setup</a></span><span class="op">(</span>
-  read_dir <span class="op">=</span> <span class="st">"/path/to/your/hilda-stata-files"</span>, 
-  save_dir <span class="op">=</span> <span class="st">"/path/to/save/hilda-fst-files"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/hil_setup.html">hil_setup</a></span><span class="op">(</span></span>
+<span>  read_dir <span class="op">=</span> <span class="st">"/path/to/your/hilda-stata-files"</span>, </span>
+<span>  save_dir <span class="op">=</span> <span class="st">"/path/to/save/hilda-fst-files"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>This will allow you to fast query HILDA data from all waves using <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 </div>
 <div class="section level3">
@@ -147,83 +144,94 @@
 </h2>
 <p>Once the setup is completed, you can now start fetching HILDA data with <code>hildar</code>!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/asiripanich/hildar" class="external-link">hildar</a></span><span class="op">)</span>
-
-<span class="co"># fetch removes the HILDA year prefix from all the selected variable</span>
-<span class="co"># (e.g. axxx = 2001, bxxx = 2002).</span>
-<span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, add_geography <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;    xwaveid              hhid                wave          hgage           hgsex              mrcurr             hhrih              hhsgcc              hhwth             hhwtrp       </span>
-<span class="co">#&gt;  Length:55899       Length:55899       Min.   :1.00   Min.   :  0.00   Length:55899       Length:55899       Length:55899       Length:55899       Min.   :    0.0   Min.   :  -10.0  </span>
-<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1.00   1st Qu.: 15.00   Class :character   Class :character   Class :character   Class :character   1st Qu.:  732.7   1st Qu.:  -10.0  </span>
-<span class="co">#&gt;  Mode  :character   Mode  :character   Median :2.00   Median : 34.00   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :  909.4   Median :  821.9  </span>
-<span class="co">#&gt;                                        Mean   :1.96   Mean   : 34.82                                                                               Mean   : 1021.9   Mean   :  809.4  </span>
-<span class="co">#&gt;                                        3rd Qu.:3.00   3rd Qu.: 51.00                                                                               3rd Qu.: 1148.8   3rd Qu.: 1122.0  </span>
-<span class="co">#&gt;                                        Max.   :3.00   Max.   :100.00                                                                               Max.   :14094.0   Max.   :16000.0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/asiripanich/hildar" class="external-link">hildar</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># fetch removes the HILDA year prefix from all the selected variable</span></span>
+<span><span class="co"># (e.g. axxx = 2001, bxxx = 2002).</span></span>
+<span><span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, add_geography <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Rprofile: `hhid` and `losat`</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Renviron: ``</span></span>
+<span><span class="co">#&gt;    xwaveid              hhid                wave          hhwth             hhwtrp            hgage           hgsex              mrcurr             hhrih              hhsgcc              losat        </span></span>
+<span><span class="co">#&gt;  Length:55899       Length:55899       Min.   :1.00   Min.   :    0.0   Min.   :  -10.0   Min.   :  0.00   Length:55899       Length:55899       Length:55899       Length:55899       Min.   :-10.000  </span></span>
+<span><span class="co">#&gt;  Class :character   Class :character   1st Qu.:1.00   1st Qu.:  732.7   1st Qu.:  -10.0   1st Qu.: 15.00   Class :character   Class :character   Class :character   Class :character   1st Qu.:-10.000  </span></span>
+<span><span class="co">#&gt;  Mode  :character   Mode  :character   Median :2.00   Median :  909.4   Median :  821.9   Median : 34.00   Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median :  7.000  </span></span>
+<span><span class="co">#&gt;                                        Mean   :1.96   Mean   : 1021.9   Mean   :  809.4   Mean   : 34.82                                                                               Mean   :  2.748  </span></span>
+<span><span class="co">#&gt;                                        3rd Qu.:3.00   3rd Qu.: 1148.8   3rd Qu.: 1122.0   3rd Qu.: 51.00                                                                               3rd Qu.:  9.000  </span></span>
+<span><span class="co">#&gt;                                        Max.   :3.00   Max.   :14094.0   Max.   :16000.0   Max.   :100.00                                                                               Max.   : 10.000</span></span></code></pre></div>
 <p>There is a quick option to add basic demographic variables to the data, which is set to TRUE by default.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span>, add_basic_vars <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "xwaveid" "hhid"    "wave"    "hgage"   "hgsex"   "mrcurr"  "hhrih"   "hhwth"   "hhwtrp"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span>, add_basic_vars <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Rprofile: `hhid` and `losat`</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Renviron: ``</span></span>
+<span><span class="co">#&gt;  [1] "xwaveid" "hhid"    "wave"    "hhwth"   "hhwtrp"  "hgage"   "hgsex"   "mrcurr"  "hhrih"   "losat"</span></span></code></pre></div>
 <p>How about doing a quick search to find variables that you want? Use <code>hil_dict</code> which is a data.table that you can search or view HILDA variables without going to their documentation webpage.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hilda_dictionary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_setup.html">hil_dict</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hilda_dictionary</span><span class="op">)</span>
-<span class="co">#&gt;        var            wave                    label</span>
-<span class="co">#&gt; 1: xwaveid              NA         XW Cross wave ID</span>
-<span class="co">#&gt; 2:    hhid 1,2,3,4,5,6,...          HF Household ID</span>
-<span class="co">#&gt; 3:   hhpno 1,2,3,4,5,6,...         HF Person number</span>
-<span class="co">#&gt; 4:   hhpid 1,2,3,4,5,6,...             HF Person ID</span>
-<span class="co">#&gt; 5:  hhrpid 1,2,3,4,5,6,... DV: Randomised person id</span>
-<span class="co">#&gt; 6: hhstate 1,2,3,4,5,6,...                 HF State</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hilda_dictionary</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_setup.html">hil_dict</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hilda_dictionary</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        var            wave                    label</span></span>
+<span><span class="co">#&gt; 1: xwaveid              NA         XW Cross wave ID</span></span>
+<span><span class="co">#&gt; 2:    hhid 1,2,3,4,5,6,...          HF Household ID</span></span>
+<span><span class="co">#&gt; 3:   hhpno 1,2,3,4,5,6,...         HF Person number</span></span>
+<span><span class="co">#&gt; 4:   hhpid 1,2,3,4,5,6,...             HF Person ID</span></span>
+<span><span class="co">#&gt; 5:  hhrpid 1,2,3,4,5,6,... DV: Randomised person id</span></span>
+<span><span class="co">#&gt; 6: hhstate 1,2,3,4,5,6,...                 HF State</span></span></code></pre></div>
 <p>Let say we want to select all variables that are related to ‘employment’. Here is how we can easily use the selected employment variables in <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="fu"><a href="reference/hil_vars.html">hil_labs</a></span><span class="op">(</span><span class="st">"employment"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ! These variables: `cnpu_fd`, `cnpu_np`, `cnpu_o1`, `cnpu_o2`, `cnpu_na`, `cnph_o1`, `cnph_o2`, `cnpc_ps`, `cnpc_fd`, `cnpc_o1`, `cnpc_o2`, `cnsu_ps`, `cnsu_fd`, `cnsu_kp`, `cnsu_np`, `cnsu_o1`, `cnsu_o2`, `cnsu_na`, `cnsh_bs`, `cnsh_ru`, `cnsh_re`, `cnsh_ps`, `cnsh_fd`, `cnsh_kp`, `cnsh_o1`, `cnsh_o2`, `cnsc_bs`, `cnsc_ru`, `cnsc_ps`, `cnsc_fd`, `cnsc_kp`, `cnsc_o1`, `cnsc_o2`, `chkb12`, `pjothru`, `pjothra`, `pjotcnt`, `fmfempn`, `fmmempn`, `lshremp`, `lsmnemp`, `lsmncom`, `fisemr`, `lsemp`, `lscom`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.</span>
-<span class="co">#&gt; ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.</span>
-<span class="co">#&gt; ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `fisemr`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, `nph5_fd`, `nph6_fd`, `nph1_o1`, `nph2_o1`, ... don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
-<span class="co">#&gt; [1] 55899    79</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="fu"><a href="reference/hil_vars.html">hil_labs</a></span><span class="op">(</span><span class="st">"employment"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Rprofile: `hhid` and `losat`</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Renviron: ``</span></span>
+<span><span class="co">#&gt; ! These variables: `cnpu_fd`, `cnpu_np`, `cnpu_o1`, `cnpu_o2`, `cnpu_na`, `cnph_o1`, `cnph_o2`, `cnpc_ps`, `cnpc_fd`, `cnpc_o1`, `cnpc_o2`, `cnsu_ps`, `cnsu_fd`, `cnsu_kp`, `cnsu_np`, `cnsu_o1`, `cnsu_o2`, `cnsu_na`, `cnsh_bs`, `cnsh_ru`, `cnsh_re`, `cnsh_ps`, `cnsh_fd`, `cnsh_kp`, `cnsh_o1`, `cnsh_o2`, `cnsc_bs`, `cnsc_ru`, `cnsc_ps`, `cnsc_fd`, `cnsc_kp`, `cnsc_o1`, `cnsc_o2`, `chkb12`, `pjothru`, `pjothra`, `pjotcnt`, `fmfempn`, `fmmempn`, `lshremp`, `lsmnemp`, `lsmncom`, `fisemr`, `lsemp`, `lscom`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, … don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_a200u.fst'.</span></span>
+<span><span class="co">#&gt; ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `jbtremp`, `ujtros`, `ncesop`, `rcesop`, `rtgwage`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, … don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_b200u.fst'.</span></span>
+<span><span class="co">#&gt; ! These variables: `fmfempo`, `fmmempo`, `jbempst`, `loimpew`, `fisemr`, `cnsh_au`, `hepuwrk`, `herjob`, `herhour`, `hechjob`, `hetowrk`, `heonas`, `hespeq`, `heothed`, `nsu1_fd`, `nsu1_o1`, `nsu1_o2`, `nsu1_na`, `nsu1_np`, `nsu2_fd`, `nsu2_o1`, `nsu2_o2`, `nsu2_na`, `nsu2_np`, `nsu3_fd`, `nsu3_o1`, `nsu3_o2`, `nsu3_na`, `nsu3_np`, `nsu4_fd`, `nsu4_o1`, `nsu4_o2`, `nsu4_na`, `nsu4_np`, `nsu5_fd`, `nsu5_o1`, `nsu5_o2`, `nsu5_na`, `nsu5_np`, `nsu6_fd`, `nsu6_o1`, `nsu6_o2`, `nsu6_na`, `nsu6_np`, `nsh1_ps`, `nsh2_ps`, `nsh3_ps`, `nsh4_ps`, `nsh5_ps`, `nsh6_ps`, `nsh1_fd`, `nsh2_fd`, `nsh3_fd`, `nsh4_fd`, `nsh5_fd`, `nsh6_fd`, `nsh1_o1`, `nsh2_o1`, `nsh3_o1`, `nsh4_o1`, `nsh5_o1`, `nsh6_o1`, `nsh1_o2`, `nsh2_o2`, `nsh3_o2`, `nsh4_o2`, `nsh5_o2`, `nsh6_o2`, `npu1_o1`, `npu1_o2`, `npu1_na`, `npu1_np`, `npu2_o1`, `npu2_o2`, `npu2_na`, `npu2_np`, `npu3_o1`, `npu3_o2`, `npu3_na`, `npu3_np`, `npu4_o1`, `npu4_o2`, `npu4_na`, `npu4_np`, `npu5_o1`, `npu5_o2`, `npu5_na`, `npu5_np`, `npu6_o1`, `npu6_o2`, `npu6_na`, `npu6_np`, `nph1_fd`, `nph2_fd`, `nph3_fd`, `nph4_fd`, `nph5_fd`, `nph6_fd`, `nph1_o1`, `nph2_o1`, … don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_c200u.fst'.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 55899    80</span></span></code></pre></div>
 <p>Or if you know the prefix of a subject area that you like to query, you can use <code>hil_vars(pattern)</code> to query all variable names that match the pattern. For example, <code>hil_vars("^ff")</code> will get all variables in subject area ‘Health’ and nested area ‘Heath - diet’.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="fu"><a href="reference/hil_vars.html">hil_vars</a></span><span class="op">(</span><span class="st">"^ff"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_a200u.fst'.</span>
-<span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_b200u.fst'.</span>
-<span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in 'C:\Users\amarin\OneDrive - UNSW\data\HILDA20-fst/Combined_c200u.fst'.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span>
-<span class="co">#&gt; [1] 55899     9</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hilda_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2003</span>, vars <span class="op">=</span> <span class="fu"><a href="reference/hil_vars.html">hil_vars</a></span><span class="op">(</span><span class="st">"^ff"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Rprofile: `hhid` and `losat`</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Renviron: ``</span></span>
+<span><span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_a200u.fst'.</span></span>
+<span><span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_b200u.fst'.</span></span>
+<span><span class="co">#&gt; ! These variables: `ffmilk`, `ffveg`, `ffvegs`, `fffrt`, `fffrts`, `ffbf`, `ffsalt`, `ffbrfr`, `fflunr`, `ffdinr`, `ffcdiet`, `ffdietf`, `ffsrw`, `ffscw`, `ffleg`, `ffcake`, `ffpasta`, `ffsnack`, `ffcerl`, `ffconf`, `ffbread`, `ffspud`, `ffrmeat`, `ffprocm`, `ffpoult`, and `fffish` don't exist in '/Users/amarin/OneDrive - UNSW/data/HIlDA20-fst/Combined_c200u.fst'.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">hilda_data</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 55899    10</span></span></code></pre></div>
+<p>To set default variables to be loaded every time you call <code><a href="reference/hil_fetch.html">hil_fetch()</a></code>, see <code><a href="reference/hil_user_default_vars.html">hil_user_default_vars()</a></code>.</p>
 <p>Here is a summary of the dimensions of our HILDA data files.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># the number of variables and rows in each wave</span>
-<span class="va">nrows_by_wave</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2020</span>, add_basic_vars <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_rows <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span>
-
-<span class="va">hilda_dictionary</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">var</span>, <span class="va">label</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span><span class="st">"V1"</span>, <span class="st">"wave"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="va">.</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, <span class="fu">.</span><span class="op">(</span>number_of_variables <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">nrows_by_wave</span>, by <span class="op">=</span> <span class="st">"wave"</span><span class="op">)</span>
-<span class="co">#&gt;     wave number_of_variables number_of_rows</span>
-<span class="co">#&gt;  1:    1                4289          19914</span>
-<span class="co">#&gt;  2:    2                5220          18295</span>
-<span class="co">#&gt;  3:    3                5214          17690</span>
-<span class="co">#&gt;  4:    4                5081          17209</span>
-<span class="co">#&gt;  5:    5                5893          17467</span>
-<span class="co">#&gt;  6:    6                6140          17453</span>
-<span class="co">#&gt;  7:    7                6044          17280</span>
-<span class="co">#&gt;  8:    8                6186          17144</span>
-<span class="co">#&gt;  9:    9                6202          17632</span>
-<span class="co">#&gt; 10:   10                6488          17855</span>
-<span class="co">#&gt; 11:   11                6691          23415</span>
-<span class="co">#&gt; 12:   12                6530          23182</span>
-<span class="co">#&gt; 13:   13                6455          23299</span>
-<span class="co">#&gt; 14:   14                6719          23114</span>
-<span class="co">#&gt; 15:   15                6800          23305</span>
-<span class="co">#&gt; 16:   16                6433          23507</span>
-<span class="co">#&gt; 17:   17                6697          23442</span>
-<span class="co">#&gt; 18:   18                7093          23267</span>
-<span class="co">#&gt; 19:   19                7278          23256</span>
-<span class="co">#&gt; 20:   20                6864          22932</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># the number of variables and rows in each wave</span></span>
+<span><span class="va">nrows_by_wave</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="reference/hil_fetch.html">hil_fetch</a></span><span class="op">(</span>years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2020</span>, add_basic_vars <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">.</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>number_of_rows <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Rprofile: `hhid` and `losat`</span></span>
+<span><span class="co">#&gt; ℹ `HILDAR_USER_DEFAULT_VARS` in Renviron: ``</span></span>
+<span></span>
+<span><span class="va">hilda_dictionary</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">var</span>, <span class="va">label</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html" class="external-link">setnames</a></span><span class="op">(</span><span class="st">"V1"</span>, <span class="st">"wave"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="va">.</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">wave</span><span class="op">)</span>, <span class="fu">.</span><span class="op">(</span>number_of_variables <span class="op">=</span> <span class="va">.N</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">wave</span><span class="op">]</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">nrows_by_wave</span>, by <span class="op">=</span> <span class="st">"wave"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     wave number_of_variables number_of_rows</span></span>
+<span><span class="co">#&gt;  1:    1                4289          19914</span></span>
+<span><span class="co">#&gt;  2:    2                5220          18295</span></span>
+<span><span class="co">#&gt;  3:    3                5214          17690</span></span>
+<span><span class="co">#&gt;  4:    4                5081          17209</span></span>
+<span><span class="co">#&gt;  5:    5                5893          17467</span></span>
+<span><span class="co">#&gt;  6:    6                6140          17453</span></span>
+<span><span class="co">#&gt;  7:    7                6044          17280</span></span>
+<span><span class="co">#&gt;  8:    8                6186          17144</span></span>
+<span><span class="co">#&gt;  9:    9                6202          17632</span></span>
+<span><span class="co">#&gt; 10:   10                6488          17855</span></span>
+<span><span class="co">#&gt; 11:   11                6691          23415</span></span>
+<span><span class="co">#&gt; 12:   12                6530          23182</span></span>
+<span><span class="co">#&gt; 13:   13                6455          23299</span></span>
+<span><span class="co">#&gt; 14:   14                6719          23114</span></span>
+<span><span class="co">#&gt; 15:   15                6800          23305</span></span>
+<span><span class="co">#&gt; 16:   16                6433          23507</span></span>
+<span><span class="co">#&gt; 17:   17                6697          23442</span></span>
+<span><span class="co">#&gt; 18:   18                7093          23267</span></span>
+<span><span class="co">#&gt; 19:   19                7278          23256</span></span>
+<span><span class="co">#&gt; 20:   20                6864          22932</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -259,7 +267,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/asiripanich/hildar/actions" class="external-link"><img src="https://github.com/asiripanich/hildar/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/asiripanich/hildar/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/asiripanich/hildar/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
@@ -274,7 +282,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
