@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# hildar 0.3.0.9000
+
+- `hil_setup()` can be wrapped with `progressr::with_progress` to show its progress.
+- `hil_fetch()` now works with general releases of HILDA. (thanks @raisin-toast, #6).
+- `hil_fetch()` now makes sure that the HILDA files correspond to the requested years exist before attempting to fetch.
+- `hil_fetch()` fetches variables returned by `hil_user_default_vars()` by default. See `hil_user_default_vars()` for details.
+- Use pkgdown's new theme.
+
+
 # hildar 0.3.0
 
 - Improved README.
