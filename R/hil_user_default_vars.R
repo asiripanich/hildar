@@ -13,6 +13,7 @@
 #' @return User default variable names as a character vector.
 #'
 #' @export
+#' @examples 
 #' hil_user_default_vars()
 hil_user_default_vars <- function() {
   vars_in_dot_rprofile <- getOption("HILDAR_USER_DEFAULT_VARS")
