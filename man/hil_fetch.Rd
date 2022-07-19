@@ -48,5 +48,19 @@ in your \code{.Rprofile} file first, then in \code{.Renviron} file.}
 a data.table object
 }
 \description{
-Fetch HILDA data
+Fetch HILDA data from the HILDA fst files created by \code{\link[=hil_setup]{hil_setup()}}.
+To set default variables for \code{\link[=hil_fetch]{hil_fetch()}} to fetch see \code{\link[=hil_user_default_vars]{hil_user_default_vars()}}.
+}
+\examples{
+\dontrun{
+summary(hil_fetch(2011))
+
+summary(hil_fetch(2011:2012, vars = "losat"))
+
+# Query all variables that start with 'hs' (Housing)
+summary(hil_fetch(2011, vars = hil_vars("^hs")))
+
+# Query all variables with the word 'coronavirus' in their variable description.
+summary(hil_fetch(2020, vars = hil_labs("coronavirus")))
+}
 }

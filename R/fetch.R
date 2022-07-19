@@ -37,6 +37,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' summary(hil_fetch(2011))
 #'
 #' summary(hil_fetch(2011:2012, vars = "losat"))
@@ -46,6 +47,7 @@
 #'
 #' # Query all variables with the word 'coronavirus' in their variable description.
 #' summary(hil_fetch(2020, vars = hil_labs("coronavirus")))
+#' }
 hil_fetch <-
   function(years = NULL,
            vars = NULL,

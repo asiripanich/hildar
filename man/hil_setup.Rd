@@ -33,18 +33,20 @@ columns: var, label, and wave. But if \code{save_dir} is not
 \code{NULL}, the dict will be saved to that location.
 }
 \description{
-This functions looks in a directory for HILDA files in .dta.
-format and save them as fst files. The fst files will be used
-by \code{hil_fetch()} for loading querying HILDA data.
+This function looks in a directory for HILDA data files with \code{.dta},
+the Stata binary data format, save them as fst files.
+The fst files will be used by \code{hil_fetch()} for loading HILDA data.
 }
 \note{
 This function can take a long time to finish since each HILDA file
 is quite large. One option is to use the future package to choose
 your parallel backend before running \code{hil_fetch()}. The following
 code chuck uses \code{multisession} which creates background R sessions
-equal to the number of \code{workers}.\preformatted{library(future)
+equal to the number of \code{workers}.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{library(future)
 plan(multisession, workers = 2)
-}
+}\if{html}{\out{</div>}}
 }
 \examples{
 # HILDA data dictionary
