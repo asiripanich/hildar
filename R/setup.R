@@ -1,8 +1,8 @@
 #' Save HILDA Stata files data to fst data
 #'
-#' This functions looks in a directory for HILDA files in .dta.
-#' format and save them as fst files. The fst files will be used
-#' by `hil_fetch()` for loading querying HILDA data.
+#' This function looks in a directory for HILDA data files with `.dta`,
+#' the Stata binary data format, save them as fst files.
+#' The fst files will be used by `hil_fetch()` for loading HILDA data.
 #'
 #' @param read_dir read directory where the HILDA files that
 #'  match this `Combined_.*.dta` regex pattern are in.
@@ -33,7 +33,7 @@ hil_setup <- function(read_dir, save_dir) {
   hilda_filedirs <- list.files(
     path = read_dir,
     pattern = "Combined_.*.dta",
-    full.names = T
+    full.names = TRUE
   )
   hilda_files <- list.files(path = read_dir, pattern = ".dta")
   furrr::future_walk(seq_along(hilda_files), ~ {

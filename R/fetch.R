@@ -1,5 +1,8 @@
 #' Fetch HILDA data
 #'
+#' Fetch HILDA data from the HILDA fst files created by [hil_setup()].
+#' To set default variables for [hil_fetch()] to fetch see [hil_user_default_vars()].
+#'
 #' @param years
 #'  This argument allow you to specify the years of HILDA
 #'  that you like to load instead of using alphabets.
@@ -32,6 +35,19 @@
 #' @importFrom data.table rbindlist as.data.table setcolorder setnames
 #' @importFrom fst read_fst
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' summary(hil_fetch(2011))
+#'
+#' summary(hil_fetch(2011:2012, vars = "losat"))
+#'
+#' # Query all variables that start with 'hs' (Housing)
+#' summary(hil_fetch(2011, vars = hil_vars("^hs")))
+#'
+#' # Query all variables with the word 'coronavirus' in their variable description.
+#' summary(hil_fetch(2020, vars = hil_labs("coronavirus")))
+#' }
 hil_fetch <-
   function(years = NULL,
            vars = NULL,
@@ -54,7 +70,7 @@ hil_fetch <-
     }
     available_waves <- list.files(
       path = hilda_fst_dir,
-      pattern = "Combined_[a-z]\\d{3}u.fst",
+      pattern = "Combined_[a-z]\\d{3}(u|c).fst",
       full.names = TRUE
     ) %>%
       basename() %>%
@@ -70,40 +86,32 @@ hil_fetch <-
       inp_vars <- vars # cache to match with new_varnames
     }
 
-    if (add_population_weight) {
-      pop_weight_vars <-
-        c(
-          HILDA$household_population_weight,
-          HILDA$responding_person_population_weight
-        )
-    } else {
-      pop_weight_vars <- NULL
-    }
-
-    if (add_basic_vars == TRUE) {
-      basic_vars <- c("hgage", "hgsex", "mrcurr", "hhrih")
-    } else {
-      basic_vars <- NULL
-    }
-
-    if (add_geography == TRUE) {
-      geography_vars <- c("hhsgcc")
-    } else {
-      geography_vars <- NULL
-    }
-
-    if (any(vars %in% "all")) {
+    if (length(vars) == 1 && vars == "all") {
       vars <- NULL
     } else {
+      if (add_population_weight) {
+        vars <-
+          c(
+            vars,
+            HILDA$household_population_weight,
+            HILDA$responding_person_population_weight
+          )
+      }
+
+      if (add_basic_vars == TRUE) {
+        vars <- c(vars, "hgage", "hgsex", "mrcurr", "hhrih")
+      }
+
+      if (add_geography == TRUE) {
+        vars <- c(vars, "hhsgcc")
+      }
+
       vars <-
         unique(
           c(
             HILDA$xwaveid,
-            HILDA$household_id,
-            basic_vars,
             vars,
-            geography_vars,
-            pop_weight_vars
+            hil_user_default_vars()
           )
         )
     }
@@ -116,7 +124,7 @@ hil_fetch <-
           {
             path_to_fst <- list.files(
               path = hilda_fst_dir,
-              pattern = paste0(wave, "\\d{3}u.fst"),
+              pattern = paste0("Combined_", wave, "\\d{3}(u|c).fst"),
               full.names = TRUE
             )
             if (length(path_to_fst) != 1) {
@@ -142,7 +150,16 @@ hil_fetch <-
             }
             # add wave number
             dt[, wave := which(letters == wave)]
-            setcolorder(dt, c(HILDA$xwaveid, HILDA$household_id, "wave"))
+            main_col_orders <- c(
+              HILDA$xwaveid,
+              HILDA$household_id_restricted_release,
+              HILDA$household_id_general_release,
+              "wave"
+            )
+            setcolorder(
+              dt,
+              main_col_orders[main_col_orders %in% colnames(dt)]
+            )
             dt
           },
           error = function(e) {
