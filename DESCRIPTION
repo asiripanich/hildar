@@ -27,7 +27,8 @@ Suggests:
     roxygen2,
     testthat,
     spelling (>= 2.2.0),
-    progressr
+    progressr,
+    future
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Language: en-US

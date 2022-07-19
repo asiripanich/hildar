@@ -4,8 +4,7 @@ test_that("hil_setup", {
   hilda_save_path <- "/Users/amarin/data/hildar_save_test"
   hil_setup(hilda_read_path, hilda_save_path)
 
-  library(future)
-  plan(multisession, workers = 2)
+  future::plan(future::multisession, workers = 2)
   progressr::with_progress({
     hil_setup(hilda_read_path, hilda_save_path)
   })
