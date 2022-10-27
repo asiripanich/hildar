@@ -1,5 +1,7 @@
 test_that("hil_setup", {
   # testthat::skip("requires a manual execution")
+  system.file("extdata", package = "hildar") %>% list.files()
+  hilda_read_dir <- system.file("extdata", package = "hildar")
   hilda_save_dir <- tempdir()
   hil_setup(hilda_read_dir, hilda_save_dir)
   checkmate::expect_data_frame(

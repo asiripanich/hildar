@@ -2,8 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-data-raw
-inst
 .Rprofile
 docs
 README.html
