@@ -150,30 +150,3 @@ make_dict <- function(read_dir, save_dir = NULL) {
   hilda_dict
 }
 
-#' @rdname hil_setup
-#' @export
-#' @examples
-#' # HILDA data dictionary
-#' \dontrun{
-#' hil_dict()
-#' }
-hil_dict <- function() {
-  hilda_dict_path <- fs::path(get_hilda_fst_path(), "hil_dict.rds")
-  checkmate::assert_file_exists(hilda_dict_path)
-  readRDS(hilda_dict_path)
-}
-
-#' Get a `HILDA_FST` environment variable
-#'
-#' This returns an environment variable called `HILDA_FST` which is
-#' the pathname where HILDA fst files are stored.
-#'
-#' @return a pathname.
-#' @export
-get_hilda_fst_path <- function() {
-  if (is.null(Sys.getenv("HILDA_FST"))) {
-    stop("`HILDA_FST` doesn't exist.")
-  }
-  return(Sys.getenv("HILDA_FST"))
-}
-

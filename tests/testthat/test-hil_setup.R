@@ -1,11 +1,27 @@
 test_that("hil_setup", {
-  testthat::skip("requires a manual execution")
-  hilda_read_path <- "/Users/amarin/data/hildar_read_test"
-  hilda_save_path <- "/Users/amarin/data/hildar_save_test"
-  hil_setup(hilda_read_path, hilda_save_path)
+  hilda_read_dir <- system.file("extdata", package = "hildar")
+  hilda_save_dir <- fs::path(tempdir(), "hildar_fst_test_setup")
+  dir.create(hilda_save_dir)
+  
+  hil_setup(hilda_read_dir, hilda_save_dir)
+
+  hilda_filenames <- list.files(hilda_read_dir) %>% 
+    basename() %>% 
+    sub('\\.dta$', '', .)
+
+  for (hilda_filename in hilda_filenames) {
+    checkmate::expect_file_exists(
+      fs::path(hilda_save_dir, paste0(hilda_filename, ".fst"))
+    )
+  }
+
+  checkmate::expect_file_exists(fs::path(hilda_save_dir, "hil_dict.rds"))
 
   future::plan(future::multisession, workers = 2)
   progressr::with_progress({
-    hil_setup(hilda_read_path, hilda_save_path)
+    hil_setup(hilda_read_dir, hilda_save_dir)
   })
+
+  # remove the test setup
+  unlink(hilda_save_dir, recursive = TRUE)
 })

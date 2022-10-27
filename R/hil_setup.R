@@ -42,7 +42,7 @@ hil_setup <- function(read_dir, save_dir) {
     pattern = "Combined_[a-z]\\d{3}(u|c).dta",
     full.names = TRUE
   )
-  hilda_files <- list.files(path = read_dir, pattern = ".dta")
+  hilda_files <- basename(hilda_filedirs)
   if (requireNamespace("progressr", quietly = TRUE)) {
     p <- progressr::progressor(steps = length(hilda_files))
   }

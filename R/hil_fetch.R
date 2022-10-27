@@ -55,10 +55,7 @@ hil_fetch <-
            add_population_weight = TRUE,
            add_basic_vars = TRUE,
            add_geography = FALSE,
-           hilda_fst_dir = ifelse(!is.null(getOption("HILDA_FST")),
-             getOption("HILDA_FST"),
-             get_hilda_fst_path()
-           )) {
+           hilda_fst_dir = get_hilda_fst_dir()) {
     if (!checkmate::test_directory_exists(hilda_fst_dir, access = "r")) {
       stop(
         "There is no `HILDA_FST` in your global options or in your ",
@@ -77,6 +74,13 @@ hil_fetch <-
       gsub("Combined_", "", .) %>%
       gsub("\\d.*", "", .) %>%
       tolower()
+    if (length(available_waves) == 0) {
+        stop(
+          "No HILDA fst files detected in `", hilda_fst_dir, "`. ",
+          "Please make sure you provide the right directory where the ",
+          "fst files created by `hil_setup()` are stored."
+        )
+    }
     available_years <- 2000 + seq_along(letters)[letters %in% available_waves]
     checkmate::assert_integerish(years, any.missing = FALSE)
     checkmate::assert_subset(years, choices = available_years)

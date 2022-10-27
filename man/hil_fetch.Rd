@@ -11,8 +11,7 @@ hil_fetch(
   add_population_weight = TRUE,
   add_basic_vars = TRUE,
   add_geography = FALSE,
-  hilda_fst_dir = ifelse(!is.null(getOption("HILDA_FST")), getOption("HILDA_FST"),
-    get_hilda_fst_path())
+  hilda_fst_dir = get_hilda_fst_dir()
 )
 }
 \arguments{
