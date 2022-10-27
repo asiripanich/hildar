@@ -5,12 +5,15 @@
 \alias{hil_vars}
 \title{Search HILDA data dictionary by variable or label.}
 \usage{
-hil_labs(pattern, ...)
+hil_labs(pattern, hilda_fst_dir = NULL, ...)
 
-hil_vars(pattern, ...)
+hil_vars(pattern, hilda_fst_dir = NULL, ...)
 }
 \arguments{
 \item{pattern}{a RegEx pattern.}
+
+\item{hilda_fst_dir}{a directory to HILDA fst files generated using \code{hil_setup()}.
+If NULL, the result of \code{get_hilda_fst_dir()} will be used.}
 
 \item{...}{arguments here are passed to \code{grepl()}.3}
 }
