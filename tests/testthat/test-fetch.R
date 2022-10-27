@@ -1,7 +1,4 @@
 test_that("get one year data", {
-  skip_on_ci()
-  skip_on_cran()
-
   data <- hildar::hil_fetch(years = 2011)
   expect_true(data[, unique(wave)] == 11)
   expect_true(nrow(data) != 0)
@@ -10,10 +7,7 @@ test_that("get one year data", {
 
 
 test_that("get missing data in one wave", {
-  skip_on_ci()
-  skip_on_cran()
-
-  selected_years <- 2011:2012
+  selected_years <- 2001
   # Note:
   # skdrvl: Currently holds a motor vehicle license
   # only exists in wave 12 and 16
@@ -21,4 +15,12 @@ test_that("get missing data in one wave", {
   expect_true(data[, data.table::uniqueN(wave)] == length(selected_years))
   expect_true(nrow(data) != 0)
   expect_true(ncol(data) != 0)
+})
+
+test_that("fetch multiple years", {
+  checkmate::expect_data_frame(
+    hil_fetch(c(2001, 2011, 2020), hilda_fst_dir = hilda_save_dir, vars = "all"),
+    nrows = 3,
+    min.cols = 3
+  )
 })
