@@ -6,13 +6,10 @@
 #'
 #' @return a directory.
 #' @export
-#' get_hilda_fst_path()
-get_hilda_fst_path <- function() {
-  if (!is.null(getOption("HILDA_FST"))) {
-    return(getOption("HILDA_FST"))
+  hil_fst_path <- getOption("HILDA_FST") %||% 
+    Sys.getenv("HILDA_FST")
+  if (!checkmate::test_directory_exists(hil_fst_path)) {
+    stop("The `HILDA_FST` variable doesn't exist in your `.Renviron`, `.Rprofile`, or R global options.")
   }
-  if (is.null(Sys.getenv("HILDA_FST"))) {
-    stop("`HILDA_FST` doesn't exist.")
-  }
-  return(Sys.getenv("HILDA_FST"))
+  return(hil_fst_path)
 }
