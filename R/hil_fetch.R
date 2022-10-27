@@ -55,7 +55,7 @@ hil_fetch <-
            add_population_weight = TRUE,
            add_basic_vars = TRUE,
            add_geography = FALSE,
-           hilda_fst_dir = get_hilda_fst_path()) {
+           hilda_fst_dir = get_hilda_fst_dir()) {
     if (!checkmate::test_directory_exists(hilda_fst_dir, access = "r")) {
       stop(
         "There is no `HILDA_FST` in your global options or in your ",

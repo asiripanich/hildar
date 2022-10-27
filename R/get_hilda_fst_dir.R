@@ -6,6 +6,9 @@
 #'
 #' @return a directory.
 #' @export
+#' @examples 
+#' get_hilda_fst_dir()
+get_hilda_fst_dir <- function() {
   hil_fst_path <- getOption("HILDA_FST") %||% 
     Sys.getenv("HILDA_FST")
   if (!checkmate::test_directory_exists(hil_fst_path)) {
